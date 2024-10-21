@@ -4,36 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FEAT UP</title>
+
+    <link rel="stylesheet" href="../styles/index.css">
 </head>
 <body>
-    <section class="home">
-        <header>
-            <div class="titulo">
-                <span>FEAT UP</span>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Sobre</a></li>
-                    <li><a href="#">Sobre</a></li>
-                    <li><a href="#">Contato</a></li>
-                </ul>
-            </nav>
-            <div class="acoes">
-                <button>Login</button>
-                <button>Cadastrar</button>
-            </div>
-        </header>
-        
-        <div class="banner">
-            <div class="conteudo-banner">
-                <span>Potencialize seu conhecimento!</span>
-                <span>Aprenda com diversos outros produtores que fazem parte de nosso projeto!</span>
-                <button>Participe!</button>
+    <section class="landing">
+        <div class="home">
+            <header>
+                <div class="titulo">
+                    <span>FEAT UP</span>
+                </div>
+                <nav>
+                    <ul class="navbar">
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#criador">Criador</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </nav>
+                <div class="acoes">
+                    <button class="btn-login">Login</button>
+                    <button class="btn-cadastrar">Cadastrar</button>
+                </div>
+            </header>
+            
+            <div class="banner">
+                <div class="conteudo-banner">
+                    <span class="titulo">Potencialize seu conhecimento!</span>
+                    <span class="descricao">Aprenda com diversos outros produtores que fazem parte de nosso projeto!</span>
+                    <button class="btn-participar">Participe!</button>
+                </div>
             </div>
         </div>
+        
     </section>
 
-    <section class="sobre">
+    <section id="sobre" class="sobre">
         <div class="titulo">
             <span>Sobre  o Projeto</span>
         </div>
@@ -52,7 +57,7 @@
         </div>
     </section>
 
-    <section class="criador">
+    <section id="criador" class="criador">
         <div class="titulo">
             <span>Criador</span>
         </div>
@@ -62,7 +67,7 @@
         </div>
     </section>
 
-    <section class="contato">
+    <section id="contato" class="contato">
         <div class="conteudo-contato">
             <div class="titulo">
                 <span>Contato</span>
@@ -89,7 +94,7 @@
                     <label for="iptResposta">Concorda em receber respostas por email</label>
                 </div>
                 <div class="botao">
-                    <button onclick="enviarMensagem()" type="submit"></button>
+                    <button onclick="enviarMensagem()" type="submit">Enviar</button>
                 </div>
             </form>
         </div>

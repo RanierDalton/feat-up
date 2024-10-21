@@ -1,3 +1,12 @@
 :root{
-    --tamanho-titulo: 4em;
+    /* TAMANHOS */
+    --tamanho-titulo: 3em;
+    --tamanho-sub:2em;
+    --tamanho-texto-nav:1.1em;
+    --tamanho-desc: 1.5em;
+
+    /* CORES */
+    --primary-color: #FF2525;
+    --button-color:#F00000;
+    --btn-cadastra-background:#00000000;
 }

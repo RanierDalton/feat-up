@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+@import './root.css';
+
+*{
+    font-family: "Inria Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button{
+    cursor: pointer;
+}
+
+/* HOME */
+
+.landing{
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/banner.jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    
+    width: 90%;
+    height: 80vh;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+
+    height: 10%;
+}
+
+header .titulo span{
+    font-size: var(--tamanho-titulo);
+    color: white;
+}
+
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar{
+    display: flex; 
+    justify-content: space-between;  
+}
+
+.navbar li{
+    list-style-type: none;
+    display: flex; 
+    justify-content: space-between;  
+}
+
+.navbar a {
+    text-decoration: none;
+    display: flex;
+    color: white;
+    font-size: var(--tamanho-texto-nav);
+
+    margin-right: 20px;
+
+    transition: 0.8s;
+}
+
+.navbar a:hover{
+    text-decoration: underline var(--primary-color);
+    text-underline-offset: 8px;
+    color: var(--primary-color);
+}
+
+.acoes{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.btn-login{
+    background-color: var(--button-color);
+    border:none;
+    border-radius: 10px;
+    font-size: var(--tamanho-texto-nav);
+    color: white;
+
+    margin-right: 20px;
+
+    width: 80px;
+    height: 30px;
+
+    transition: 0.5s;
+}
+
+.btn-login:hover{
+    background-color: white;
+    color: black;
+}
+
+.btn-cadastrar{
+    border: 1px solid var(--button-color);
+
+    background-color: var(--btn-cadastrar-background);
+    border-radius: 10px;
+    font-size: var(--tamanho-texto-nav);
+    color: var(--button-color);
+
+    margin-right: 20px;
+
+    width: 100px;
+    height: 30px;
+
+    transition: 0.5s;
+}
+
+.btn-cadastrar:hover{
+    background-color:var(--button-color) ;
+    color: white;
+}
+
+.banner{
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.conteudo-banner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.conteudo-banner .titulo{
+    font-size: var(--tamanho-titulo);
+    color: white;
+}
+
+.conteudo-banner .descricao{
+    color: white;
+    font-size: var(--tamanho-desc);
+    margin-top: 8px;
+    margin-bottom:15px;
+}
+
+.conteudo-banner .btn-participar{
+    background-color: var(--button-color);
+    border:none;
+    border-radius: 10px;
+    font-size: var(--tamanho-sub);
+    color: white;
+
+    margin-right: 20px;
+
+    width: 190px;
+    height: 50px;
+
+    transition: 0.5s;
+}
+
+.conteudo-banner .btn-participar:hover{
+    background-color: white;
+    color: black;
+}
+
+/* SOBRE O PROJETO */
+
+.sobre {
+    height: 90vh;
+    width: 90%;
+}
+
+/* CRIADOR */
+
+.criador {
+    height: 90vh;
+    width: 90%;
+}
+
+/* CONTATO */
+
+.contato{
+    height: 90vh;
+    width: 90%;
+}
+
+/* RODAPÉ */
+
+footer{
+    height: 40vh;
+    width: 100%;
+}
