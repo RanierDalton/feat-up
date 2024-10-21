@@ -183,11 +183,20 @@ nav{
     width: 90%;
 }
 
+.img-sobre{
+    max-width: 700px;
+}
+
 /* CRIADOR */
 
 .criador {
     height: 90vh;
     width: 90%;
+}
+
+.img-criador {
+    border-radius: 500px;
+    max-width: 350px;
 }
 
 /* CONTATO */
@@ -202,4 +211,10 @@ nav{
 footer{
     height: 40vh;
     width: 100%;
+    background-color: var(--bg-color-footer);
+}
+
+.icones-redes a{
+    text-decoration: none;
+    color: white;
 }
