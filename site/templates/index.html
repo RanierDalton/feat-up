@@ -44,14 +44,15 @@
         </div>
         <div class="conteudo-sobre">
             <div class="texto">
-                <span class="texto-sobre">
+                <span>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mi eros, ultrices sit amet ullamcorper at, commodo eget diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam elementum luctus tellus aliquam vehicula. Phasellus interdum ipsum non mollis tristique. Phasellus et tellus quis odio rutrum sodales sit amet vitae dolor. Mauris condimentum ligula nisl, nec eleifend nisl mollis in. 
+                    
                 </span>
                 <span class="texto-sobre">
                     Quisque ut massa arcu. Aenean laoreet, nibh vitae imperdiet pulvinar, nulla ligula commodo lorem, pellentesque accumsan mi libero in purus. Integer sagittis, dui sed interdum elementum, augue leo ultricies ex, eget ullamcorper libero ante et dui. Etiam feugiat lobortis velit sed viverra. Vestibulum bibendum, magna ac gravida dictum, dolor diam venenatis neque, eu hendrerit massa enim non nunc. Ut tempus elit sit amet elit dignissim mattis. Morbi porttitor risus in turpis volutpat, vel gravida mauris luctus. Phasellus vel feugiat lectus, vitae varius sapien.
                 </span>
             </div>
-            <div>
+            <div class="image">
                 <img class="img-sobre" src="../img/sobre-img.png" alt="Imagem de um homem com casaco vermelho compondo uma música">
             </div>
         </div>
@@ -62,8 +63,14 @@
             <span>Criador</span>
         </div>
         <div class="conteudo-criador">
-            <img class="img-criador" src="../img/img-ranier.jpg" alt="Imagem de um Homem Brnaco com cabelo hondulado vestindo uma roupa social preta">
-            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mi eros, ultrices sit amet ullamcorper at, commodo eget diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam elementum luctus tellus aliquam vehicula. Phasellus interdum ipsum non mollis tristique. Phasellus et tellus quis odio rutrum sodales sit amet vitae dolor. Mauris condimentum ligula nisl, nec eleifend nisl mollis in. </span>
+            <div class="imagem">
+                <img class="img-criador" src="../img/img-ranier.jpg" alt="Imagem de um Homem Brnaco com cabelo hondulado vestindo uma roupa social preta">
+            </div>
+
+            <div class="texto">
+                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mi eros, ultrices sit amet ullamcorper at, commodo eget diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam elementum luctus tellus aliquam vehicula. Phasellus interdum ipsum non mollis tristique. Phasellus et tellus quis odio rutrum sodales sit amet vitae dolor. Mauris condimentum ligula nisl, nec eleifend nisl mollis in. </span>
+            </div>
+            
         </div>
     </section>
 
@@ -72,24 +79,24 @@
             <div class="titulo">
                 <span>Contato</span>
             </div>
-            <form class="formulario">
+            <form id="contato" class="formulario">
                 <div class="campo-contato">
                     <label for="iptNome">Nome:</label>
-                    <input id="iptNome" type="text" placeholder="Informe seu nome completo">
+                    <input id="iptNome" type="text" placeholder="Informe seu nome completo" required autofocus>
                 </div>
-                <div class="campo-contato">
+                <div class="campo-contato margin-top">
                     <label for="iptEmail">Email:</label>
-                    <input id="iptEmail" type="email" placeholder="Informe seu email">
+                    <input id="iptEmail" type="email" placeholder="Informe seu email" required>
                 </div>
-                <div class="campo-contato">
+                <div class="campo-contato margin-top">
                     <label for="iptAssunto">Assunto:</label>
-                    <input id="iptAssunto" type="text" placeholder="Informe o assunto">
+                    <input id="iptAssunto" type="text" placeholder="Informe o assunto" required>
                 </div>
-                <div class="campo-contato">
+                <div class="campo-contato-msg margin-top">
                     <label for="iptMensagem">Mensagem:</label>
-                    <textarea id="iptMensagem">Digite a mensagem do contato</textarea>
+                    <textarea form="contato" rows="4.7" cols="90" id="iptMensagem" required>Digite a mensagem do contato</textarea>
                 </div>
-                <div class="campo-contato">
+                <div class="campo-confirmacao margin-top">
                     <input id="iptResposta" type="checkbox">
                     <label for="iptResposta">Concorda em receber respostas por email</label>
                 </div>

@@ -6,6 +6,7 @@
     font-family: "Inria Sans", sans-serif;
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
 }
 
 body{
@@ -33,7 +34,7 @@ button{
     flex-direction: column;
     
     width: 90%;
-    height: 80vh;
+    height: 90vh;
 }
 
 header{
@@ -52,17 +53,18 @@ nav{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 60%;
 }
 
 .navbar{
     display: flex; 
-    justify-content: space-between;  
+    justify-content: space-around;
+    width: 60%;
 }
 
 .navbar li{
     list-style-type: none;
-    display: flex; 
-    justify-content: space-between;  
+    display: flex;  
 }
 
 .navbar a {
@@ -70,8 +72,6 @@ nav{
     display: flex;
     color: white;
     font-size: var(--tamanho-texto-nav);
-
-    margin-right: 20px;
 
     transition: 0.8s;
 }
@@ -180,7 +180,50 @@ nav{
 
 .sobre {
     height: 90vh;
-    width: 90%;
+    width: 92%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.sobre .titulo{
+    min-height: 20vh;
+    font-size: var(--tamanho-titulo);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.conteudo-sobre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 70vh;
+}
+
+.conteudo-sobre .texto{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.texto-sobre{
+    margin-top: 5vh;
+}
+
+.conteudo-sobre .texto span{
+    font-size: var(--tamanho-desc);
+}
+
+.image{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 50%;
 }
 
 .img-sobre{
@@ -190,13 +233,49 @@ nav{
 /* CRIADOR */
 
 .criador {
-    height: 90vh;
+    height: 70vh;
     width: 90%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.criador .titulo{
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.criador .titulo span{
+    font-size: var(--tamanho-titulo);
+}
+
+.conteudo-criador{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.conteudo-criador .texto{
+    width: 60%;
+}
+
+.conteudo-criador .texto span{
+    font-size: var(--tamanho-desc);
+}
+
+.conteudo-criador .imagem{
+    width: 30%;
 }
 
 .img-criador {
     border-radius: 500px;
-    max-width: 350px;
+    max-width: 450px;
 }
 
 /* CONTATO */
@@ -204,6 +283,111 @@ nav{
 .contato{
     height: 90vh;
     width: 90%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.conteudo-contato{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    height: 90vh;
+}
+
+.conteudo-contato .titulo{
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.conteudo-contato .titulo span{
+    font-size: var(--tamanho-titulo);
+}
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+}
+
+.margin-top{
+    margin-top: 2vh;
+}
+
+.campo-contato{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 9vh;
+}
+
+.campo-contato-msg{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 15vh;
+}
+
+.campo-contato label,
+.campo-contato-msg label,
+.campo-confirmacao label{
+    font-size: var(--tamanho-texto-nav);
+}
+
+.campo-confirmacao input{
+    border-radius: 10px;
+    width: 15px;
+}
+
+.campo-contato input{
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 45px;
+    padding-left: 5px;
+    font-size: var(--tamanho-texto-nav);
+}
+
+.campo-contato input::placeholder{
+    color: var(--placeholder-color);
+}
+
+.campo-contato-msg textarea{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding-left: 5px;
+    padding-top: 8px;
+    font-size: var(--tamanho-texto-nav);
+    color: var(--placeholder-color);
+}
+
+.botao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 10vh;
+}
+
+.botao button{
+    background-color: var(--bg-color-footer);
+    border:none;
+    border-radius: 10px;
+    font-size: var(--tamanho-sub);
+    color: white;
+
+    margin-right: 20px;
+
+    width: 190px;
+    height: 50px;
+
+    transition: 0.5s;
+}
+
+.botao button:hover{
+    background-color: var(--light-red);
+    color: black;
 }
 
 /* RODAPÉ */

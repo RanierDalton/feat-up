@@ -4,10 +4,13 @@
     --tamanho-sub:2em;
     --tamanho-texto-nav:1.1em;
     --tamanho-desc: 1.5em;
+    --tamanho-pequeno:1em;
 
     /* CORES */
+    --light-red: rgb(255, 86, 86);
     --primary-color: #FF2525;
     --button-color:#F00000;
     --btn-cadastra-background:#00000000;
-    --bg-color-footer:#8B0101;
+    --bg-color-footer:#BE0000;
+    --placeholder-color: #716969;
 }
