@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/:tagName', produtoresController.getPerfil);
 
-router.get('/feed', produtoresController.acharFeats);
+router.get('/:tagName/feed', produtoresController.acharFeats);
 
 
 module.exports = router;

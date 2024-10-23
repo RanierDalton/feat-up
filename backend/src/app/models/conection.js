@@ -1,4 +1,4 @@
-const mysql = require('mysql2/promise');
+const mysql = require('mysql2');
 
 require('dotenv').config();
 const HOST = process.env.MYSQL_HOST;
@@ -14,6 +14,6 @@ const conection = mysql.createPool({
     password:SENHA,
     database: DB,
     port: PORTA
-});
+}).promise();
 
 module.exports = conection;
