@@ -1,19 +1,21 @@
-const mysql = require('./conection');
+const poolDb = require('./conection');
 
-const getProdutores = async () => {
-    const convites = await mysql.execute(
-        'SELECT * FROM produtor'
+const getProdutores = async (dados) => {
+    const dadosFeats = await poolDb.execute(
+        'SELECT * FROM produtor WHERE aplicativo = ? OR genero = ?',[dados.aplicativo, dados.genero]
     );
 
-    return convites;
+    // Realizar filtros para retirar o próprio perfil, perfil de pessoas que convidaram e que já participam de um feat
+
+    return dadosFeats[0];
 };
 
 const getPerfil = async (alias) => {
-    const convites = await mysql.execute(
+    const dados = await poolDb.execute(
         'SELECT * FROM produtor WHERE nome=?',[alias]
     );
 
-    return convites;
+    return dados[0][0];
 };
 
 module.exports = {
