@@ -1,9 +1,46 @@
-# Projeto Feat Up
+# FEAT UP
 
-## Link para como organizar projeto: https://youtu.be/Cdu0WJhI-d8?si=uksVZJZkJtse159s
+> Projeto 
 
-## Link para aprender auth: https://youtu.be/qEBoZ8lJR3k?si=8OVaZz9pmayaeVwh
+## 💻 Pré-requisitos
 
-## Link auxílio rede social simples: https://youtu.be/Co5a3QbSonU?si=5-OTjek_xhtDS2Nw
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
-## Colocar escolha de user image: https://youtu.be/xXrs4j-p3yE?si=CSWZ3jEN6YT35shK
+- Você instalou `Node JS` na versão mais recente.
+- Você tem uma máquina `Windows / Linux / Mac`.
+
+## 🚀 Instalando FEAT UP
+
+Para instalar o FEAT UP, siga estas etapas:
+
+```
+git clone 'url_deste_repositório'
+```
+
+## ☕ Usando FEAT UP
+
+Para usar FEAT UP, siga estas etapas:
+
+```
+cd feat-up/backend/
+```
+
+```
+npm i
+```
+
+```
+npm run dev
+```
+
+## 📫 Contribuindo para FEAT UP
+
+Para contribuir com FEAT UP, siga estas etapas:
+
+1. Faça suas alterações.
+2. Verifique se não há atualizações no remoto: `git pull origin main`
+3. Se houver um problema de merge, de um stash e puxe as alterações na nuvem: `git stash` e `git pull origin main`
+4. Veja todas as alterações e modifique-as: `git stash pop`
+5. Adicione essas alterações no git e realize o commit: `git add .'` e `git commit -m '<mensagem_commit>'`
+6. Envie para o branch original: `git push origin main`
+7. Crie a solicitação de pull.
