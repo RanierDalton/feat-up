@@ -3,30 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../styles/login.css">
     <title>Log In - Feat Up</title>
 </head>
 <body>
     <section>
-        <div>
-            <header>
-                <span></span>
-                <span></span>
+        <div class="box">
+            <header class="cabecalho">
+                <span>Bem vindo ao</span>
+                <span>Feat Up</span>
             </header>
             <div>
                 <div>
-                    <label for=""></label>
-                    <input type="text">
+                    <label for="iptApelido">Alias:</label>
+                    <input id="iptApelido" type="text" placeholder="Informe seu apelido">
                 </div>
                 <div>
-                    <label for=""></label>
-                    <input type="password" name="" id="">
+                    <label for="iptSenha">Senha:</label>
+                    <input type="password" id="iptSenha" placeholder="Informe sua senha">
                 </div>
                 <div>
-                    <button>Entrar</button>
+                    <button onclick="entrar()">Entrar</button>
                 </div>
             </div>
             <footer>
-                <span><a href="./cadastro.html"></a></span>
+                <span>Não possui cadastro?<a href="./cadastro.html">Clique aqui para se cadastrar</a></span>
             </footer>
         </div>
     </section>
