@@ -4,32 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../styles/login.css">
+    
     <title>Log In - Feat Up</title>
 </head>
 <body>
     <section>
         <div class="box">
-            <header class="cabecalho">
-                <span>Bem vindo ao</span>
-                <span>Feat Up</span>
+            <header>
+                <span class="subtitle">Bem vindo ao</span>
+                <span class="title">Feat Up</span>
             </header>
-            <div>
-                <div>
+            <div class="forms">
+                <div class="campo">
                     <label for="iptApelido">Alias:</label>
                     <input id="iptApelido" type="text" placeholder="Informe seu apelido">
                 </div>
-                <div>
+                <div class="campo">
                     <label for="iptSenha">Senha:</label>
-                    <input type="password" id="iptSenha" placeholder="Informe sua senha">
+                    <div class="ipt-senha">
+                        <input type="password" id="iptSenha" placeholder="Informe sua senha">
+                        <button class="toggle-password" onclick="mudarVisibilidade()">
+                            <i id="iconSenha" class="fa-solid fa-eye"></i>
+                        </button>
+                        
+                    </div>
                 </div>
-                <div>
+                <div class="botao">
                     <button onclick="entrar()">Entrar</button>
                 </div>
             </div>
             <footer>
-                <span>Não possui cadastro?<a href="./cadastro.html">Clique aqui para se cadastrar</a></span>
+                <span>Não possui cadastro?</span>
+                <a href="./cadastro.html">Clique aqui para se cadastrar</a>
             </footer>
         </div>
     </section>
+    
+    <dialog close id="popUp">
+        <div class="content">
+            <div class="corpo">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>Apelido ou senha incorretos</span>
+            </div>
+                
+            <div class="rodape">
+                <button onclick="popUp.close();">OK</button>
+            </div>
+        </div>
+    </dialog>
+
+    
 </body>
 </html>
+<script src="../../js/login.js"></script>
+<!-- LIB FONT AWESOME-->
+<script src="https://kit.fontawesome.com/d5ea0dfb99.js" crossorigin="anonymous"></script>

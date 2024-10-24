@@ -24,17 +24,181 @@ button{
 
 section{
     height: 100vh;
+    width:50vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .box{
+    border-radius: 10px;
     background-color: white;
-}
-
-.cabecalho{
+    width: 100%;
+    height: 55%;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
+header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    font-size: var(--tamanho-titulo);
+}
+
+.subtitle{
+    font-size: var(--tamanho-desc);
+}
+
+.forms{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 50%;
+    width: 100%;
+}
+
+.campo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.campo label{
+    font-size: var(--tamanho-pequeno);
+}
+
+.campo input{
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 45px;
+    padding-left: 5px;
+    font-size: var(--tamanho-texto-nav);
+}
+
+.ipt-senha{
+    position: relative;
+    display: inline-block;
+}
+
+.ipt-senha input{
+    padding-right: 55px;
+}
+
+.ipt-senha button{
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.ipt-senha button i{
+    font-size: 1.4em;
+}
+
+.botao{
+    width: 60%;
+}
+
+.botao button{
+    background-color: var(--bg-color-footer);
+    border:none;
+    border-radius: 10px;
+    font-size: var(--tamanho-sub);
+    color: white;
+
+    margin-right: 20px;
+
+    width: 100%;
+    height: 50px;
+
+    transition: 0.5s;
+}
+
+footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+footer span, 
+footer a{
+    font-size: var(--tamanho-pequeno);
+}
+
+footer a{
+    text-decoration: none;
+    color: var(--bg-color-footer);
+}
+
+/* MODAL */ 
+dialog{
+    margin: auto;
+    border: none;
+    outline: none;
+    filter: drop-shadow(3px 1px 2px rgb(0, 0, 0));
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.493);
+}
+
+.content{
+    width: 30vh;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.corpo{
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid black;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.corpo i{
+    margin-bottom: 10px;
+    font-size: 3.5em;
+    color: red;
+}
+
+.rodape{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rodape button{
+    background-color: var(--bg-color-footer);
+    border:none;
+    border-radius: 3px;
+    font-size: 1em;
+    color: white;
+
+    width: 50px;
+    
+
+    transition: 0.5s;
+}
