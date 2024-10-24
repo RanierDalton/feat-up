@@ -522,7 +522,7 @@ footer{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-
+    margin-top: 2%;
 }
 
 .icones-redes a{
@@ -531,7 +531,7 @@ footer{
 }
 
 .icones-redes a i{
-    font-size: 3.5em;
+    font-size: 3.3em;
 }
 
 .copy{
