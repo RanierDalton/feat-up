@@ -1,6 +1,6 @@
 # FEAT UP
 
-> Projeto 
+> Este projeto consiste em uma plataforma que facilita a conexão entre produtores musicais, permitindo a colaborações e interações em redes sociais. A modelagem de dados foi projetada para capturar todas as principais atividades dos produtores, incluindo colaborações (feats), preferências de gênero musical, uso de aplicativos musicais e redes sociais.
 
 ## 💻 Pré-requisitos
 
