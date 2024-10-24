@@ -23,26 +23,38 @@ function enviarMensagem(){
         modal.showModal();
         return msgModal.innerText = "Você precisa concordar com o envio da mensagem para enviar!";
     }
-    
-    const conteudo = JSON.parse({
-        name: nome,
-        email: email,
-        subject: assunto,
-        message: mensagem 
-    });
 
     fetch('http://localhost:3333/contato', {
-        method: 'POST', // GET, POST, PUT, DELETE, etc.
-        mode: 'no-cors', // no-cors, cors, same-origin
-        cache: 'no-cache', // default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, same-origin, omit
+        method: 'POST', // GET, POST, PUT, DELETE, etc. 
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
         },
-        redirect: 'follow', // manual, follow, error
-        referrer: 'no-referrer', // no-referrer, client
-        body: conteudo
+        mode: 'no-cors',
+        body: JSON.stringify({
+            name: nome,
+            email: email,
+            subject: assunto,
+            message: mensagem 
+        })
     })
-    .then(response => response.json())
+    .then((response) => response.json())
+    .then((dados) => console.log(dados));
 
 }
+
+function censor(censor) {
+    var i = 0;
+    
+    return function(key, value) {
+      if(i !== 0 && typeof(censor) === 'object' && typeof(value) == 'object' && censor == value) 
+        return '[Circular]'; 
+      
+      if(i >= 29) // seems to be a harded maximum of 30 serialized objects?
+        return '[Unknown]';
+      
+      ++i; // so we know we aren't using the original object anymore
+      
+      return value;  
+    }
+  }
