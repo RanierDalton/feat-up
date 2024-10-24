@@ -82,7 +82,7 @@
             <form id="contato" class="formulario">
                 <div class="campo-contato">
                     <label for="iptNome">Nome:</label>
-                    <input id="iptNome" type="text" placeholder="Informe seu nome completo" required autofocus>
+                    <input id="iptNome" type="text" placeholder="Informe seu nome completo" required>
                 </div>
                 <div class="campo-contato margin-top">
                     <label for="iptEmail">Email:</label>
@@ -97,8 +97,10 @@
                     <textarea form="contato" rows="4.7" cols="90" id="iptMensagem" required>Digite a mensagem do contato</textarea>
                 </div>
                 <div class="campo-confirmacao margin-top">
-                    <input id="iptResposta" type="checkbox">
-                    <label for="iptResposta">Concorda em receber respostas por email</label>
+                    <div class="checkbox-wrapper-1">
+                        <input id="iptConfirmar" class="substituted" type="checkbox" aria-hidden="true" />
+                        <label for="iptConfirmar">Concorda em receber respostas por email</label>
+                    </div>
                 </div>
                 <div class="botao">
                     <button onclick="enviarMensagem()" type="submit">Enviar</button>
