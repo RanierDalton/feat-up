@@ -79,7 +79,7 @@
             <div class="titulo">
                 <span>Contato</span>
             </div>
-            <form id="contato" class="formulario">
+            <div id="contato" class="formulario">
                 <div class="campo-contato">
                     <label for="iptNome">Nome:</label>
                     <input id="iptNome" type="text" placeholder="Informe seu nome completo" required>
@@ -105,7 +105,7 @@
                 <div class="botao">
                     <button onclick="enviarMensagem()" type="submit">Enviar</button>
                 </div>
-            </form>
+            </div>
         </div>
     </section>
 
@@ -133,6 +133,19 @@
             </div>
         </div>
     </footer>
+
+    <dialog close id="popUp">
+        <div class="content">
+            <div class="corpo">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span id="msgPopUp"></span>
+            </div>
+                
+            <div class="rodape">
+                <button onclick="popUp.close();">OK</button>
+            </div>
+        </div>
+    </dialog>
 
 
     <script src="../public/js/contato.js"></script>

@@ -545,3 +545,66 @@ footer{
     color: white;
     font-size: var(--tamanho-texto-nav);
 }
+
+/* MODAL */ 
+dialog{
+    margin: auto;
+    border: none;
+    outline: none;
+    filter: drop-shadow(3px 1px 2px rgb(0, 0, 0));
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.493);
+}
+
+.content{
+    width: 30vh;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.corpo{
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid black;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.corpo i{
+    margin-bottom: 10px;
+    font-size: 3.5em;
+    color: red;
+}
+
+.corpo span{
+    text-align: center;
+}
+
+.rodape{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rodape button{
+    background-color: var(--bg-color-footer);
+    border:none;
+    border-radius: 3px;
+    font-size: 1em;
+    color: white;
+
+    width: 50px;
+    
+
+    transition: 0.5s;
+}
