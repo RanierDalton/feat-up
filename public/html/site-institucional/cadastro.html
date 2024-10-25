@@ -12,81 +12,22 @@
             <header class="cabecalho">
                 <span>Cadastrar</span>
             </header>
-            <div class="campos-input">
-                <div class="campo">
-                    <label for="iptNome">Nome:</label>
-                    <input id="iptNome" type="text" placeholder="Informe seu nome completo">
-                </div>
-                <div class="campo">
-                    <label for="iptApelido">Alias:</label>
-                    <input id="iptApelido" type="text" placeholder="Informe seu apelido">
-                </div>
-                <div class="campo">
-                    <label for="iptEmail">Email:</label>
-                    <input id="iptEmail" type="email" placeholder="Informe seu email">
-                </div>
-                <div class="campo">
-                    <label for="iptDescricao">Descrição:</label>
-                    <textarea id="iptDescricao" cols="30" rows="10" placeholder="Fale um pouco sobre sua experiência na música"></textarea>
-                </div>
-                <div class="campo">
-                    <div>
-                        <label for="iptRedeSocial">Redes Sociais:</label>
-                        <a onclick="adicionarRede()"><span>Adicionar</span></a>
-                    </div>
-                    <input id="iptRedeSocial" name="redesSociais" type="url" placeholder="Link da Rede">
-                </div>
-                <div class="campo">
-                    <div>
-                        <label for="iptGenero">Gêneros Produzidos:</label>
-                        <a onclick="adicionarGenero()"><span>Adicionar</span></a>
-                    </div>
-                    <select id="slctGenero" name="slctGeneros">
-                        
-                    </select>
-                </div>
-                <div class="campo">
-                    <label for="iptAplicativo">Aplicativo que Utiliza:</label>
-                    <select id="iptAplicativo">
-                        <option value=""></option>
-                    </select>
-                </div>
-                <div class="campo">
-                    <label for="iptPontoForte">Qual o seu ponto forte:</label>
-                    <select id="iptPontoForte">
-                        <option value=""></option>
-                    </select>
-                </div>
-                <div class="campo">
-                    <label for="iptSenha">Senha:</label>
-                    <div class="ipt-senha">
-                        <input type="password" id="iptSenha" placeholder="Informe sua senha">
-                        <button class="toggle-password" onclick="mudarVisibilidade(1)">
-                            <i id="iconSenha" class="fa-solid fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="campo">
-                    <label for="iptConfirmar">Confirmar Senha:</label>
-                    <div class="ipt-senha">
-                        <input type="password" id="iptConfirmar" placeholder="Informe sua senha">
-                        <button class="toggle-password" onclick="mudarVisibilidade(2)">
-                            <i id="iconConfirmar" class="fa-solid fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
+            <div id="forms" class="forms margin-top">
             </div>
-            <footer>
-                <div>
-                    <button>Cadastrar</button>
-                </div>
-                <div>
-                    <a onclick="avacar()"><span>Próxima</span></a>
-                    <a onclick="voltar()"><span>Anterior</span></a>
-                </div>
-            </footer>
         </div>
     </section>
+    <dialog close id="popUp">
+        <div class="content">
+            <div class="corpo">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>Apelido ou senha incorretos</span>
+            </div>
+                
+            <div class="rodape">
+                <button onclick="popUp.close();">OK</button>
+            </div>
+        </div>
+    </dialog>
     <script src="../../static/js/visibilidadeSenha.js"></script>
     <script src="../../static/js/cadastro.js"></script>
     <!-- LIB FONT AWESOME-->

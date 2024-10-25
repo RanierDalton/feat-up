@@ -14,12 +14,16 @@ body{
     flex-direction: column;
     align-items: center;
 
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../static/assets/partnership.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.712), rgba(0, 0, 0, 0.5)), url("../../static/assets/partnership.jpg");
     background-size: cover;
 }
 
 button{
     cursor: pointer;
+}
+
+textarea {
+    resize: none;
 }
 
 section{
@@ -45,15 +49,137 @@ section{
     flex-direction: column;
 }
 
+.cabecalho span{
+    font-size: var(--tamanho-titulo);
+}
+
+.forms{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .campos-input{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+
+    width: 80%;
+}
+
+.margin-top{
+    margin-top: 3%;
+}
+
+.margin-bottom{
+    margin-bottom: 4%;
 }
 
 .campo{
     display: flex;
     flex-direction: column;
+    width: 100%;
+}
+
+.campo label{
+    font-size: var(--tamanho-pequeno);
+}
+
+.campo input{
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 45px;
+    padding-left: 5px;
+    font-size: var(--tamanho-texto-nav);
+}
+
+.campo textarea{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding-left: 5px;
+    padding-top: 8px;
+    font-size: var(--tamanho-texto-nav);
+    color: var(--placeholder-color);
+}
+
+.campo select{
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: var(--tamanho-texto-nav);
+    color: var(--placeholder-color);
+    background-color: white;
+    height: 45px;
+}
+
+.ipt-senha{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.ipt-senha input{
+    padding-right: 55px;
+    width: 86%;
+}
+
+.ipt-senha button{
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.ipt-senha button i{
+    font-size: 1.4em;
+}
+
+.add-top{
+    display: flex;
+    justify-content: space-between;
+}
+
+.botao{
+    width: 100%;
+}
+
+.botao button{
+    background-color: var(--bg-color-footer);
+    border:none;
+    border-radius: 10px;
+    font-size: var(--tamanho-sub);
+    color: white;
+
+    margin-right: 20px;
+
+    width: 100%;
+    height: 50px;
+
+    transition: 0.5s;
+}
+
+footer{
+    width: 80%;
+    height: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.nav{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+a{
+    text-decoration: none;
+    color: var(--primary-color);
 }
 
