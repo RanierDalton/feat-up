@@ -94,6 +94,7 @@ section{
     height: 45px;
     padding-left: 5px;
     font-size: var(--tamanho-texto-nav);
+    margin-top: 1%;
 }
 
 .campo textarea{
@@ -102,7 +103,6 @@ section{
     padding-left: 5px;
     padding-top: 8px;
     font-size: var(--tamanho-texto-nav);
-    color: var(--placeholder-color);
 }
 
 .campo select{
@@ -112,6 +112,7 @@ section{
     color: var(--placeholder-color);
     background-color: white;
     height: 45px;
+    margin-top: 1%;
 }
 
 .ipt-senha{
@@ -208,3 +209,66 @@ a{
     color: var(--primary-color);
 }
 
+
+/* MODAL */ 
+dialog{
+    margin: auto;
+    border: none;
+    outline: none;
+    filter: drop-shadow(3px 1px 2px rgb(0, 0, 0));
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.493);
+}
+
+.content{
+    width: 30vh;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.corpo{
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid black;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.corpo i{
+    margin-bottom: 10px;
+    font-size: 3.5em;
+    color: red;
+}
+
+.corpo span{
+    text-align: center;
+}
+
+.rodape{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rodape button{
+    background-color: var(--bg-color-footer);
+    border:none;
+    border-radius: 3px;
+    font-size: 1em;
+    color: white;
+
+    width: 50px;
+    
+
+    transition: 0.5s;
+}

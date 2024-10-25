@@ -1,3 +1,20 @@
+let opcoesGeneros = buscarGeneros();
+loadContent();
+
+
+function carregarGeneros(){
+    let opcoes = '';
+    opcoesGeneros.forEach((genero) => {
+        opcoes+=`<option value="${genero.id}">${genero.nome}</option>`;
+    });
+
+    return opcoes;
+}
+
+const inputRede = `<input id="iptRedeSocial" name="redesSociais" type="url" placeholder="Link da Rede">`;
+const inputGeneros = `<select id="slctGenero" name="iptGeneros">
+                            ${opcoes}
+                        </select>`;
 const telas = {
     inicial: `
                 <div class="campos-input">
@@ -21,26 +38,24 @@ const telas = {
             <footer>
                 <div class="nav">
                     <span></span>
-                    <a href="#" onclick="mudarPagina(2)"><span>Próxima<i class="fa-solid fa-arrow-right"></i></span></a>
+                    <a href="#" onclick="mudarPagina(2, false)"><span>Próxima<i class="fa-solid fa-arrow-right"></i></span></a>
                 </div>
             </footer>`,
     meio:`
             <div class="campos-input">
-                    <div class="campo margin-top" >
+                    <div class="campo margin-top" id="divRede">
                         <div class="add-top">
                             <label for="iptRedeSocial">Redes Sociais:</label>
                             <a href="#" onclick="adicionarRede()"><span>Adicionar</span></a>
                         </div>
-                        <input id="iptRedeSocial" name="redesSociais" type="url" placeholder="Link da Rede">
+                        ${inputRede}
                     </div>
-                    <div class="campo margin-top" >
+                    <div class="campo margin-top" id="divGenero">
                         <div class="add-top">
                             <label for="slctGenero">Gêneros Produzidos:</label>
                             <a href="#" onclick="adicionarGenero()"><span>Adicionar</span></a>
                         </div>
-                        <select id="slctGenero" name="iptGeneros">
-                            <option value="">Selecione uma opção</option>
-                        </select>
+                        ${inputGeneros}
                     </div>
                     <div class="campo margin-top" >
                         <label for="iptAplicativo">Aplicativo que utiliza:</label>
@@ -57,8 +72,8 @@ const telas = {
                 </div>
             <footer>
                 <div class="nav">
-                    <a href="#" onclick="mudarPagina(1)"><span><i class="fa-solid fa-arrow-left"></i>Anterior</span></a>
-                    <a href="#" onclick="mudarPagina(3)"><span>Próxima<i class="fa-solid fa-arrow-right"></i></span></a>
+                    <a href="#" onclick="mudarPagina(1, true)"><span><i class="fa-solid fa-arrow-left"></i>Anterior</span></a>
+                    <a href="#" onclick="mudarPagina(3, false)"><span>Próxima<i class="fa-solid fa-arrow-right"></i></span></a>
                 </div>
             </footer>`,
     final:`     <div class="campos-input">
@@ -103,16 +118,31 @@ const telas = {
                         <button onclick="cadastrar()">Cadastrar</button>
                     </div>
                     <div class="nav margin-top">
-                        <a href="#" onclick="mudarPagina(2)"><span><i class="fa-solid fa-arrow-left"></i>Anterior</span></a>
+                        <a href="#" onclick="mudarPagina(2, true)"><span><i class="fa-solid fa-arrow-left"></i>Anterior</span></a>
                     </div>
                 </footer>`
 }
 
 let telAtual = 1;
 
-const divForm = document.getElementById("forms");
+let nome = '';
+let apelido = '';
+let email = '';
+let descricao = '';
 
-function loadContent(){
+let generos =  '';
+let redesSociais = '';
+let aplicativo = '';
+let pontoForte = '';
+
+let senha = '';
+let confirmar = '';
+
+const divForm = document.getElementById("forms");
+const modal = document.getElementById('popUp');
+
+// CARREGAR E MUDAR CONTEÚDOS DAS PÁGINAS
+async function loadContent(){
     if(telAtual==1){
         divForm.innerHTML = telas.inicial;
     } else if(telAtual==2){
@@ -122,45 +152,67 @@ function loadContent(){
     }
 }
 
-function mudarPagina(numeroPagina){
+function mudarPagina(numeroPagina, isVoltar){
     var numeroPaginaAnterior = telAtual;
     if(verificarInputs(numeroPaginaAnterior)){
         telAtual = numeroPagina;
         loadContent();
+        if(isVoltar && numeroPagina == 1){
+            iptNome.value = nome;
+            iptApelido.value = apelido;
+            iptEmail.value = email;
+            iptDescricao.value = descricao;
+        } else if(numeroPagina == 2){
+            slctGenero.value = generos;
+            iptRedeSocial.value = redesSociais;
+            iptAplicativo.value = aplicativo;
+            iptPontoForte.value = pontoForte;
+        } else if(numeroPagina == 3){
+            iptSenha.value = senha;
+            iptConfirmar.value = confirmar;
+        }
     }    
 }
 
+
+// VALIDAÇÕES 
 function verificarInputs(numeroPagina){
     if(numeroPagina==1){
-        let nome = iptNome.value;
-        let apelido = iptApelido.value;
-        let email = iptEmail.value;
-        let descricao = iptDescricao.value;
+        nome = iptNome.value;
+        apelido = iptApelido.value;
+        email = iptEmail.value;
+        descricao = iptDescricao.value;
 
         if(!validarNome(nome)){
-
+            return false;
         }
-
+        
         if(apelido == ""){
-
+            modal.showModal();
+            msgError.innerText ="Por favor, preencha o valor do apelido";
+            return false;
         }
 
         if(!validarEmail(email)){
-
+            return false;
         }
 
         if(descricao == ""){
-            
+            modal.showModal();
+            msgError.innerText ="Por favor, preencha o campo descrição";
+            return false;
         }
 
     } else if(numeroPagina==2){
-        let generos =  iptPontoForte.value;
-        let redesSociais = iptPontoForte.value;
-        let aplicativo = iptPontoForte.value;
-        let pontoForte = iptPontoForte.value;
-        // coletar os inputs e fzr validações
+        generos =  slctGenero.value;
+        redesSociais = iptRedeSocial.value;
+        aplicativo = iptAplicativo.value;
+        pontoForte = iptPontoForte.value;
+        
+        validarRedes(redesSociais);
     } else if(numeroPagina==3){
-
+        senha = iptSenha.value;
+        confirmar = iptConfirmar.value;
         // coletar os inputs e fzr validações
     }
 
@@ -169,10 +221,10 @@ function verificarInputs(numeroPagina){
 
 function validarNome(nome){
     nome = nome.split(" ");
-    if(nome.length < 2){
-        modalErro.showModal()
-        span_erro.innerText ="Valor do nome inválido";
-        return false;
+    if(nome.length < 2 || nome == ''){
+        modal.showModal();
+        msgError.innerText ="Valor do nome inválido";
+        return false
     }
 
     return true;
@@ -187,10 +239,9 @@ function validarEmail(email){
     var isArroba = email.includes('@') && indiceArroba < indiceEnd;
 
     if((tamEmail < 8 || tamEmail > 45) && !isEnd && !isArroba || email == ''){
-        modalErro.showModal()
-        span_erro.innerText = "Insira um valor de email válido";
+        modal.showModal();
+        msgError.innerText ="Valor do email inválido";
         return false;
-
     }
 
     return true;
@@ -234,9 +285,33 @@ function validarSenha(senha, confirmacao){
     return true;
 }
 
+// FUNCIONALIDADES DE ADD E REMOVER INPUTS
+
+let contadorIptRedes = 1;
+let contadorIptGeneros = 1;
+
+function adicionarRede(){
+    divRede.innerHTML += inputRede;
+}
+
+function removerRede(){
+
+}
+
+function adicionarGenero(){
+    divGenero.innerHTML += inputGeneros;
+}
+
+function removerGenero(){
+
+}
 
 function cadastrar(){
 
 }
 
-loadContent();
+// Buscar infos no Backend
+async function buscarGeneros(){
+    await fetch().then().then();
+}
+
