@@ -1,7 +1,7 @@
 function getLogin(){
-    window.open('http://localhost:3330/login', '_self');
+    location.href = '../html/site-institucional/login.html';
 }
 
 function getCadastro(){
-    window.open('http://localhost:3330/cadastro', '_self');
+    location.href = '../html/site-institucional/cadastro.html';
 }
