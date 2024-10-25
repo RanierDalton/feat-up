@@ -139,6 +139,31 @@ section{
     font-size: 1.4em;
 }
 
+.verificacoesSenha{
+    display: flex;
+    flex-direction: column;
+}
+
+.verificacoesSenha span{
+    color: var(--primary-color);
+}
+
+.campo-confirmacao{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.campo-confirmacao label{
+    font-size: var(--tamanho-texto-nav);
+    margin-left: 3%;
+}
+
+.campo-confirmacao input{
+    border-radius: 10px;
+    width: 15px;
+}
+
 .add-top{
     display: flex;
     justify-content: space-between;
