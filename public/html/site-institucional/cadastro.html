@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro - Feat Up</title>
+    <link rel="stylesheet" href="../../static/styles/cadastro.css">
 </head>
 <body>
     <section>
@@ -11,48 +12,68 @@
             <header class="cabecalho">
                 <span>Cadastrar</span>
             </header>
-            <div>
-                <div>
-                    <label for=""></label>
-                    <input type="text">
+            <div class="campos-input">
+                <div class="campo">
+                    <label for="iptNome">Nome:</label>
+                    <input id="iptNome" type="text" placeholder="Informe seu nome completo">
                 </div>
-                <div>
-                    <label for=""></label>
-                    <input type="text">
+                <div class="campo">
+                    <label for="iptApelido">Alias:</label>
+                    <input id="iptApelido" type="text" placeholder="Informe seu apelido">
                 </div>
-                <div>
-                    <label for=""></label>
-                    <input type="email">
+                <div class="campo">
+                    <label for="iptEmail">Email:</label>
+                    <input id="iptEmail" type="email" placeholder="Informe seu email">
                 </div>
-                <div>
-                    <label for=""></label>
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                <div class="campo">
+                    <label for="iptDescricao">Descrição:</label>
+                    <textarea id="iptDescricao" cols="30" rows="10" placeholder="Fale um pouco sobre sua experiência na música"></textarea>
                 </div>
-                <div>
+                <div class="campo">
                     <div>
-                        <span></span>
-                        <span><a href=""></a></span>
+                        <label for="iptRedeSocial">Redes Sociais:</label>
+                        <a onclick="adicionarRede()"><span>Adicionar</span></a>
                     </div>
-                    <input type="url">
+                    <input id="iptRedeSocial" name="redesSociais" type="url" placeholder="Link da Rede">
                 </div>
-                <div>
+                <div class="campo">
                     <div>
-                        <label></label>
-                        <span><a href=""></a></span>
+                        <label for="iptGenero">Gêneros Produzidos:</label>
+                        <a onclick="adicionarGenero()"><span>Adicionar</span></a>
                     </div>
-                    <select name="" id="">
+                    <select id="slctGenero" name="slctGeneros">
+                        
+                    </select>
+                </div>
+                <div class="campo">
+                    <label for="iptAplicativo">Aplicativo que Utiliza:</label>
+                    <select id="iptAplicativo">
                         <option value=""></option>
                     </select>
                 </div>
-                <div>
-                    <label></label>
-                    <select name="" id="">
+                <div class="campo">
+                    <label for="iptPontoForte">Qual o seu ponto forte:</label>
+                    <select id="iptPontoForte">
                         <option value=""></option>
                     </select>
                 </div>
-                <div>
-                    <label></label>
-                    <input type="text">
+                <div class="campo">
+                    <label for="iptSenha">Senha:</label>
+                    <div class="ipt-senha">
+                        <input type="password" id="iptSenha" placeholder="Informe sua senha">
+                        <button class="toggle-password" onclick="mudarVisibilidade(1)">
+                            <i id="iconSenha" class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="campo">
+                    <label for="iptConfirmar">Confirmar Senha:</label>
+                    <div class="ipt-senha">
+                        <input type="password" id="iptConfirmar" placeholder="Informe sua senha">
+                        <button class="toggle-password" onclick="mudarVisibilidade(2)">
+                            <i id="iconConfirmar" class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             <footer>
@@ -66,5 +87,10 @@
             </footer>
         </div>
     </section>
+    <script src="../../static/js/visibilidadeSenha.js"></script>
+    <script src="../../static/js/cadastro.js"></script>
+    <!-- LIB FONT AWESOME-->
+    <script src="https://kit.fontawesome.com/d5ea0dfb99.js" crossorigin="anonymous"></script>
+    
 </body>
 </html>

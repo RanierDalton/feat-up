@@ -25,10 +25,8 @@ function entrar(){
         return modal.showModal();
     }
 
-    fetch('localhost:3333/', {
-
+    let credenciais = {
+        alias:apelido,
+        senha:sneha
     }
-    ).then(message, ()=>{
-
-    });
 }
