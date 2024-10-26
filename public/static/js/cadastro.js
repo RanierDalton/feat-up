@@ -1,8 +1,32 @@
-let opcoesGeneros = buscarGeneros();
-loadContent();
+let opcoesGeneros = [
+    {
+        id: 1,
+        nome: 'Trap'
+    },
+    {
+        id: 2,
+        nome: 'Eletrônica'
+    }
+];
 
+const socialMediaUrls = [
+    { urlBase: "https://www.facebook.com/", nome: "Facebook" },
+    { urlBase: "https://www.instagram.com/", nome: "Instagram" },
+    { urlBase: "https://twitter.com/", nome: "Twitter" },
+    { urlBase: "https://www.linkedin.com/in/", nome: "LinkedIn" },
+    { urlBase: "https://www.youtube.com/c/", nome: "YouTube - Channel" },
+    { urlBase: "https://www.youtube.com/@", nome: "YouTube - Username" },
+    { urlBase: "https://www.tiktok.com/@", nome: "TikTok" },
+    { urlBase: "https://soundcloud.com/", nome: "SoundCloud" },
+    { urlBase: "https://open.spotify.com/artist/", nome: "Spotify Artist" },
+    { urlBase: "https://.bandcamp.com", nome: "Bandcamp" },
+    { urlBase: "https://www.pinterest.com/", nome: "Pinterest" },
+    { urlBase: "https://github.com/", nome: "GitHub" },
+    { urlBase: "https://vimeo.com/", nome: "Vimeo" }
+];
 
 function carregarGeneros(){
+    // let opcoesGeneros = buscarGeneros();
     let opcoes = '';
     opcoesGeneros.forEach((genero) => {
         opcoes+=`<option value="${genero.id}">${genero.nome}</option>`;
@@ -11,9 +35,10 @@ function carregarGeneros(){
     return opcoes;
 }
 
-const inputRede = `<input id="iptRedeSocial" name="redesSociais" type="url" placeholder="Link da Rede">`;
+const inputRede = `<input name="redesSociais" type="url" placeholder="Link da Rede">`;
 const inputGeneros = `<select id="slctGenero" name="iptGeneros">
-                            ${opcoes}
+                            <option value="">Selecione uma opção</option>
+                            ${carregarGeneros()}
                         </select>`;
 const telas = {
     inicial: `
@@ -45,17 +70,20 @@ const telas = {
             <div class="campos-input">
                     <div class="campo margin-top" id="divRede">
                         <div class="add-top">
-                            <label for="iptRedeSocial">Redes Sociais:</label>
+                            <label for="">Redes Sociais:</label>
                             <a href="#" onclick="adicionarRede()"><span>Adicionar</span></a>
                         </div>
-                        ${inputRede}
+                        <input name="redesSociais" type="url" placeholder="Link da Rede">
                     </div>
                     <div class="campo margin-top" id="divGenero">
                         <div class="add-top">
                             <label for="slctGenero">Gêneros Produzidos:</label>
                             <a href="#" onclick="adicionarGenero()"><span>Adicionar</span></a>
                         </div>
-                        ${inputGeneros}
+                        <select id="slctGenero" name="iptGeneros">
+                            <option value="">Selecione uma opção</option>
+                            ${carregarGeneros()}
+                        </select>
                     </div>
                     <div class="campo margin-top" >
                         <label for="iptAplicativo">Aplicativo que utiliza:</label>
@@ -164,7 +192,6 @@ function mudarPagina(numeroPagina, isVoltar){
             iptDescricao.value = descricao;
         } else if(numeroPagina == 2){
             slctGenero.value = generos;
-            iptRedeSocial.value = redesSociais;
             iptAplicativo.value = aplicativo;
             iptPontoForte.value = pontoForte;
         } else if(numeroPagina == 3){
@@ -204,12 +231,34 @@ function verificarInputs(numeroPagina){
         }
 
     } else if(numeroPagina==2){
-        generos =  slctGenero.value;
-        redesSociais = iptRedeSocial.value;
         aplicativo = iptAplicativo.value;
         pontoForte = iptPontoForte.value;
         
-        validarRedes(redesSociais);
+        if(!validarRedes('redesSociais')){
+            console.log('Entrei no 1º');
+            modal.showModal();
+            msgError.innerText ="Por favor, preencha os campos das redes sociais";
+            return false;
+        }
+
+        if(!validarGeneros('iptGeneros')){
+            modal.showModal();
+            msgError.innerText ="Por favor, preencha os campos dos Generos";
+            return false;
+        }
+
+        if(aplicativo == ""){
+            modal.showModal();
+            msgError.innerText ="Por favor, preencha o campo de aplicativo";
+            return false;
+        }
+
+        if(pontoForte == ""){
+            modal.showModal();
+            msgError.innerText ="Por favor, preencha o campo de ponto forte";
+            return false;
+        }
+
     } else if(numeroPagina==3){
         senha = iptSenha.value;
         confirmar = iptConfirmar.value;
@@ -231,7 +280,6 @@ function validarNome(nome){
 }
 
 function validarEmail(email){
-    console.log(email)
     var tamEmail = email.length;
     var isEnd = email.endsWith('.com') || email.endsWith('.br') || email.endsWith('.gov');
     var indiceEnd = email.indexOf('.com') || email.indexOf('.br') || email.indexOf('.gov') ;
@@ -285,13 +333,53 @@ function validarSenha(senha, confirmacao){
     return true;
 }
 
+function validarRedes(classe){
+    let redes = document.getElementsByName(classe);
+
+    for(let i=0; i<redes.length; i++){
+        let urlBase = socialMediaUrls[i].urlBase;
+        let patterns = urlBase.split(redes[i].value);
+
+        console.log(patterns[0] != urlBase);
+
+        if(redes[i].value == "" || redes[i].value.length < 10 || patterns[0] != urlBase){
+            console.log('Entrei no 2º');
+            return false; 
+        }
+    }
+    return true;
+}
+
+function validarGeneros(classe){
+    let generos = document.getElementsByName(classe);
+
+    generos.forEach((ipt) => {
+        if(ipt.value == ""){
+            return false;
+        }
+    });
+
+    return true;
+}
+
 // FUNCIONALIDADES DE ADD E REMOVER INPUTS
 
 let contadorIptRedes = 1;
 let contadorIptGeneros = 1;
 
 function adicionarRede(){
+    let redes = document.getElementsByName('redesSociais');
+    let valoresInputs = [];
+
+    redes.forEach((ipt) => {
+        valoresInputs.push(ipt.value);
+    });
+
     divRede.innerHTML += inputRede;
+
+    for(let i=0; i<valoresInputs.length;i++){
+        redes[i].value = valoresInputs[i];
+    }
 }
 
 function removerRede(){
@@ -299,7 +387,18 @@ function removerRede(){
 }
 
 function adicionarGenero(){
+    let generos = document.getElementsByName('iptGeneros');
+    let valoresInputs = [];
+
+    generos.forEach((ipt) => {
+        valoresInputs.push(ipt.value);
+    });
+    
     divGenero.innerHTML += inputGeneros;
+
+    for(let i=0; i<valoresInputs.length;i++){
+        generos[i].value = valoresInputs[i];
+    }
 }
 
 function removerGenero(){
@@ -315,3 +414,4 @@ async function buscarGeneros(){
     await fetch().then().then();
 }
 
+loadContent();
