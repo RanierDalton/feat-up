@@ -217,6 +217,7 @@ function mudarPagina(numeroPagina, isVoltar){
             iptEmail.value = email;
             iptDescricao.value = descricao;
         } else if(numeroPagina == 2){
+            // TODO
             // Inserir os valores em todos os inputs de redes sociais
             // Inserir os valores em todos os inputs de generos
             // Inserir o valor do aplicativo
@@ -286,6 +287,8 @@ function verificarInputs(numeroPagina){
     } else if(numeroPagina==3){
         senha = iptSenha.value;
         confirmar = iptConfirmar.value;
+
+        // TODO
         // coletar os inputs e fzr validações
     }
 
@@ -406,7 +409,7 @@ function adicionarRede(){
 }
 
 function removerRede(){
-
+    // TODO
 }
 
 function adicionarGenero(){
@@ -425,15 +428,16 @@ function adicionarGenero(){
 }
 
 function removerGenero(){
-
+    // TODO
 }
 
 function cadastrar(){
-
+    // TODO
 }
 
 // Buscar infos no Backend
 async function buscarGeneros(){
+    // TODO
     await fetch().then().then();
 }
 
