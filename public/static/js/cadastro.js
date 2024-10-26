@@ -20,6 +20,20 @@ const opcoesAplicativos = [
     }
 ];
 
+let informacoesCadastro = {
+    nome: '',
+    apelido: '',
+    email: '',
+    descricao:'',
+    redes: [],
+    generos: [],
+    aplicativo: '',
+    pontoForte: '',
+    senha: ''
+}
+
+const CARACTERES_ESPECIAIS = /[^A-Za-z0-9]/;
+
 const socialMediaUrls = [
     { urlBase: "https://www.facebook.com/", nome: "Facebook" },
     { urlBase: "https://www.instagram.com/", nome: "Instagram" },
@@ -134,17 +148,17 @@ const telas = {
                     <div class="campo senha">
                         <label for="iptSenha">Senha:</label>
                         <div class="ipt-senha">
-                            <input type="password" id="iptSenha" placeholder="Informe sua senha" oninput="validarSenha()">
+                            <input type="password" id="iptSenha" placeholder="Informe sua senha" oninput="validarSenha(this)">
                             <button class="toggle-password" onclick="mudarVisibilidade(1)">
                                 <i id="iconSenha" class="fa-solid fa-eye"></i>
                             </button>
                         </div>
                         <div class="verificacoesSenha margin-top">
-                            <span>8 caracteres Total</span>
-                            <span>1 caractere Minúcula</span>
-                            <span>1 caractere Maiúscula</span>
-                            <span>1 Número</span>
-                            <span>1 Caractere Especial</span>
+                            <span id="caractere">8 caracteres Total</span>
+                            <span id="minusculo">1 caractere Minúcula</span>
+                            <span id="maiusculo">1 caractere Maiúscula</span>
+                            <span id="numero">1 Número</span>
+                            <span id="especial">1 Caractere Especial</span>
                         </div>
                     <div>
                     <div class="campo margin-top" >
@@ -159,10 +173,6 @@ const telas = {
                     <div class="campo-confirmacao ">
                         <input id="iptConfirmarTermos" type="checkbox" />
                         <label for="iptConfirmarTermos">Li e concordo com os termos e condições do site</label>
-                    </div>
-                    <div class="campo-confirmacao">
-                        <input id="iptConfirmarNotificacoes" type="checkbox" />
-                        <label for="iptConfirmarNotificacoes">Aceito receber notificações por email</label>
                     </div>
                     </div>
                     </div>
@@ -216,14 +226,15 @@ function mudarPagina(numeroPagina, isVoltar){
             iptApelido.value = apelido;
             iptEmail.value = email;
             iptDescricao.value = descricao;
-        } else if(numeroPagina == 2){
+        } else if(isVoltar && numeroPagina == 2){
             // TODO
             // Inserir os valores em todos os inputs de redes sociais
             // Inserir os valores em todos os inputs de generos
             // Inserir o valor do aplicativo
             // Inserir ponto forte
         }
-    }    
+    }   
+    telAtual = numeroPagina; 
 }
 
 
@@ -255,6 +266,11 @@ function verificarInputs(numeroPagina){
             return false;
         }
 
+        informacoesCadastro.nome = nome;
+        informacoesCadastro.apelido = apelido;
+        informacoesCadastro.email = email;
+        informacoesCadastro.descricao = descricao;
+
     } else if(numeroPagina==2){
         aplicativo = iptAplicativo.value;
         pontoForte = iptPontoForte.value;
@@ -284,12 +300,32 @@ function verificarInputs(numeroPagina){
             return false;
         }
 
+        informacoesCadastro.aplicativo = aplicativo;
+        informacoesCadastro.pontoForte = pontoForte;
+
     } else if(numeroPagina==3){
         senha = iptSenha.value;
         confirmar = iptConfirmar.value;
 
-        // TODO
-        // coletar os inputs e fzr validações
+        if(!validarSenha(iptSenha)){
+            modal.showModal();
+            msgError.innerText ="O valor de ambas as senhas não batem";
+            return false;
+        }
+
+        if(senha != confirmar){
+            modal.showModal();
+            msgError.innerText ="O valor de ambas as senhas não batem";
+            return false;
+        }
+
+        if(!iptConfirmarTermos.checked){
+            modal.showModal();
+            msgError.innerText ="Concorde com nossos termos e licenças para se cadastrar";
+            return false;
+        }
+
+        informacoesCadastro.senha = senha;
     }
 
     return true;
@@ -322,7 +358,14 @@ function validarEmail(email){
     return true;
 }
 
-function validarSenha(senha, confirmacao){
+function validarSenha(ipt){
+    caractere.style.color = 'red';
+    minusculo.style.color = 'red';
+    maiusculo.style.color = 'red';
+    numero.style.color = 'red';
+    especial.style.color = 'red';  
+
+    var senha = ipt.value;
     var tamSenha = senha.length;
     var isEspecial = CARACTERES_ESPECIAIS.test(senha);
 
@@ -330,7 +373,6 @@ function validarSenha(senha, confirmacao){
     var isMaiuscula = false;
     var isNum = false;        
 
-    // pd usar um forEach ou find
     for(var i = 0; i < tamSenha; i++){
         if(senha[i] == senha[i].toUpperCase()){
             isMaiuscula = true;
@@ -340,51 +382,73 @@ function validarSenha(senha, confirmacao){
             isMinuscula = true;
         }
 
-        if(Number(parseFloat(senha[i])) == senha[i]){
+        console.log(Number(parseFloat(senha[i])) == Number(senha[i]));
+
+        if(typeof Number(senha[i]) === 'number'){
             isNum = true;
         }
     }
 
+    if(tamSenha>= 8 && tamSenha <= 45){
+        caractere.style.color = 'green';
+    }
+
+    if(isMaiuscula){
+        maiusculo.style.color = 'green';
+    }
+
+    if(isMinuscula){
+        minusculo.style.color = 'green';
+    }
+
+    if(isEspecial){
+        especial.style.color = 'green';
+    }
+
+    if(isNum){
+        numero.style.color = 'green';
+    }
+
     if(tamSenha < 8 || !isMinuscula || !isMaiuscula || !isEspecial || !isNum || senha == ''){
-        modalErro.showModal()
-        span_erro.innerText = "Insira uma senha válida";
         return false;
     }
 
-    if(senha !== confirmacao){
-        modalErro.showModal()
-        span_erro.innerText = "As senhas não batem";
-        return false;
-    }
-
-    return true;
+    return true
 }
 
 function validarRedes(classe){
     let redes = document.getElementsByName(classe);
+    let valoresInputs = [];
 
     for(let i=0; i<redes.length; i++){
         let urlBase = socialMediaUrls[i].urlBase;
         let patterns = urlBase.split(redes[i].value);
 
-        console.log(patterns[0] != urlBase);
-
         if(redes[i].value == "" || redes[i].value.length < 10 || patterns[0] != urlBase){
-            console.log('Entrei no 2º');
             return false; 
         }
+
+        valoresInputs.push(redes[i].value);
     }
+
+    informacoesCadastro.redes = valoresInputs;
     return true;
 }
 
 function validarGeneros(classe){
     let generos = document.getElementsByName(classe);
+    let valoresInputs = [];
+
 
     for(let i=0; i<generos.length; i++){
         if(generos[i].value == ""){
             return false;
         }
+        valoresInputs.push(generos[i].value);
     }
+
+    informacoesCadastro.generos = valoresInputs;
+
     return true;
 }
 
@@ -432,7 +496,18 @@ function removerGenero(){
 }
 
 function cadastrar(){
-    // TODO
+    if(!verificarInputs(telAtual)){
+        modal.showModal();
+        msgError.innerText ="Erro ao cadastrar o usuário";
+        return false;
+    }
+    modal.showModal();
+    msgError.innerText ="Cadastrou legal";
+    iconModal.classList.remove('fa-circle-exclamation');
+    iconModal.style.color = 'green';
+    iconModal.classList.add('fa-circle-check');
+    // enviar pra API
+    //fetch().then().then();
 }
 
 // Buscar infos no Backend
