@@ -1,4 +1,4 @@
-let opcoesGeneros = [
+const opcoesGeneros = [
     {
         id: 1,
         nome: 'Trap'
@@ -6,6 +6,17 @@ let opcoesGeneros = [
     {
         id: 2,
         nome: 'Eletrônica'
+    }
+];
+
+const opcoesAplicativos = [
+    {
+        id: 1,
+        nome: 'Pro Tools'
+    },
+    {
+        id: 2,
+        nome: 'FLStudio'
     }
 ];
 
@@ -30,6 +41,16 @@ function carregarGeneros(){
     let opcoes = '';
     opcoesGeneros.forEach((genero) => {
         opcoes+=`<option value="${genero.id}">${genero.nome}</option>`;
+    });
+
+    return opcoes;
+}
+
+function carregarAplicativos(){
+    // let opcoesGeneros = buscarGeneros();
+    let opcoes = '';
+    opcoesAplicativos.forEach((app) => {
+        opcoes+=`<option value="${app.id}">${app.nome}</option>`;
     });
 
     return opcoes;
@@ -89,12 +110,17 @@ const telas = {
                         <label for="iptAplicativo">Aplicativo que utiliza:</label>
                         <select id="iptAplicativo">
                             <option value="">Selecione uma opção</option>
+                            ${carregarAplicativos()}
                         </select>
                     </div>
                     <div class="campo margin-top" >
                         <label for="iptPontoForte">Qual o seu ponto forte:</label>
                         <select id="iptPontoForte">
                             <option value="">Selecione uma opção</option>
+                            <option value="1">Instrumental</option>
+                            <option value="2">Beat</option>
+                            <option value="3">Mix</option>
+                            <option value="4">Master</option>
                         </select>
                     </div>
                 </div>
@@ -191,12 +217,10 @@ function mudarPagina(numeroPagina, isVoltar){
             iptEmail.value = email;
             iptDescricao.value = descricao;
         } else if(numeroPagina == 2){
-            slctGenero.value = generos;
-            iptAplicativo.value = aplicativo;
-            iptPontoForte.value = pontoForte;
-        } else if(numeroPagina == 3){
-            iptSenha.value = senha;
-            iptConfirmar.value = confirmar;
+            // Inserir os valores em todos os inputs de redes sociais
+            // Inserir os valores em todos os inputs de generos
+            // Inserir o valor do aplicativo
+            // Inserir ponto forte
         }
     }    
 }
@@ -233,7 +257,7 @@ function verificarInputs(numeroPagina){
     } else if(numeroPagina==2){
         aplicativo = iptAplicativo.value;
         pontoForte = iptPontoForte.value;
-        
+
         if(!validarRedes('redesSociais')){
             console.log('Entrei no 1º');
             modal.showModal();
@@ -353,12 +377,11 @@ function validarRedes(classe){
 function validarGeneros(classe){
     let generos = document.getElementsByName(classe);
 
-    generos.forEach((ipt) => {
-        if(ipt.value == ""){
+    for(let i=0; i<generos.length; i++){
+        if(generos[i].value == ""){
             return false;
         }
-    });
-
+    }
     return true;
 }
 
