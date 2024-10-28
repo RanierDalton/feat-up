@@ -9,6 +9,17 @@ const opcoesGeneros = [
     }
 ];
 
+const opcoesRedes = [
+    {
+        id: 1,
+        nome: 'instagram'
+    },
+    {
+        id: 2,
+        nome: 'bandcamp'
+    }
+];
+
 const opcoesAplicativos = [
     {
         id: 1,
@@ -30,31 +41,27 @@ let informacoesCadastro = {
     aplicativo: '',
     pontoForte: '',
     senha: ''
-}
+};
 
 const CARACTERES_ESPECIAIS = /[^A-Za-z0-9]/;
 
-const socialMediaUrls = [
-    { urlBase: "https://www.facebook.com/", nome: "Facebook" },
-    { urlBase: "https://www.instagram.com/", nome: "Instagram" },
-    { urlBase: "https://twitter.com/", nome: "Twitter" },
-    { urlBase: "https://www.linkedin.com/in/", nome: "LinkedIn" },
-    { urlBase: "https://www.youtube.com/c/", nome: "YouTube - Channel" },
-    { urlBase: "https://www.youtube.com/@", nome: "YouTube - Username" },
-    { urlBase: "https://www.tiktok.com/@", nome: "TikTok" },
-    { urlBase: "https://soundcloud.com/", nome: "SoundCloud" },
-    { urlBase: "https://open.spotify.com/artist/", nome: "Spotify Artist" },
-    { urlBase: "https://.bandcamp.com", nome: "Bandcamp" },
-    { urlBase: "https://www.pinterest.com/", nome: "Pinterest" },
-    { urlBase: "https://github.com/", nome: "GitHub" },
-    { urlBase: "https://vimeo.com/", nome: "Vimeo" }
-];
+let contadorIptRedes = 1;
+let contadorIptGeneros = 1;
 
 function carregarGeneros(){
     // let opcoesGeneros = buscarGeneros();
     let opcoes = '';
     opcoesGeneros.forEach((genero) => {
         opcoes+=`<option value="${genero.id}">${genero.nome}</option>`;
+    });
+
+    return opcoes;
+}
+
+function carregarRedes(){
+    let opcoes = '';
+    opcoesRedes.forEach((rede) => {
+        opcoes+=`<option value="${rede.id}">${rede.nome}</option>`;
     });
 
     return opcoes;
@@ -70,11 +77,6 @@ function carregarAplicativos(){
     return opcoes;
 }
 
-const inputRede = `<input name="redesSociais" type="url" placeholder="Link da Rede">`;
-const inputGeneros = `<select id="slctGenero" name="iptGeneros">
-                            <option value="">Selecione uma opção</option>
-                            ${carregarGeneros()}
-                        </select>`;
 const telas = {
     inicial: `
                 <div class="campos-input">
@@ -106,19 +108,27 @@ const telas = {
                     <div class="campo margin-top" id="divRede">
                         <div class="add-top">
                             <label for="">Redes Sociais:</label>
-                            <a href="#" onclick="adicionarRede()"><span>Adicionar</span></a>
+                            <a href="#" onclick="adicionarRede(0)"><span>Adicionar</span></a>
                         </div>
-                        <input name="redesSociais" type="url" placeholder="Link da Rede">
+                        <div class="inputs-class">
+                            <select name="redesSociais" id="iptAplicativo">
+                                <option value="">Selecione uma redes sociais</option>
+                                ${carregarRedes()}
+                            </select>
+                            <input name="redesSociais" type="url" placeholder="Informe o user da mesma">
+                        </div>
                     </div>
                     <div class="campo margin-top" id="divGenero">
                         <div class="add-top">
                             <label for="slctGenero">Gêneros Produzidos:</label>
                             <a href="#" onclick="adicionarGenero()"><span>Adicionar</span></a>
                         </div>
-                        <select id="slctGenero" name="iptGeneros">
-                            <option value="">Selecione uma opção</option>
-                            ${carregarGeneros()}
-                        </select>
+                        <div class="input-genero maximo">
+                            <select id="slctGenero" name="iptGeneros">
+                                <option value="">Selecione uma opção</option>
+                                ${carregarGeneros()}
+                            </select>
+                        </div>
                     </div>
                     <div class="campo margin-top" >
                         <label for="iptAplicativo">Aplicativo que utiliza:</label>
@@ -454,9 +464,6 @@ function validarGeneros(classe){
 
 // FUNCIONALIDADES DE ADD E REMOVER INPUTS
 
-let contadorIptRedes = 1;
-let contadorIptGeneros = 1;
-
 function adicionarRede(){
     let redes = document.getElementsByName('redesSociais');
     let valoresInputs = [];
@@ -465,6 +472,20 @@ function adicionarRede(){
         valoresInputs.push(ipt.value);
     });
 
+    
+    const inputRede = `<div class="inputs-class">
+                        <select name="redesSociais" id="iptAplicativo">
+                            <option value="">Selecione uma redes sociais</option>
+                            ${carregarRedes()}
+                        </select>
+                        <div class="ipt-rede">
+                            <input name="redesSociais" type="url" placeholder="Informe o user da mesma">
+                            <button class="toggle-password" onclick="removerRede(${contadorIptRedes})">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>`;
+    contadorIptRedes++;
     divRede.innerHTML += inputRede;
 
     for(let i=0; i<valoresInputs.length;i++){
@@ -472,8 +493,10 @@ function adicionarRede(){
     }
 }
 
-function removerRede(){
-    // TODO
+function removerRede(indexInput){
+    let inputsRedes = document.getElementsByClassName('inputs-class');
+
+    inputsRedes[indexInput].remove();
 }
 
 function adicionarGenero(){
@@ -483,16 +506,31 @@ function adicionarGenero(){
     generos.forEach((ipt) => {
         valoresInputs.push(ipt.value);
     });
+
+    const inputGeneros = `
+    <div class="input-genero">
+        <select id="slctGenero" name="iptGeneros">
+            <option value="">Selecione uma opção</option>
+            ${carregarGeneros()}
+        </select>
+        <button class="toggle-password" onclick="removerGenero(${contadorIptRedes})">
+            <i class="fa-solid fa-trash"></i>
+        </button>
+    </div>
+    `;
     
     divGenero.innerHTML += inputGeneros;
+    contadorIptGeneros++;
 
     for(let i=0; i<valoresInputs.length;i++){
         generos[i].value = valoresInputs[i];
     }
 }
 
-function removerGenero(){
-    // TODO
+function removerGenero(indexInput){
+    let inputsGeneros = document.getElementsByClassName('input-genero');
+
+    console.log(inputsGeneros);
 }
 
 function cadastrar(){

@@ -115,6 +115,59 @@ section{
     margin-top: 1%;
 }
 
+.ipt-rede{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.ipt-rede input{
+    padding-right: 55px;
+    width: 86%;
+}
+
+.ipt-rede button{
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.ipt-rede button i{
+    font-size: 1.4em;
+}
+
+.input-genero{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.input-genero select{
+    width: 100%;
+}
+.input-genero button{
+    width: 5%;
+}
+
+.maximo input{
+    width: 100% !important;
+}
+
+.input-genero button{
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.input-genero button i{
+    font-size: 1.4em;
+}
+
 .ipt-senha{
     position: relative;
     display: inline-block;
@@ -168,6 +221,11 @@ section{
 .add-top{
     display: flex;
     justify-content: space-between;
+}
+
+.inputs-class{
+    display: flex;
+    flex-direction: column;
 }
 
 .botao{

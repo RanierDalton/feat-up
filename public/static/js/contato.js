@@ -7,54 +7,48 @@ let ipt_confirmar = document.getElementById('iptConfirmar');
 let modal = document.getElementById('popUp');
 let msgModal = document.getElementById('msgPopUp');
 
-function enviarMensagem(){
-    let nome = ipt_nome.value;
-    let email = ipt_email.value;
-    let assunto = ipt_assunto.value;
-    let mensagem = ipt_mensagem.value;
-    let isConfirmado = ipt_confirmar.checked;
+function sendEmail() {
+    var checkResposta = ipt_mensagem1.checked;
 
-    if(nome == '' || email == '' || assunto == '' || mensagem.value == ''){
+    if(!checkResposta){
+        modal.showModal()
+        return msgModal.innerText = "Você precisa concordar com o envio da mensagem para enviar!";
+    }
+    // https://app.elasticemail.com/login?_gl=1*6r0n63*_gcl_au*MTMzOTQzNzY2NC4xNzI4MzM3NDkw*FPAU*MTMzOTQzNzY2NC4xNzI4MzM3NDkw*_ga*MTg3Nzk0OTg0MS4xNzI4MzM3NDUz*_ga_9GFVDHZ5M5*MTcyODMzNzQ1My4xLjEuMTcyODMzNzkzOS41Mi4wLjA.*_ga_MZLQS12D2G*MTcyODMzNzQ1Mi4xLjEuMTcyODMzNzkzOS4wLjAuMTE5MzI1NDQxNg..
+    // O link acima da acesso ao site onde tem tudo sobre as credenciais e senhas, porém já configurei tudo
+    // deixei as credenciais no .env
+
+    var emailContactado = ipt_email.value;
+    var nome = ipt_nome.value;
+    var assunto = ipt_assunto.value;
+
+    if(nome == '' || emailContactado == '' || assunto == '' || ipt_mensagem.value == ''){
         modal.showModal();
         return msgModal.innerText = "Preencha TODOS os campos corretamente!";
     }
-
-    if(!isConfirmado){
-        modal.showModal();
-        return msgModal.innerText = "Você precisa concordar com o envio da mensagem para enviar!";
-    }
-
-    fetch('http://localhost:3333/contato', {
-        method: 'POST', // GET, POST, PUT, DELETE, etc. 
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-        },
-        mode: 'no-cors',
-        body: JSON.stringify({
-            name: nome,
-            email: email,
-            subject: assunto,
-            message: mensagem 
-        })
-    })
-    .then((response) => response.json())
-    .then((dados) => console.log(dados));
-
-}
-
-function censor(censor) {
-    var i = 0;
     
-    return function(key, value) {
-      if(i !== 0 && typeof(censor) === 'object' && typeof(value) == 'object' && censor == value) 
-        return '[Circular]'; 
-      
-      if(i >= 29) // seems to be a harded maximum of 30 serialized objects?
-        return '[Unknown]';
-      
-      ++i; // so we know we aren't using the original object anymore
-      
-      return value;  
-    }
-  }
+    var mensagem = `
+        Nome Usuário: ${nome}<br>
+        Email: ${emailContactado}<br>
+        Assunto: ${assunto}<br>
+        Mensagem: ${ipt_mensagem.value}
+    `;
+
+    Email.send({
+        Host: "smtp.elasticemail.com",
+        Port: porta,
+        Username: email,
+        Password: senha,
+        To: email,
+        From: email,
+        Subject:assunto,
+        Body: mensagem
+    })
+    .then(function (resposta) {
+        msgModal.innerText = resposta;
+        modal.showModal();
+    });
+}
+function closeModal(){
+    modal.close();
+}
