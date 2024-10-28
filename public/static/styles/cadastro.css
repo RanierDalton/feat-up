@@ -109,7 +109,6 @@ section{
     border: 1px solid black;
     border-radius: 10px;
     font-size: var(--tamanho-texto-nav);
-    color: var(--placeholder-color);
     background-color: white;
     height: 45px;
     margin-top: 1%;
@@ -149,6 +148,7 @@ section{
 .input-genero select{
     width: 100%;
 }
+
 .input-genero button{
     width: 5%;
 }

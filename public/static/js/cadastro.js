@@ -111,8 +111,8 @@ const telas = {
                             <a href="#" onclick="adicionarRede(0)"><span>Adicionar</span></a>
                         </div>
                         <div class="inputs-class">
-                            <select name="redesSociais" id="iptAplicativo">
-                                <option value="">Selecione uma redes sociais</option>
+                            <select name="redesSociais" id="iptRede">
+                                <option value="" disabled selected>Selecione uma redes sociais</option>
                                 ${carregarRedes()}
                             </select>
                             <input name="redesSociais" type="url" placeholder="Informe o user da mesma">
@@ -125,7 +125,7 @@ const telas = {
                         </div>
                         <div class="input-genero maximo">
                             <select id="slctGenero" name="iptGeneros">
-                                <option value="">Selecione uma opção</option>
+                                <option value="" disabled selected>Selecione uma opção</option>
                                 ${carregarGeneros()}
                             </select>
                         </div>
@@ -133,14 +133,14 @@ const telas = {
                     <div class="campo margin-top" >
                         <label for="iptAplicativo">Aplicativo que utiliza:</label>
                         <select id="iptAplicativo">
-                            <option value="">Selecione uma opção</option>
+                            <option value="" disabled selected>Selecione uma opção</option>
                             ${carregarAplicativos()}
                         </select>
                     </div>
                     <div class="campo margin-top" >
                         <label for="iptPontoForte">Qual o seu ponto forte:</label>
                         <select id="iptPontoForte">
-                            <option value="">Selecione uma opção</option>
+                            <option value="" disabled selected selected>Selecione uma opção</option>
                             <option value="1">Instrumental</option>
                             <option value="2">Beat</option>
                             <option value="3">Mix</option>
@@ -204,8 +204,8 @@ let apelido = '';
 let email = '';
 let descricao = '';
 
-let generos =  '';
-let redesSociais = '';
+let generos =  [];
+let redesSociais = [];
 let aplicativo = '';
 let pontoForte = '';
 
@@ -228,25 +228,65 @@ async function loadContent(){
 
 function mudarPagina(numeroPagina, isVoltar){
     var numeroPaginaAnterior = telAtual;
-    if(verificarInputs(numeroPaginaAnterior)){
+    if(isVoltar){
         telAtual = numeroPagina;
         loadContent();
-        if(isVoltar && numeroPagina == 1){
-            iptNome.value = nome;
-            iptApelido.value = apelido;
-            iptEmail.value = email;
-            iptDescricao.value = descricao;
-        } else if(isVoltar && numeroPagina == 2){
-            // TODO
-            // Inserir os valores em todos os inputs de redes sociais
-            // Inserir os valores em todos os inputs de generos
-            // Inserir o valor do aplicativo
-            // Inserir ponto forte
+
+        if(numeroPagina == 1){
+            iptNome.value = informacoesCadastro.nome;
+            iptApelido.value = informacoesCadastro.apelido;
+            iptEmail.value = informacoesCadastro.email;
+            iptDescricao.value = informacoesCadastro.descricao;
+        } else if(numeroPagina == 2){
+            assimilarRedes();
+            assimilarGeneros();
+
+            iptAplicativo.value = informacoesCadastro.aplicativo;
+            iptPontoForte.value = informacoesCadastro.pontoForte;
         }
+
+    } else if(verificarInputs(numeroPaginaAnterior)){
+        telAtual = numeroPagina;
+        loadContent();
     }   
     telAtual = numeroPagina; 
 }
 
+function assimilarRedes(){
+    let redes = document.getElementsByName('redesSociais');
+    if(informacoesCadastro.redes.length > 1){
+        for(let i=0; i<(informacoesCadastro.redes.length-1);i++){
+            adicionarRede();
+        }
+    }
+    
+    let contadorListaDados = 0;
+    
+    for(let i=1; i <= redes.length; i++){
+        if(i % 2 == 0){
+            redes[i-2].value = informacoesCadastro.redes[contadorListaDados].idRede;
+            redes[i-1].value = informacoesCadastro.redes[contadorListaDados].user;
+            contadorListaDados++;
+        }
+    }
+}
+
+function assimilarGeneros(){
+    let generos = document.getElementsByName('iptGeneros');
+   
+    if(informacoesCadastro.generos.length > 1){
+        for(let i=0; i<(informacoesCadastro.generos.length-1);i++){
+            adicionarGenero();
+        }
+    }
+
+    console.log(generos);
+    console.log(informacoesCadastro.generos);
+    
+    for(let i=0; i < generos.length; i++){
+        generos[i].value = informacoesCadastro.generos[i];
+    }
+}
 
 // VALIDAÇÕES 
 function verificarInputs(numeroPagina){
@@ -426,34 +466,43 @@ function validarSenha(ipt){
     return true
 }
 
-function validarRedes(classe){
-    let redes = document.getElementsByName(classe);
+function validarRedes(name){
+    let redes = document.getElementsByName(name);
     let valoresInputs = [];
 
-    for(let i=0; i<redes.length; i++){
-        let urlBase = socialMediaUrls[i].urlBase;
-        let patterns = urlBase.split(redes[i].value);
+    console.log(redes);
 
-        if(redes[i].value == "" || redes[i].value.length < 10 || patterns[0] != urlBase){
+    for(let i=0; i<redes.length; i++){
+        if(redes[i].value == ""){
             return false; 
         }
 
-        valoresInputs.push(redes[i].value);
-    }
+        let valor = {
+            idRede:'',
+            user:''
+        };
 
+        if((i+1) % 2 == 0){
+            valor.idRede = redes[i-1].value;
+            valor.user = redes[i].value;
+            valoresInputs.push(valor);
+        }
+        
+    }
+    
     informacoesCadastro.redes = valoresInputs;
     return true;
 }
 
-function validarGeneros(classe){
-    let generos = document.getElementsByName(classe);
+function validarGeneros(nome){
+    let generos = document.getElementsByName(nome);
     let valoresInputs = [];
-
 
     for(let i=0; i<generos.length; i++){
         if(generos[i].value == ""){
-            return false;
+            return false; 
         }
+
         valoresInputs.push(generos[i].value);
     }
 
@@ -467,15 +516,15 @@ function validarGeneros(classe){
 function adicionarRede(){
     let redes = document.getElementsByName('redesSociais');
     let valoresInputs = [];
-
+    console.log(redes);
     redes.forEach((ipt) => {
         valoresInputs.push(ipt.value);
     });
 
     
     const inputRede = `<div class="inputs-class">
-                        <select name="redesSociais" id="iptAplicativo">
-                            <option value="">Selecione uma redes sociais</option>
+                        <select name="redesSociais" id="iptRede">
+                            <option value="" disabled selected selected>Selecione uma redes sociais</option>
                             ${carregarRedes()}
                         </select>
                         <div class="ipt-rede">
@@ -510,7 +559,7 @@ function adicionarGenero(){
     const inputGeneros = `
     <div class="input-genero">
         <select id="slctGenero" name="iptGeneros">
-            <option value="">Selecione uma opção</option>
+            <option value="" disabled selected>Selecione uma opção</option>
             ${carregarGeneros()}
         </select>
         <button class="toggle-password" onclick="removerGenero(${contadorIptRedes})">
@@ -530,23 +579,32 @@ function adicionarGenero(){
 function removerGenero(indexInput){
     let inputsGeneros = document.getElementsByClassName('input-genero');
 
-    console.log(inputsGeneros);
+    inputsGeneros[indexInput].remove();
 }
 
 function cadastrar(){
-    if(!verificarInputs(telAtual)){
-        modal.showModal();
-        msgError.innerText ="Erro ao cadastrar o usuário";
-        return false;
+    // TODO
+    if(verificarInputs(telAtual)){
+        // let res = postCadastro();
+        if(/* res.statusCode == 200 */ true){
+            modal.showModal();
+            msgError.innerText ="Cadastrou legal";
+            iconModal.classList.remove('fa-circle-exclamation');
+            iconModal.style.color = 'green';
+            iconModal.classList.add('fa-circle-check');
+
+            location.href = '../../html/site-institucional/login.html';
+        } else {
+            // modal.showModal();
+            // msgError.innerText = res.errorMessage;
+            // return false;
+        }
     }
-    modal.showModal();
-    msgError.innerText ="Cadastrou legal";
-    iconModal.classList.remove('fa-circle-exclamation');
-    iconModal.style.color = 'green';
-    iconModal.classList.add('fa-circle-check');
-    // enviar pra API
-    //fetch().then().then();
 }
+
+async function postCadastro(){
+    // TODO
+} 
 
 // Buscar infos no Backend
 async function buscarGeneros(){
