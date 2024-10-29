@@ -51,7 +51,11 @@ function sendEmail() {
         Body: mensagem
     })
     .then(function (resposta) {
-        msgModal.innerText = resposta;
+        if(resposta != 'OK'){
+            msgModal.innerText = 'Erro ao enviar o email, tente novamente mais tarde.';
+        } else{
+            msgModal.innerText = 'Email enviado com sucesso!';
+        }
         modal.showModal();
     });
 }
