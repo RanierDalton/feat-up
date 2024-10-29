@@ -1,3 +1,8 @@
+let credenciais = undefined;
+coletarCredenciais();
+
+let header = new Headers();
+
 let ipt_nome = document.getElementById('iptNome');
 let ipt_email = document.getElementById('iptEmail');
 let ipt_assunto = document.getElementById('iptAssunto');
@@ -8,6 +13,7 @@ let modal = document.getElementById('popUp');
 let msgModal = document.getElementById('msgPopUp');
 
 function sendEmail() {
+    console.log(credenciais);
     var checkResposta = ipt_mensagem1.checked;
 
     if(!checkResposta){
@@ -35,7 +41,7 @@ function sendEmail() {
     `;
 
     Email.send({
-        Host: "smtp.elasticemail.com",
+        Host: host,
         Port: porta,
         Username: email,
         Password: senha,
@@ -51,4 +57,15 @@ function sendEmail() {
 }
 function closeModal(){
     modal.close();
+}
+
+async function coletarCredenciais(){
+    await fetch('http://localhost:3333/credenciais')
+    .then((res) => {
+        Promise.resolve(res.json())
+        .then(post => credenciais = post);
+    })
+    .catch(e => {
+        console.log(e);
+    });
 }

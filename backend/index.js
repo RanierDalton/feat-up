@@ -7,8 +7,8 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
-const PORTA_APP = process.env.APP_PORT;
-const HOST_APP = process.env.APP_HOST;
+const PORTA_APP = process.env.SERVER_PORT;
+const HOST_APP = process.env.SERVER_HOST;
 
 // IMPORTAR TODAS AS ROTAS DO BACKEND
 const indexRouter = require("./src/routes/root");
