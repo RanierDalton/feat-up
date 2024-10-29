@@ -14,7 +14,7 @@ let msgModal = document.getElementById('msgPopUp');
 
 function sendEmail() {
     console.log(credenciais);
-    var checkResposta = ipt_mensagem1.checked;
+    var checkResposta = ipt_confirmar.checked;
 
     if(!checkResposta){
         modal.showModal()
@@ -41,13 +41,13 @@ function sendEmail() {
     `;
 
     Email.send({
-        Host: host,
-        Port: porta,
-        Username: email,
-        Password: senha,
-        To: email,
-        From: email,
-        Subject:assunto,
+        Host: credenciais.host,
+        Port: credenciais.porta,
+        Username: credenciais.email,
+        Password: credenciais.senha,
+        To: credenciais.email,
+        From: credenciais.email,
+        Subject: assunto,
         Body: mensagem
     })
     .then(function (resposta) {
