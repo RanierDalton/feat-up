@@ -1,10 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+
+
 :root{
     /* TAMANHOS */
+    --tamanho-kpi: 3.1em;
     --tamanho-titulo: 3em;
     --tamanho-sub:2em;
     --tamanho-texto-nav:1.1em;
     --tamanho-desc: 1.5em;
     --tamanho-pequeno:1em;
+
+    /* GROSSURA DE FONTES */
+    --bold-kpi: 700;
 
     /* CORES */
     --light-red: rgb(255, 86, 86);
@@ -13,4 +21,8 @@
     --btn-cadastra-background:#00000000;
     --bg-color-footer:#BE0000;
     --placeholder-color: #716969;
+
+    --adm-bg-color:#C3C3C3;
+    --normal-bg-color: #222121;
+    --bg-color-kpi: #D9D9D9;
 }

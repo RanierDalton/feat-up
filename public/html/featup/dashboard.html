@@ -4,57 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Feat Up</title>
+
+    <link rel="stylesheet" href="../../static/styles/dashboard.css">
 </head>
 <body>
-    <header>
-        <div>
-            <nav>
-                <div>
-                    <span></span>
+    <section class="cabecalho">
+        <header>
+            <div class="conteudo">
+                <div class="titulo">
+                    <span>FEAT UP</span>
                 </div>
-                <div>
-                    <span></span>
+                <nav>
+                    <ul class="navbar">
+                        <li><a href="#" class="ativo">Dashboard</a></li>
+                    </ul>
+                </nav>
+                <div class="profile">
+                    <button onclick="abrirMenu()">
+                        <img src="../../static/assets/default.png" alt="">
+                    </button>
                 </div>
-                <div>
-                    <img src="" alt="">
-                    <i class="fa-solid fa-caret-down"></i>
-                </div>
-            </nav>
-        </div>
-    </header>
-    <section>
-        <div>
-            <div>
-                <div>
-                    <div>
-                        <span></span>
-                        <span></span>
+            </div>
+        </header>
+    </section>
+    
+    <section class="dash">
+        <div class="conteudo-dash">
+            <div class="header-dash">
+                <div class="kpis-dash">
+                    <div class="kpi">
+                        <span class="titulo">Usuários Totais</span>
+                        <span class="dado">2045</span>
                     </div>
-                    <div>
-                        <span></span>
-                        <span></span>
+                    <div class="kpi">
+                        <span class="titulo">Usuários Ativos</span>
+                        <span class="dado">2003</span>
                     </div>
-                    <div>
-                        <span></span>
-                        <span></span>
+                    <div class="kpi">
+                        <span class="titulo">Feats Totais</span>
+                        <span class="dado">1209</span>
                     </div>
                 </div>
             </div>
-            <div>
-                <div>
-                    <div>
+            <div class="corpo-dash">
+                <div class="graficos">
+                    <div class="grafico">
                         <canvas id="generos"></canvas>
                     </div>
-                    <div>
+                    <div class="grafico">
                         <canvas id="feats"></canvas>
                     </div>
-                    <div>
+                    <div class="grafico">
                         <canvas id="aplicativos"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../static/js/dashboard.js"></script>
     <!-- LIB FONT AWESOME-->
     <script src="https://kit.fontawesome.com/d5ea0dfb99.js" crossorigin="anonymous"></script>
 </body>
