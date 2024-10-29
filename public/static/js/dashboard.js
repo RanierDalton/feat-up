@@ -103,6 +103,7 @@ function charts(){
 }
 
 charts();
+
 let isAberto = false;
 function abrirPerfil(){
   if(isAberto){
@@ -112,5 +113,4 @@ function abrirPerfil(){
     dropdownPerfil.classList.add('mostrar');
     isAberto = true;
   }
-  
 }
