@@ -141,10 +141,10 @@ const telas = {
                         <label for="iptPontoForte">Qual o seu ponto forte:</label>
                         <select id="iptPontoForte">
                             <option value="" disabled selected selected>Selecione uma opção</option>
-                            <option value="1">Instrumental</option>
-                            <option value="2">Beat</option>
-                            <option value="3">Mix</option>
-                            <option value="4">Master</option>
+                            <option value="Instrumental">Instrumental</option>
+                            <option value="Beat">Beat</option>
+                            <option value="Mix">Mix</option>
+                            <option value="Master">Master</option>
                         </select>
                     </div>
                 </div>
