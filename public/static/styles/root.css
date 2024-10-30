@@ -26,3 +26,10 @@
     --normal-bg-color: #222121;
     --bg-color-kpi: #D9D9D9;
 }
+
+*{
+    font-family: "Inria Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}

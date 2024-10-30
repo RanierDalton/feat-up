@@ -1,12 +1,5 @@
 @import './root.css';
 
-*{
-    font-family: "Inria Sans", sans-serif;
-    margin: 0;
-    padding: 0;
-    scroll-behavior: smooth;
-}
-
 body{
     background-color: var(--adm-bg-color);
 }
@@ -43,6 +36,10 @@ header{
 .titulo span{
     color: white;
     font-size: var(--tamanho-titulo);
+}
+
+nav{
+    width: 35%;
 }
 
 .navbar{
@@ -90,6 +87,35 @@ header{
 
 .profile button:hover img{
     background-color: white;
+}
+
+/* PERFIL */
+.dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content .sair{
+    color: var(--primary-color);
+}
+
+.dropdown-content a:hover {
+    background-color: rgb(225, 240, 254);
+}
+
+.mostrar{
+    display: block;
 }
 
 /* CORPO - DASHBOARD */
@@ -169,33 +195,3 @@ header{
 #generos,#aplicativos{
     height: 250px;
 }
-
-/* PERFIL */
-.dropdown-content{
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 120px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content .sair{
-    color: var(--primary-color);
-}
-
-.dropdown-content a:hover {
-    background-color: rgb(225, 240, 254);
-}
-
-.mostrar{
-    display: block;
-}
-

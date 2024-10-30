@@ -124,7 +124,7 @@ nav{
 }
 
 .btn-cadastrar:hover{
-    background-color:var(--button-color) ;
+    background-color:var(--button-color);
     color: white;
 }
 
