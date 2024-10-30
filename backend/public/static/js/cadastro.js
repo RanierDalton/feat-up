@@ -1,82 +1,3 @@
-const opcoesGeneros = [
-    {
-        id: 1,
-        nome: 'Trap'
-    },
-    {
-        id: 2,
-        nome: 'Eletrônica'
-    }
-];
-
-const opcoesRedes = [
-    {
-        id: 1,
-        nome: 'instagram'
-    },
-    {
-        id: 2,
-        nome: 'bandcamp'
-    }
-];
-
-const opcoesAplicativos = [
-    {
-        id: 1,
-        nome: 'Pro Tools'
-    },
-    {
-        id: 2,
-        nome: 'FLStudio'
-    }
-];
-
-let informacoesCadastro = {
-    nome: '',
-    apelido: '',
-    email: '',
-    descricao:'',
-    redes: [],
-    generos: [],
-    aplicativo: '',
-    pontoForte: '',
-    senha: ''
-};
-
-const CARACTERES_ESPECIAIS = /[^A-Za-z0-9]/;
-
-let contadorIptRedes = 1;
-let contadorIptGeneros = 1;
-
-function carregarGeneros(){
-    // let opcoesGeneros = buscarGeneros();
-    let opcoes = '';
-    opcoesGeneros.forEach((genero) => {
-        opcoes+=`<option value="${genero.id}">${genero.nome}</option>`;
-    });
-
-    return opcoes;
-}
-
-function carregarRedes(){
-    let opcoes = '';
-    opcoesRedes.forEach((rede) => {
-        opcoes+=`<option value="${rede.id}">${rede.nome}</option>`;
-    });
-
-    return opcoes;
-}
-
-function carregarAplicativos(){
-    // let opcoesGeneros = buscarGeneros();
-    let opcoes = '';
-    opcoesAplicativos.forEach((app) => {
-        opcoes+=`<option value="${app.id}">${app.nome}</option>`;
-    });
-
-    return opcoes;
-}
-
 const telas = {
     inicial: `
                 <div class="campos-input">
@@ -195,6 +116,85 @@ const telas = {
                         <a href="#" onclick="mudarPagina(2, true)"><span><i class="fa-solid fa-arrow-left"></i>Anterior</span></a>
                     </div>
                 </footer>`
+}
+
+const opcoesGeneros = [
+    {
+        id: 1,
+        nome: 'Trap'
+    },
+    {
+        id: 2,
+        nome: 'Eletrônica'
+    }
+];
+
+const opcoesRedes = [
+    {
+        id: 1,
+        nome: 'instagram'
+    },
+    {
+        id: 2,
+        nome: 'bandcamp'
+    }
+];
+
+const opcoesAplicativos = [
+    {
+        id: 1,
+        nome: 'Pro Tools'
+    },
+    {
+        id: 2,
+        nome: 'FLStudio'
+    }
+];
+
+let informacoesCadastro = {
+    nome: '',
+    apelido: '',
+    email: '',
+    descricao:'',
+    redes: [],
+    generos: [],
+    aplicativo: '',
+    pontoForte: '',
+    senha: ''
+};
+
+const CARACTERES_ESPECIAIS = /[^A-Za-z0-9]/;
+
+let contadorIptRedes = 1;
+let contadorIptGeneros = 1;
+
+function carregarGeneros(){
+    // let opcoesGeneros = buscarGeneros();
+    let opcoes = '';
+    opcoesGeneros.forEach((genero) => {
+        opcoes+=`<option value="${genero.id}">${genero.nome}</option>`;
+    });
+
+    return opcoes;
+}
+
+function carregarRedes(){
+    let opcoes = '';
+    opcoesRedes.forEach((rede) => {
+        opcoes+=`<option value="${rede.id}">${rede.nome}</option>`;
+    });
+
+    return opcoes;
+}
+
+function carregarAplicativos(){
+    // let opcoesGeneros = buscarGeneros();
+    let opcoes = '';
+    opcoesAplicativos.forEach((app) => {
+        opcoes+=`<option value="${app.id}">${app.nome}</option>`;
+    });
+
+    return opcoes;
 }
 
 let telAtual = 1;
