@@ -13,6 +13,7 @@ const HOST_APP = process.env.SERVER_HOST;
 // IMPORTAR TODAS AS ROTAS DO BACKEND
 const indexRouter = require("./src/routes/root");
 const emailRouter = require("./src/routes/email");
+const produtorRouter = require('./src/routes/produtor');
 // var usuarioRouter = require("path");
 // var avisosRouter = require("path");
 // var medidasRouter = require("path");
@@ -29,6 +30,7 @@ app.use(cors());
 
 app.use(indexRouter);
 app.use(emailRouter);
+app.use(produtorRouter);
 // app.use("/usuarios", usuarioRouter);
 // app.use("/avisos", avisosRouter);
 // app.use("/medidas", medidasRouter);
@@ -37,9 +39,7 @@ app.use(emailRouter);
 
 // SUBIR O SERVER
 app.listen(PORTA_APP, function () {
-    console.log(`                                                                            
-        Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar .: http://${HOST_APP}:${PORTA_APP} :.
-        `
+    console.log(`Acesse o caminho a seguir para visualizar: http://${HOST_APP}:${PORTA_APP}`
     );
 });
 
