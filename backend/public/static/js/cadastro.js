@@ -8,26 +8,24 @@ const opcoesRede = fetch('/redes')
     return resposta.json();
 });
 
-
-
 function carregarGeneros(){
-    let opcoes = '';
-
-    optGeneros.forEach((genero) => {
-        opcoes+=`<option value="${genero.id}">${genero.nome}</option>`;
+    opcoesGenero.then((data) => {
+        let opcoes='<option value="" disabled selected selected>Selecione um dos Gêneros</option>';
+        data.forEach((genero) => opcoes+=`<option value="${genero.id}">${genero.nome}</option>`);
+        let slctGeneros = document.getElementsByName('iptGeneros'); 
+        slctGeneros.forEach((ipt) => ipt.innerHTML = opcoes);
     });
-
-    return opcoes;
 }
 
 function carregarRedes(){
-    let opcoes = '';
-
-    optRedes.forEach((rede) => {
-        opcoes+=`<option value="${rede.id}">${rede.nome}</option>`;
+    opcoesRede.then((data) => {
+        let opcoes='<option value="" disabled selected selected>Selecione uma redes sociais</option>';
+        data.forEach((rede) => opcoes+=`<option value="${rede.id}">${rede.nome}</option>`);
+        let scltRede = document.getElementsByName('redesSociais'); 
+        console.log(scltRede);
+        console.log(opcoes);
+        scltRede.forEach((ipt) => ipt.innerHTML = opcoes);
     });
-
-    return opcoes;
 }
 
 let informacoesCadastro = {
@@ -71,7 +69,8 @@ async function loadContent(){
         divForm.innerHTML = telas.inicial;
     } else if(telAtual==2){
         divForm.innerHTML = telas.meio;
-        console.log(optRedes);
+        carregarGeneros();
+        carregarRedes();
     } else if(telAtual==3){
         divForm.innerHTML = telas.final;
     }
@@ -371,12 +370,11 @@ function adicionarRede(){
     redes.forEach((ipt) => {
         valoresInputs.push(ipt.value);
     });
-
     
     const inputRede = `<div class="inputs-class">
-                        <select name="redesSociais" id="iptRede">
+                        <select name="redesSociais" id="iptRede" class="scltRedes">
                             <option value="" disabled selected selected>Selecione uma redes sociais</option>
-                            ${optRedes}
+                            
                         </select>
                         <div class="ipt-rede">
                             <input name="redesSociais" type="url" placeholder="Informe o user da mesma">
@@ -385,12 +383,15 @@ function adicionarRede(){
                             </button>
                         </div>
                     </div>`;
-    contadorIptRedes++;
+    
     divRede.innerHTML += inputRede;
-
+    contadorIptRedes++;
+    carregarRedes();
     for(let i=0; i<valoresInputs.length;i++){
         redes[i].value = valoresInputs[i];
     }
+
+    
 }
 
 function removerRede(indexInput){
@@ -411,7 +412,7 @@ function adicionarGenero(){
     <div class="input-genero">
         <select id="slctGenero" name="iptGeneros">
             <option value="" disabled selected>Selecione uma opção</option>
-            ${optGeneros}
+            
         </select>
         <button class="toggle-password" onclick="removerGenero(${contadorIptRedes})">
             <i class="fa-solid fa-trash"></i>
@@ -421,7 +422,7 @@ function adicionarGenero(){
     
     divGenero.innerHTML += inputGeneros;
     contadorIptGeneros++;
-
+    carregarGeneros();
     for(let i=0; i<valoresInputs.length;i++){
         generos[i].value = valoresInputs[i];
     }
@@ -468,7 +469,7 @@ async function postCadastro(){
           console.log(`#ERRO: ${resposta}`);
           
         });
-} 
+}
 
 let telas = {
     inicial: `
@@ -500,13 +501,13 @@ let telas = {
             <div class="campos-input">
                     <div class="campo margin-top" id="divRede">
                         <div class="add-top">
-                            <label for="">Redes Sociais:</label>
+                            <label for="iptRede">Redes Sociais:</label>
                             <a href="#" onclick="adicionarRede(0)"><span>Adicionar</span></a>
                         </div>
                         <div class="inputs-class">
-                            <select name="redesSociais" id="iptRede">
+                            <select name="redesSociais" id="iptRede" class="scltRedes">
                                 <option value="" disabled selected>Selecione uma redes sociais</option>
-                                ${carregarRedes()}
+                                
                             </select>
                             <input name="redesSociais" type="url" placeholder="Informe o user da mesma">
                         </div>
@@ -519,7 +520,7 @@ let telas = {
                         <div class="input-genero maximo">
                             <select id="slctGenero" name="iptGeneros">
                                 <option value="" disabled selected>Selecione uma opção</option>
-                                ${carregarGeneros()}
+                                
                             </select>
                         </div>
                     </div>
