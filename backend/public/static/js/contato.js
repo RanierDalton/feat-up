@@ -64,7 +64,7 @@ function closeModal(){
 }
 
 async function coletarCredenciais(){
-    await fetch('http://localhost:3333/credenciais')
+    await fetch('/credenciais')
     .then((res) => {
         Promise.resolve(res.json())
         .then(post => credenciais = post);

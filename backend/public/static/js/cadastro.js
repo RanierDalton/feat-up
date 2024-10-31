@@ -1,155 +1,34 @@
-const telas = {
-    inicial: `
-                <div class="campos-input">
-                    <div class="campo margin-top" >
-                        <label for="iptNome">Nome:</label>
-                        <input id="iptNome" type="text" placeholder="Informe seu nome completo">
-                    </div>
-                    <div class="campo margin-top" >
-                        <label for="iptApelido">Alias:</label>
-                        <input id="iptApelido" type="text" placeholder="Informe seu apelido">
-                    </div>
-                    <div class="campo margin-top" >
-                        <label for="iptEmail">Email:</label>
-                        <input id="iptEmail" type="email" placeholder="Informe seu email">
-                    </div>
-                    <div class="campo margin-top" >
-                        <label for="iptDescricao">Descrição:</label>
-                        <textarea id="iptDescricao" cols="30" rows="10" placeholder="Fale um pouco sobre sua experiência na música"></textarea>
-                    </div>
-                </div>
-            <footer>
-                <div class="nav">
-                    <span></span>
-                    <a href="#" onclick="mudarPagina(2, false)"><span>Próxima<i class="fa-solid fa-arrow-right"></i></span></a>
-                </div>
-            </footer>`,
-    meio:`
-            <div class="campos-input">
-                    <div class="campo margin-top" id="divRede">
-                        <div class="add-top">
-                            <label for="">Redes Sociais:</label>
-                            <a href="#" onclick="adicionarRede(0)"><span>Adicionar</span></a>
-                        </div>
-                        <div class="inputs-class">
-                            <select name="redesSociais" id="iptRede">
-                                <option value="" disabled selected>Selecione uma redes sociais</option>
-                                ${carregarRedes()}
-                            </select>
-                            <input name="redesSociais" type="url" placeholder="Informe o user da mesma">
-                        </div>
-                    </div>
-                    <div class="campo margin-top" id="divGenero">
-                        <div class="add-top">
-                            <label for="slctGenero">Gêneros Produzidos:</label>
-                            <a href="#" onclick="adicionarGenero()"><span>Adicionar</span></a>
-                        </div>
-                        <div class="input-genero maximo">
-                            <select id="slctGenero" name="iptGeneros">
-                                <option value="" disabled selected>Selecione uma opção</option>
-                                ${carregarGeneros()}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="campo margin-top" >
-                        <label for="iptAplicativo">Aplicativo que utiliza:</label>
-                        <select id="iptAplicativo">
-                            <option value="" disabled selected>Selecione uma opção</option>
-                            ${carregarAplicativos()}
-                        </select>
-                    </div>
-                    <div class="campo margin-top" >
-                        <label for="iptPontoForte">Qual o seu ponto forte:</label>
-                        <select id="iptPontoForte">
-                            <option value="" disabled selected selected>Selecione uma opção</option>
-                            <option value="Instrumental">Instrumental</option>
-                            <option value="Beat">Beat</option>
-                            <option value="Mix">Mix</option>
-                            <option value="Master">Master</option>
-                        </select>
-                    </div>
-                </div>
-            <footer>
-                <div class="nav">
-                    <a href="#" onclick="mudarPagina(1, true)"><span><i class="fa-solid fa-arrow-left"></i>Anterior</span></a>
-                    <a href="#" onclick="mudarPagina(3, false)"><span>Próxima<i class="fa-solid fa-arrow-right"></i></span></a>
-                </div>
-            </footer>`,
-    final:`     <div class="campos-input">
-                    <div class="campo senha">
-                        <label for="iptSenha">Senha:</label>
-                        <div class="ipt-senha">
-                            <input type="password" id="iptSenha" placeholder="Informe sua senha" oninput="validarSenha(this)">
-                            <button class="toggle-password" onclick="mudarVisibilidade(1)">
-                                <i id="iconSenha" class="fa-solid fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="verificacoesSenha margin-top">
-                            <span id="caractere">8 caracteres Total</span>
-                            <span id="minusculo">1 caractere Minúcula</span>
-                            <span id="maiusculo">1 caractere Maiúscula</span>
-                            <span id="numero">1 Número</span>
-                            <span id="especial">1 Caractere Especial</span>
-                        </div>
-                    <div>
-                    <div class="campo margin-top" >
-                        <label for="iptConfirmar">Confirmar Senha:</label>
-                        <div class="ipt-senha">
-                            <input type="password" id="iptConfirmar" placeholder="Informe sua senha">
-                            <button class="toggle-password" onclick="mudarVisibilidade(2)">
-                                <i id="iconConfirmar" class="fa-solid fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="campo-confirmacao ">
-                        <input id="iptConfirmarTermos" type="checkbox" />
-                        <label for="iptConfirmarTermos">Li e concordo com os termos e condições do site</label>
-                    </div>
-                    </div>
-                    </div>
-                </div>
-                <footer class="margin-bottom">
-                    <div class="botao">
-                        <button onclick="cadastrar()">Cadastrar</button>
-                    </div>
-                    <div class="nav margin-top">
-                        <a href="#" onclick="mudarPagina(2, true)"><span><i class="fa-solid fa-arrow-left"></i>Anterior</span></a>
-                    </div>
-                </footer>`
+const opcoesGenero = fetch('/generos')
+.then( (resposta) => {
+    return resposta.json();   
+});
+
+const opcoesRede = fetch('/redes')
+.then((resposta) => {
+    return resposta.json();
+});
+
+
+
+function carregarGeneros(){
+    let opcoes = '';
+
+    optGeneros.forEach((genero) => {
+        opcoes+=`<option value="${genero.id}">${genero.nome}</option>`;
+    });
+
+    return opcoes;
 }
 
-const opcoesGeneros = [
-    {
-        id: 1,
-        nome: 'Trap'
-    },
-    {
-        id: 2,
-        nome: 'Eletrônica'
-    }
-];
+function carregarRedes(){
+    let opcoes = '';
 
-const opcoesRedes = [
-    {
-        id: 1,
-        nome: 'instagram'
-    },
-    {
-        id: 2,
-        nome: 'bandcamp'
-    }
-];
+    optRedes.forEach((rede) => {
+        opcoes+=`<option value="${rede.id}">${rede.nome}</option>`;
+    });
 
-const opcoesAplicativos = [
-    {
-        id: 1,
-        nome: 'Pro Tools'
-    },
-    {
-        id: 2,
-        nome: 'FLStudio'
-    }
-];
+    return opcoes;
+}
 
 let informacoesCadastro = {
     nome: '',
@@ -167,35 +46,6 @@ const CARACTERES_ESPECIAIS = /[^A-Za-z0-9]/;
 
 let contadorIptRedes = 1;
 let contadorIptGeneros = 1;
-
-function carregarGeneros(){
-    // let opcoesGeneros = buscarGeneros();
-    let opcoes = '';
-    opcoesGeneros.forEach((genero) => {
-        opcoes+=`<option value="${genero.id}">${genero.nome}</option>`;
-    });
-
-    return opcoes;
-}
-
-function carregarRedes(){
-    let opcoes = '';
-    opcoesRedes.forEach((rede) => {
-        opcoes+=`<option value="${rede.id}">${rede.nome}</option>`;
-    });
-
-    return opcoes;
-}
-
-function carregarAplicativos(){
-    // let opcoesGeneros = buscarGeneros();
-    let opcoes = '';
-    opcoesAplicativos.forEach((app) => {
-        opcoes+=`<option value="${app.id}">${app.nome}</option>`;
-    });
-
-    return opcoes;
-}
 
 let telAtual = 1;
 
@@ -221,6 +71,7 @@ async function loadContent(){
         divForm.innerHTML = telas.inicial;
     } else if(telAtual==2){
         divForm.innerHTML = telas.meio;
+        console.log(optRedes);
     } else if(telAtual==3){
         divForm.innerHTML = telas.final;
     }
@@ -525,7 +376,7 @@ function adicionarRede(){
     const inputRede = `<div class="inputs-class">
                         <select name="redesSociais" id="iptRede">
                             <option value="" disabled selected selected>Selecione uma redes sociais</option>
-                            ${carregarRedes()}
+                            ${optRedes}
                         </select>
                         <div class="ipt-rede">
                             <input name="redesSociais" type="url" placeholder="Informe o user da mesma">
@@ -560,7 +411,7 @@ function adicionarGenero(){
     <div class="input-genero">
         <select id="slctGenero" name="iptGeneros">
             <option value="" disabled selected>Selecione uma opção</option>
-            ${carregarGeneros()}
+            ${optGeneros}
         </select>
         <button class="toggle-password" onclick="removerGenero(${contadorIptRedes})">
             <i class="fa-solid fa-trash"></i>
@@ -583,33 +434,174 @@ function removerGenero(indexInput){
 }
 
 function cadastrar(){
-    // TODO
     if(verificarInputs(telAtual)){
-        // let res = postCadastro();
-        if(/* res.statusCode == 200 */ true){
+        postCadastro();
+    }
+}
+
+async function postCadastro(){
+    fetch("/produtores/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(informacoesCadastro),
+      })
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
+  
+          if (resposta.ok) {
             modal.showModal();
             msgError.innerText ="Cadastrou legal";
             iconModal.classList.remove('fa-circle-exclamation');
             iconModal.style.color = 'green';
             iconModal.classList.add('fa-circle-check');
 
-            location.href = '../../html/site-institucional/login.html';
-        } else {
-            // modal.showModal();
-            // msgError.innerText = res.errorMessage;
-            // return false;
-        }
-    }
-}
-
-async function postCadastro(){
-    // TODO
+            location.href = '../../site-institucional/login.html';
+            
+          } else {
+            // mostrar o erro
+  
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+          
+        });
 } 
 
-// Buscar infos no Backend
-async function buscarGeneros(){
-    // TODO
-    await fetch().then().then();
-}
+let telas = {
+    inicial: `
+                <div class="campos-input">
+                    <div class="campo margin-top" >
+                        <label for="iptNome">Nome:</label>
+                        <input id="iptNome" type="text" placeholder="Informe seu nome completo">
+                    </div>
+                    <div class="campo margin-top" >
+                        <label for="iptApelido">Alias:</label>
+                        <input id="iptApelido" type="text" placeholder="Informe seu apelido">
+                    </div>
+                    <div class="campo margin-top" >
+                        <label for="iptEmail">Email:</label>
+                        <input id="iptEmail" type="email" placeholder="Informe seu email">
+                    </div>
+                    <div class="campo margin-top" >
+                        <label for="iptDescricao">Descrição:</label>
+                        <textarea id="iptDescricao" cols="30" rows="10" placeholder="Fale um pouco sobre sua experiência na música"></textarea>
+                    </div>
+                </div>
+            <footer>
+                <div class="nav">
+                    <span></span>
+                    <a href="#" onclick="mudarPagina(2, false)"><span>Próxima<i class="fa-solid fa-arrow-right"></i></span></a>
+                </div>
+            </footer>`,
+    meio:`
+            <div class="campos-input">
+                    <div class="campo margin-top" id="divRede">
+                        <div class="add-top">
+                            <label for="">Redes Sociais:</label>
+                            <a href="#" onclick="adicionarRede(0)"><span>Adicionar</span></a>
+                        </div>
+                        <div class="inputs-class">
+                            <select name="redesSociais" id="iptRede">
+                                <option value="" disabled selected>Selecione uma redes sociais</option>
+                                ${carregarRedes()}
+                            </select>
+                            <input name="redesSociais" type="url" placeholder="Informe o user da mesma">
+                        </div>
+                    </div>
+                    <div class="campo margin-top" id="divGenero">
+                        <div class="add-top">
+                            <label for="slctGenero">Gêneros Produzidos:</label>
+                            <a href="#" onclick="adicionarGenero()"><span>Adicionar</span></a>
+                        </div>
+                        <div class="input-genero maximo">
+                            <select id="slctGenero" name="iptGeneros">
+                                <option value="" disabled selected>Selecione uma opção</option>
+                                ${carregarGeneros()}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="campo margin-top" >
+                        <label for="iptAplicativo">Aplicativo que utiliza:</label>
+                        <select id="iptAplicativo">
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <option value="Ableton Live">Ableton Live</option>
+                            <option value="Acoustica Mixcraft">Acoustica Mixcraft</option>
+                            <option value="Amplitube">Amplitube</option>
+                            <option value="Audiotool">Audiotool</option>
+                            <option value="BandLab">BandLab</option>
+                            <option value="Bitwig Studio">Bitwig Studio</option>
+                            <option value="Cakewalk">Cakewalk</option>
+                            <option value="Cubase">Cubase</option>
+                            <option value="FL Studio">FL Studio</option>
+                            <option value="GarageBand">GarageBand</option>
+                            <option value="Logic Pro">Logic Pro</option>
+                            <option value="Magix Music Maker">Magix Music Maker</option>
+                            <option value="PreSonus Studio One">PreSonus Studio One</option>
+                            <option value="Pro Tools">Pro Tools</option>
+                            <option value="Reason">Reason</option>
+                        </select>
+                    </div>
+                    <div class="campo margin-top" >
+                        <label for="iptPontoForte">Qual o seu ponto forte:</label>
+                        <select id="iptPontoForte">
+                            <option value="" disabled selected selected>Selecione uma opção</option>
+                            <option value="Instrumental">Instrumental</option>
+                            <option value="Beat">Beat</option>
+                            <option value="Mix">Mix</option>
+                            <option value="Master">Master</option>
+                        </select>
+                    </div>
+                </div>
+            <footer>
+                <div class="nav">
+                    <a href="#" onclick="mudarPagina(1, true)"><span><i class="fa-solid fa-arrow-left"></i>Anterior</span></a>
+                    <a href="#" onclick="mudarPagina(3, false)"><span>Próxima<i class="fa-solid fa-arrow-right"></i></span></a>
+                </div>
+            </footer>`,
+    final:`     <div class="campos-input">
+                    <div class="campo senha">
+                        <label for="iptSenha">Senha:</label>
+                        <div class="ipt-senha">
+                            <input type="password" id="iptSenha" placeholder="Informe sua senha" oninput="validarSenha(this)">
+                            <button class="toggle-password" onclick="mudarVisibilidade(1)">
+                                <i id="iconSenha" class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="verificacoesSenha margin-top">
+                            <span id="caractere">8 caracteres Total</span>
+                            <span id="minusculo">1 caractere Minúcula</span>
+                            <span id="maiusculo">1 caractere Maiúscula</span>
+                            <span id="numero">1 Número</span>
+                            <span id="especial">1 Caractere Especial</span>
+                        </div>
+                    <div>
+                    <div class="campo margin-top" >
+                        <label for="iptConfirmar">Confirmar Senha:</label>
+                        <div class="ipt-senha">
+                            <input type="password" id="iptConfirmar" placeholder="Informe sua senha">
+                            <button class="toggle-password" onclick="mudarVisibilidade(2)">
+                                <i id="iconConfirmar" class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="campo-confirmacao ">
+                        <input id="iptConfirmarTermos" type="checkbox" />
+                        <label for="iptConfirmarTermos">Li e concordo com os termos e condições do site</label>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <footer class="margin-bottom">
+                    <div class="botao">
+                        <button onclick="cadastrar()">Cadastrar</button>
+                    </div>
+                    <div class="nav margin-top">
+                        <a href="#" onclick="mudarPagina(2, true)"><span><i class="fa-solid fa-arrow-left"></i>Anterior</span></a>
+                    </div>
+                </footer>`
+};
 
 loadContent();

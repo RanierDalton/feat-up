@@ -7,4 +7,8 @@ router.get("/produtores", (req, res) =>{
     
 });
 
+router.post("/produtores/cadastrar", () =>{
+    return produtorController.postProdutor(req, res);
+});
+
 module.exports = router;
