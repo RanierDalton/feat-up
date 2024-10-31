@@ -173,6 +173,10 @@ INSERT INTO feat (dtFeat, statusFeat, fkProdutorSolicita, fkProdutorAceita) VALU
 -- SRCIPTS DO PRÓPRIO SISTEMA
 -- ----------------------------
 
+-- SCRIPT DE SELECIONAR TODAS AS REDES, Gêneros 
+-- SELECT idRede as id, nome FROM rede_social ORDER BY nome;
+-- SELECT idGenero as id, nome FROM genero ORDER BY nome;
+
 -- SCRIPT DE LOGIN
 -- SELECT COUNT(idProdutor) FROM produtor WHERE alias = apelidoInformado AND senha = senhaInformada;
 -- ------------------------------------------------------------------------------------------------
