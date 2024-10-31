@@ -441,7 +441,7 @@ function cadastrar(){
 }
 
 async function postCadastro(){
-    fetch("/produtores/cadastrar", {
+    fetch("/produtor/cadastrar", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
