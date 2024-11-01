@@ -1,4 +1,7 @@
 const produtorModel = require('../models/produtorModel');
+const generoModel = require('../models/generoModel');
+const redeModel = require('../models/redeModel');
+
 const cadastroValidation = require('../validation/cadastroValidation');
 
 const getProdutores = (req, res) => {
@@ -34,7 +37,7 @@ const postProdutor = (req, res) =>{
     ); 
     
     // TODO
-    // produtorModel.postRedes(redes)
+    // redeModel.postRedes(redes)
     // .then((resultado) => res.status(200).json(resultado))
     // .catch((erro) => {
     //         console.log(erro);
@@ -43,7 +46,7 @@ const postProdutor = (req, res) =>{
     //     }
     // ); 
 
-    // produtorModel.postGeneros(redes)
+    // generoModel.postGeneros(redes)
     // .then((resultado) => res.status(200).json(resultado))
     // .catch((erro) => {
     //         console.log(erro);

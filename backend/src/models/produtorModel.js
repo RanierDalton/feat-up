@@ -12,14 +12,6 @@ const postProdutor = (nome, alias, email, descricao, aplicativo, pontoForte) => 
     return db.executar(instrucao);
 }
 
-const postRedes = (redes) => {
-    // TODO 
-}
-
-const postGeneros = (generos) => {
-    // TODO
-}
-
 const getProdutor = (alias) => {
     const instrucao = `SELECT idProdutor FROM produtor WHERE alias = ${alias}`;
 
@@ -37,6 +29,20 @@ const getProdutor = (alias) => {
 -- SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero WHERE adicionar genero de acordo com os generos que o user que acessou;
 -- ------------------------------------------------------------------------------------------------
 
+
+-- SCRIPT PARA ACESSAR INFORMAÇÕES DO PERFIL DE USUÁRIO
+-- SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero WHERE idProdutor = idPerfilQueUserClicou;
+-- --------------------------------------------------------------------------------------------------
+
+
+-- SCRIPT APPS MAIS USADOS
+-- SELECT COUNT(aplicativo), aplicativo FROM produtor GROUP BY aplicativo;
+
+-- SCRIPT USUARIOS TOTAL
+-- SELECT COUNT(idProdutor) FROM produtor;
+
+-- SCRIPT USUARIOS ATIVO
+-- SELECT COUNT(idProdutor) FROM produtor WHERE TIMESTAMPDIFF(DAY,now(),lastLogin) <= 10;
 
 */
 

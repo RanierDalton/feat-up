@@ -6,4 +6,9 @@ const getRedes = () =>{
     return db.executar(instrucao);
 }
 
-module.exports = {getRedes};
+const postRedes = (redes) => {
+    // TODO 
+}
+
+
+module.exports = {getRedes, postRedes};
