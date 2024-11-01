@@ -1,9 +1,47 @@
+const validarCadastro = (nome, email, apelido, descricao, redes, generos, aplicativo, pontoForte, senha) => {
+    if(!validarNome(nome)){
+        return {message:"Por favor, preencha corretmanete o campo de nome.", status:false};
+    }
+
+    if(!validarEmail(email)){
+        return {message:"Por favor, preencha corretmanete o campo de email.", status:false};
+    }
+
+    if(apelido == "" || apelido == undefined){
+        return {message:"Por favor, preencha corretamente o campo apelido.", status:false};
+    }
+
+    if(descricao == "" || descricao == undefined){
+        return {message:"Por favor, preencha corretamente o campo descrição", status:false};
+    }
+
+    if(!validarRedes(redes)){
+        return {message:"Por favor, preencha corretamente os campos das redes sociais", status:false};
+    }
+
+    if(!validarGeneros(generos)){
+        return {message:"Por favor, preencha corretamente os campos dos gêneros", status:false};
+    }
+
+    if(aplicativo == "" || aplicativo == undefined){
+        return {message:"Por favor, preencha corretamente o campo do aplicativo", status:false};
+    }
+
+    if(pontoForte == "" || pontoForte == undefined){
+        return {message:"Por favor, preencha corretamente o campo do ponto forte", status:false};
+    }
+
+    if(!validarSenha(senha)){
+        return {message:"Por favor, preencha corretamente o campo da senha", status:false};
+    }
+
+    return {message: "OK", status: true};
+}
+
 
 function validarNome(nome){
     nome = nome.split(" ");
-    if(nome.length < 2 || nome == ''){
-        modal.showModal();
-        msgError.innerText ="Valor do nome inválido";
+    if(nome.length < 2 || nome == '' || nome == undefined){
         return false
     }
 
@@ -27,13 +65,6 @@ function validarEmail(email){
 }
 
 function validarSenha(ipt){
-    caractere.style.color = 'red';
-    minusculo.style.color = 'red';
-    maiusculo.style.color = 'red';
-    numero.style.color = 'red';
-    especial.style.color = 'red';  
-
-    var senha = ipt.value;
     var tamSenha = senha.length;
     var isEspecial = CARACTERES_ESPECIAIS.test(senha);
 
@@ -57,26 +88,6 @@ function validarSenha(ipt){
         }
     }
 
-    if(tamSenha>= 8 && tamSenha <= 45){
-        caractere.style.color = 'green';
-    }
-
-    if(isMaiuscula){
-        maiusculo.style.color = 'green';
-    }
-
-    if(isMinuscula){
-        minusculo.style.color = 'green';
-    }
-
-    if(isEspecial){
-        especial.style.color = 'green';
-    }
-
-    if(isNum){
-        numero.style.color = 'green';
-    }
-
     if(tamSenha < 8 || !isMinuscula || !isMaiuscula || !isEspecial || !isNum || senha == ''){
         return false;
     }
@@ -84,51 +95,28 @@ function validarSenha(ipt){
     return true
 }
 
-function validarRedes(name){
-    let redes = document.getElementsByName(name);
-    let valoresInputs = [];
-
-    console.log(redes);
-
+function validarRedes(redes){
     for(let i=0; i<redes.length; i++){
         if(redes[i].value == ""){
             return false; 
         }
-
-        let valor = {
-            idRede:'',
-            user:''
-        };
-
-        if((i+1) % 2 == 0){
-            valor.idRede = redes[i-1].value;
-            valor.user = redes[i].value;
-            valoresInputs.push(valor);
-        }
-        
     }
-    
-    informacoesCadastro.redes = valoresInputs;
+
     return true;
 }
 
 function validarGeneros(nome){
-    let generos = document.getElementsByName(nome);
-    let valoresInputs = [];
+
 
     for(let i=0; i<generos.length; i++){
         if(generos[i].value == ""){
             return false; 
         }
-
-        valoresInputs.push(generos[i].value);
     }
-
-    informacoesCadastro.generos = valoresInputs;
 
     return true;
 }
 
 module.exports = {
-
+    validarCadastro
 };

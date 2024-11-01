@@ -1,5 +1,5 @@
 const produtorModel = require('../models/produtorModel');
-const cadastrarMiddleware = require('../middleware/cadastroMiddleware');
+const cadastroValidation = require('../validation/cadastroValidation');
 
 const getProdutores = (req, res) => {
     const produtores = produtorModel.getProdutores();
@@ -9,9 +9,7 @@ const getProdutores = (req, res) => {
 }
 
 const postProdutor = (req, res) =>{
-    // TODO
     console.log(req.body);
-    // Coletar os dados do body do request
     let nome = req.body.nome;
     let email = req.body.email;
     let alias = req.body.alias;
@@ -19,41 +17,90 @@ const postProdutor = (req, res) =>{
 
     let redes = req.body.redes;
     let generos = req.body.generos;
-    // Validar os dados 
-    // se tiver certinho, chamar o model para cadastrar
 
-    if(apelido == "" || apelido == undefined){
-        return res.status(400).send("Por favor, preencha corretamente o campo apelido.");
+    const resValidation = cadastroValidation.validarCadastro(nome, email, alias, descricao, redes, generos, aplicativo, pontoForte, senha);
+
+    if(!resValidation.status){
+        return res.status(400).json(resValidation);
     }
 
-    if(descricao == "" || descricao == undefined){
-        return res.status(400).send("Por favor, preencha corretamente o campo descrição");
-    }
-
-    if(!cadastrarMiddleware.validarRedes(redes)){
-        return res.status(400).send("Por favor, preencha corretamente os campos das redes sociais");
-    }
-
-    if(!cadastrarMiddleware.validarGeneros(generos)){
-        return res.status(400).send("Por favor, preencha corretamente os campos dos gêneros");
-    }
-
-    if(aplicativo == "" || aplicativo == undefined){
-        return res.status(400).send("Por favor, preencha corretamente o campo do aplicativo");
-    }
-
-    if(pontoForte == "" || pontoForte == undefined){
-        return res.status(400).send("Por favor, preencha corretamente o campo do ponto forte");
-    }
-
-    if(!cadastrarMiddleware.validarSenha(senha)){
-        return res.status(400).send("Por favor, preencha corretamente o campo da senha");
-    }
-
-    const cadastroProdutor = produtorModel.postProdutor();
-
-    return res.status(200).json();
+    produtorModel.postProdutor(nome, email, alias, descricao, aplicativo, pontoForte, senha) 
+    .then((resultado) => res.status(200).json(resultado))
+    .catch((erro) => {
+            console.log(erro);
+            console.log("\nHouve um erro ao realizar o cadastro do Produtor! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    ); 
     
+    // TODO
+    // produtorModel.postRedes(redes)
+    // .then((resultado) => res.status(200).json(resultado))
+    // .catch((erro) => {
+    //         console.log(erro);
+    //         console.log("\nHouve um erro ao realizar o cadastro de Redes! Erro: ", erro.sqlMessage);
+    //         res.status(500).json(erro.sqlMessage);
+    //     }
+    // ); 
+
+    // produtorModel.postGeneros(redes)
+    // .then((resultado) => res.status(200).json(resultado))
+    // .catch((erro) => {
+    //         console.log(erro);
+    //         console.log("\nHouve um erro ao realizar o cadastro de Gêneros! Erro: ", erro.sqlMessage);
+    //         res.status(500).json(erro.sqlMessage);
+    //     }
+    // ); 
 }
 
-module.exports = {getProdutores, postProdutor};
+const authProdutor = (req, res) => {
+    var email = req.body.emailServer;
+    var senha = req.body.senhaServer;
+
+    if (email == undefined) {
+        res.status(400).send("Seu email está undefined!");
+    } else if (senha == undefined) {
+        res.status(400).send("Sua senha está indefinida!");
+    } else {
+
+        usuarioModel.autenticar(email, senha)
+            .then(
+                function (resultadoAutenticar) {
+                    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
+
+                    if (resultadoAutenticar.length == 1) {
+                        console.log(resultadoAutenticar);
+
+                        aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
+                            .then((resultadoAquarios) => {
+                                if (resultadoAquarios.length > 0) {
+                                    res.json({
+                                        id: resultadoAutenticar[0].id,
+                                        email: resultadoAutenticar[0].email,
+                                        nome: resultadoAutenticar[0].nome,
+                                        senha: resultadoAutenticar[0].senha,
+                                        aquarios: resultadoAquarios
+                                    });
+                                } else {
+                                    res.status(204).json({ aquarios: [] });
+                                }
+                            })
+                    } else if (resultadoAutenticar.length == 0) {
+                        res.status(403).send("Email e/ou senha inválido(s)");
+                    } else {
+                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
+
+module.exports = {getProdutores, postProdutor, authProdutor};
