@@ -18,6 +18,12 @@ const getProdutor = (alias) => {
     return db.executar(instrucao);
 }
 
+const auth = (alias, senha) =>{
+    const instrucao = `SELECT COUNT(idProdutor) as auth, idProdutor, alias, nome, email FROM produtor WHERE alias = ${alias} AND senha = ${senha}`;
+
+    return db.executar(instrucao);
+};
+
 /* 
 
 -- SCRIPT DE CADASTRO
@@ -29,6 +35,9 @@ const getProdutor = (alias) => {
 -- SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero WHERE adicionar genero de acordo com os generos que o user que acessou;
 -- ------------------------------------------------------------------------------------------------
 
+-- SCRIPT DE LOGIN
+-- SELECT COUNT(idProdutor) FROM produtor WHERE alias = apelidoInformado AND senha = senhaInformada;
+-- ------------------------------------------------------------------------------------------------
 
 -- SCRIPT PARA ACESSAR INFORMAÇÕES DO PERFIL DE USUÁRIO
 -- SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero WHERE idProdutor = idPerfilQueUserClicou;
@@ -46,4 +55,4 @@ const getProdutor = (alias) => {
 
 */
 
-module.exports = {getProdutores, postProdutor, getProdutor};
+module.exports = {getProdutores, postProdutor, getProdutor, auth};

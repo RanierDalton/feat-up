@@ -388,7 +388,6 @@ function adicionarRede(){
     divRede.innerHTML += inputRede;
     carregarRedes();
     contadorIptRedes++;
-    
 
     for(let i=0; i<valoresInputs.length;i++){
         redes[i].value = valoresInputs[i];
