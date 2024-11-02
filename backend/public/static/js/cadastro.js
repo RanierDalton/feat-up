@@ -362,15 +362,16 @@ function validarGeneros(nome){
 }
 
 // FUNCIONALIDADES DE ADD E REMOVER INPUTS
-
 function adicionarRede(){
     let redes = document.getElementsByName('redesSociais');
     let valoresInputs = [];
-    console.log(redes);
+
     redes.forEach((ipt) => {
         valoresInputs.push(ipt.value);
     });
-    
+
+    console.log(valoresInputs);
+
     const inputRede = `<div class="inputs-class">
                         <select name="redesSociais" id="iptRede" class="scltRedes">
                             <option value="" disabled selected selected>Selecione uma redes sociais</option>
@@ -385,18 +386,18 @@ function adicionarRede(){
                     </div>`;
     
     divRede.innerHTML += inputRede;
-    contadorIptRedes++;
     carregarRedes();
+    contadorIptRedes++;
+    
+
     for(let i=0; i<valoresInputs.length;i++){
         redes[i].value = valoresInputs[i];
     }
-
-    
 }
 
 function removerRede(indexInput){
     let inputsRedes = document.getElementsByClassName('inputs-class');
-
+    contadorIptRedes--;
     inputsRedes[indexInput].remove();
 }
 
@@ -421,8 +422,10 @@ function adicionarGenero(){
     `;
     
     divGenero.innerHTML += inputGeneros;
-    contadorIptGeneros++;
     carregarGeneros();
+    contadorIptGeneros++;
+    
+
     for(let i=0; i<valoresInputs.length;i++){
         generos[i].value = valoresInputs[i];
     }

@@ -16,6 +16,7 @@ const emailRouter = require("./src/routes/email");
 const produtorRouter = require('./src/routes/produtor');
 const generoRouter = require("./src/routes/genero");
 const redeRouter = require("./src/routes/rede");
+const dashboardRouter = require("./src/routes/dashboard")
 
 // CONFIGURAÇÃO DO APP (SERVIDOR)
 const app = express();
@@ -31,6 +32,7 @@ app.use(emailRouter);
 app.use(produtorRouter);
 app.use(generoRouter);
 app.use(redeRouter);
+app.use(dashboardRouter);
 
 // SUBIR O SERVER
 app.listen(PORTA_APP, function () {
