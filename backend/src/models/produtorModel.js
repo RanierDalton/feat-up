@@ -13,13 +13,13 @@ const postProdutor = (nome, alias, email, descricao, aplicativo, pontoForte) => 
 }
 
 const getProdutor = (alias) => {
-    const instrucao = `SELECT idProdutor FROM produtor WHERE alias = ${alias}`;
+    const instrucao = `SELECT idProdutor FROM produtor WHERE alias = '${alias}'`;
 
     return db.executar(instrucao);
 }
 
 const auth = (alias, senha) =>{
-    const instrucao = `SELECT COUNT(idProdutor) as auth, idProdutor, alias, nome, email FROM produtor WHERE alias = ${alias} AND senha = ${senha}`;
+    const instrucao = `SELECT COUNT(idProdutor) as auth, idProdutor, alias, email FROM produtor WHERE alias = '${alias}' AND senha = '${senha}'`;
 
     return db.executar(instrucao);
 };

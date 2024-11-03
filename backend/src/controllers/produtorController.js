@@ -74,7 +74,6 @@ const authProdutor = (req, res) => {
                     res.status(200).json({
                         id: resAuth[0].idProdutor,
                         email: resAuth[0].email,
-                        nome: resAuth[0].nome,
                         senha: resAuth[0].senha,
                         alias: resAuth[0].alias
                     });

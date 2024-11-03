@@ -1,21 +1,7 @@
 let isVisivel = false;
-let inputApelido = document.getElementById('iptSenha');
+let inputApelido = document.getElementById('iptApelido');
 let inputSenha = document.getElementById('iptSenha');
 let modal = document.getElementById('popUp');
-
-function mudarVisibilidade(){
-    if(isVisivel){
-        isVisivel = false;
-        inputSenha.type = 'password';
-        iconSenha.classList.remove('fa-eye-slash');
-        iconSenha.classList.add('fa-eye');
-    } else{
-        isVisivel = true;
-        inputSenha.type = 'text';
-        iconSenha.classList.remove('fa-eye');
-        iconSenha.classList.add('fa-eye-slash'); 
-    }
-}
 
 function entrar(){
     let apelido = inputApelido.value;
@@ -29,6 +15,8 @@ function entrar(){
         alias:apelido,
         senha:senha
     }
+
+    console.log(credenciais);
 
     fetch("/auth/produtor", {
         method: "POST",
@@ -45,10 +33,17 @@ function entrar(){
             resposta.json().then(json => {
                 console.log(json);
                 console.log(JSON.stringify(json));
+
                 sessionStorage.EMAIL_USUARIO = json.email;
-                sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.APELIDO_USUARIO = json.alias;
                 sessionStorage.ID_USUARIO = json.id;
+
+                if(sessionStorage.APELIDO_USUARIO  == "admin"){
+                    window.location = "../../featup/dashboard.html";
+                }
+
+                window.location = "../../featup/achar_feats.html";
+                
             });
 
         } else {
