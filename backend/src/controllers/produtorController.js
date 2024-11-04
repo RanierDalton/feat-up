@@ -36,24 +36,29 @@ const postProdutor = (req, res) =>{
         }
     ); 
     
-    // TODO
-    // redeModel.postRedes(redes)
-    // .then((resultado) => res.status(200).json(resultado))
-    // .catch((erro) => {
-    //         console.log(erro);
-    //         console.log("\nHouve um erro ao realizar o cadastro de Redes! Erro: ", erro.sqlMessage);
-    //         res.status(500).json(erro.sqlMessage);
-    //     }
-    // ); 
+    for(let i = 0; i < redes.length; i++){
+        redeModel.postRedeProdutor(redes[i].idProdutor, redes[i].idRede, redes[i].user)
+        .then((resultado) => "Cadastrou rede!")
+        .catch((erro) => {
+                console.log(erro);
+                console.log("\nHouve um erro ao realizar o cadastro de Redes! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+    }
+ 
 
-    // generoModel.postGeneros(redes)
-    // .then((resultado) => res.status(200).json(resultado))
-    // .catch((erro) => {
-    //         console.log(erro);
-    //         console.log("\nHouve um erro ao realizar o cadastro de Gêneros! Erro: ", erro.sqlMessage);
-    //         res.status(500).json(erro.sqlMessage);
-    //     }
-    // ); 
+    for(let i = 0; i < generos.length; i++){
+        generoModel.postGeneroProdutor(redes)
+        .then((resultado) => "Cadastrou genero!")
+        .catch((erro) => {
+            console.log(erro);
+            console.log("\nHouve um erro ao realizar o cadastro de Gêneros! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+    }
+
+    res.status(200).json({message: "Cadastro feito com sucesso!"});
 }
 
 const authProdutor = (req, res) => {

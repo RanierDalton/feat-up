@@ -24,35 +24,33 @@ const auth = (alias, senha) =>{
     return db.executar(instrucao);
 };
 
+const getProdutoresTotais = () => {
+    const instrucao = `SELECT COUNT(idProdutor) FROM produtor`;
+    return db.executar(instrucao);
+}
+
+const getProdutoresAtivos = () => {
+    const instrucao = `SELECT COUNT(idProdutor) FROM produtor WHERE TIMESTAMPDIFF(DAY,now(),lastLogin) <= 10`;
+    return db.executar(instrucao);
+}
+
+const getAplicativosUsados = () => {
+    const instrucao = `SELECT COUNT(aplicativo), aplicativo FROM produtor GROUP BY aplicativo`;
+    return db.executar(instrucao);
+}
+
+const getAcharFeats = (condicoesGeneros) => {
+    // SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero WHERE
+    const instrucao = `SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero WHERE ${condicoesGeneros}`;
+    return db.executar(instrucao);
+}
+
 /* 
-
--- SCRIPT DE CADASTRO
--- INSERT INTO produtor (nome, alias, senha, email, descricao, pontoForte, aplicativo) VALUES (nome, apelido, senha, email, descricao, pontoForte, aplicativo);
--- SELECT idProdutor FROM produtor WHERE alias = alias que acabou de cadastrar;
--- INSERT INTO rede_produtor (fkProdutor, fkRede, usuario) VALUES (idProdutor, idRede, user); FAZER LOOP EM CASO DE MAIS DE UMA REDE
--- INSERT INTO genero_produtor (fkProdutor, fkGenero) VALUES (idProdutor, idGenero),  FAZER LOOP EM CASO DE MAIS DE UM GENERO
--- SCRIPT MOSTRAR PRODUTORES PARA FEAT
--- SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero WHERE adicionar genero de acordo com os generos que o user que acessou;
--- ------------------------------------------------------------------------------------------------
-
--- SCRIPT DE LOGIN
--- SELECT COUNT(idProdutor) FROM produtor WHERE alias = apelidoInformado AND senha = senhaInformada;
--- ------------------------------------------------------------------------------------------------
 
 -- SCRIPT PARA ACESSAR INFORMAÇÕES DO PERFIL DE USUÁRIO
 -- SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero WHERE idProdutor = idPerfilQueUserClicou;
 -- --------------------------------------------------------------------------------------------------
 
-
--- SCRIPT APPS MAIS USADOS
--- SELECT COUNT(aplicativo), aplicativo FROM produtor GROUP BY aplicativo;
-
--- SCRIPT USUARIOS TOTAL
--- SELECT COUNT(idProdutor) FROM produtor;
-
--- SCRIPT USUARIOS ATIVO
--- SELECT COUNT(idProdutor) FROM produtor WHERE TIMESTAMPDIFF(DAY,now(),lastLogin) <= 10;
-
 */
 
-module.exports = {getProdutores, postProdutor, getProdutor, auth};
+module.exports = {getProdutores, postProdutor, getProdutor, auth, getProdutoresTotais, getProdutoresAtivos, getAplicativosUsados, getAcharFeats};

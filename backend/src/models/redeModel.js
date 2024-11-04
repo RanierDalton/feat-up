@@ -6,9 +6,10 @@ const getRedes = () =>{
     return db.executar(instrucao);
 }
 
-const postRedes = (redes) => {
-    // TODO 
+const postRedeProdutor = (idProdutor, idRede, user) => {
+    const instrucao = `INSERT INTO rede_produtor (fkProdutor, fkRede, usuario) VALUES (${idProdutor}, ${idRede}, '${user}')`;
+    return db.executar(instrucao);
 }
 
 
-module.exports = {getRedes, postRedes};
+module.exports = {getRedes, postRedeProdutor};

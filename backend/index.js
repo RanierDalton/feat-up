@@ -36,7 +36,6 @@ app.use(dashboardRouter);
 
 // SUBIR O SERVER
 app.listen(PORTA_APP, function () {
-    console.log(`Acesse o caminho a seguir para visualizar: http://${HOST_APP}:${PORTA_APP}`
-    );
+    console.log(`Acesse o caminho a seguir para visualizar: http://${HOST_APP}:${PORTA_APP}`);
 });
 
