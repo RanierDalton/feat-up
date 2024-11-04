@@ -8,25 +8,37 @@ const opcoesRede = fetch('/redes')
     return resposta.json();
 });
 
+let optionsGeneros = ``;
+let optionsRedes = ``;
+
+opcoesGenero.then((data) => {
+    let options = `<option value="" disabled selected selected>Selecione um dos Gêneros</option>`;
+    data.forEach((genero) => options +=`<option value="${genero.id}">${genero.nome}</option>`);
+    optionsGeneros = options;
+});
+
+opcoesRede.then((data) => {
+    let options = `<option value="" disabled selected selected>Selecione uma redes sociais</option>`;
+    data.forEach((rede) => options +=`<option value="${rede.id}">${rede.nome}</option>`);
+    optionsRedes = options;
+});
+
 function carregarGeneros(){
-    opcoesGenero.then((data) => {
-        let opcoes='<option value="" disabled selected selected>Selecione um dos Gêneros</option>';
-        data.forEach((genero) => opcoes+=`<option value="${genero.id}">${genero.nome}</option>`);
-        let slctGeneros = document.getElementsByName('iptGeneros'); 
-        slctGeneros.forEach((ipt) => ipt.innerHTML = opcoes);
-    });
+    if(optionsGeneros == ""){
+        window.setTimeout(carregarGeneros, 100);
+    } else{
+        return optionsGeneros;
+    }
 }
 
 function carregarRedes(){
-    opcoesRede.then((data) => {
-        let opcoes='<option value="" disabled selected selected>Selecione uma redes sociais</option>';
-        data.forEach((rede) => opcoes+=`<option value="${rede.id}">${rede.nome}</option>`);
-        let scltRede = document.getElementsByName('redesSociais'); 
-        console.log(scltRede);
-        console.log(opcoes);
-        scltRede.forEach((ipt) => ipt.innerHTML = opcoes);
-    });
+    if(optionsRedes == ""){
+        window.setTimeout(carregarRedes, 100);
+    } else{
+        return optionsRedes;
+    }
 }
+
 
 let informacoesCadastro = {
     nome: '',
@@ -69,8 +81,6 @@ async function loadContent(){
         divForm.innerHTML = telas.inicial;
     } else if(telAtual==2){
         divForm.innerHTML = telas.meio;
-        carregarGeneros();
-        carregarRedes();
     } else if(telAtual==3){
         divForm.innerHTML = telas.final;
     }
@@ -172,8 +182,8 @@ function verificarInputs(numeroPagina){
         informacoesCadastro.descricao = descricao;
 
     } else if(numeroPagina==2){
-        aplicativo = iptAplicativo.value;
-        pontoForte = iptPontoForte.value;
+        aplicativo = document.getElementById('iptAplicativo').value;
+        pontoForte = document.getElementById('iptPontoForte').value;
 
         if(!validarRedes('redesSociais')){
             console.log('Entrei no 1º');
@@ -192,7 +202,7 @@ function verificarInputs(numeroPagina){
             modal.showModal();
             msgError.innerText ="Por favor, preencha o campo de aplicativo";
             return false;
-        }
+        }async
 
         if(pontoForte == ""){
             modal.showModal();
@@ -374,7 +384,7 @@ function adicionarRede(){
 
     const inputRede = `<div class="inputs-class">
                         <select name="redesSociais" id="iptRede" class="scltRedes">
-                            <option value="" disabled selected selected>Selecione uma redes sociais</option>
+                            ${carregarRedes()}
                             
                         </select>
                         <div class="ipt-rede">
@@ -386,7 +396,6 @@ function adicionarRede(){
                     </div>`;
     
     divRede.innerHTML += inputRede;
-    carregarRedes();
     contadorIptRedes++;
 
     for(let i=0; i<valoresInputs.length;i++){
@@ -411,7 +420,7 @@ function adicionarGenero(){
     const inputGeneros = `
     <div class="input-genero">
         <select id="slctGenero" name="iptGeneros">
-            <option value="" disabled selected>Selecione uma opção</option>
+            ${carregarGeneros()}
             
         </select>
         <button class="toggle-password" onclick="removerGenero(${contadorIptRedes})">
@@ -421,7 +430,6 @@ function adicionarGenero(){
     `;
     
     divGenero.innerHTML += inputGeneros;
-    carregarGeneros();
     contadorIptGeneros++;
     
 
@@ -508,7 +516,7 @@ let telas = {
                         </div>
                         <div class="inputs-class">
                             <select name="redesSociais" id="iptRede" class="scltRedes">
-                                <option value="" disabled selected>Selecione uma redes sociais</option>
+                                ${carregarRedes()}
                                 
                             </select>
                             <input name="redesSociais" type="url" placeholder="Informe o user da mesma">
@@ -521,7 +529,7 @@ let telas = {
                         </div>
                         <div class="input-genero maximo">
                             <select id="slctGenero" name="iptGeneros">
-                                <option value="" disabled selected>Selecione uma opção</option>
+                                ${carregarGeneros()}
                                 
                             </select>
                         </div>
