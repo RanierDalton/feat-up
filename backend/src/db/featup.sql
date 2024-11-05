@@ -16,6 +16,9 @@ CREATE TABLE produtor (
     CONSTRAINT chkPontoForte CHECK(pontoForte IN ('Instrumental','Beat','Mix','Master'))
 );
 
+SELECT * from produtor;
+DELETE FROM produtor WHERE idProdutor = 34;
+
 CREATE TABLE feat (
 	idFeat INT PRIMARY KEY AUTO_INCREMENT,
     dtFeat DATETIME NOT NULL DEFAULT now(),
@@ -26,6 +29,13 @@ CREATE TABLE feat (
     CONSTRAINT fkProdutorSolicitaFeat FOREIGN KEY (fkProdutorSolicita) REFERENCES produtor(idProdutor),
     CONSTRAINT fkProdutorAceitaFeat FOREIGN KEY (fkProdutorAceita) REFERENCES produtor(idProdutor)
 );
+
+CREATE TABLE teste(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nome varchar(45) UNIQUE
+);
+
+INSERT INTO teste(nome) VALUES ('Ranier');
 
 CREATE TABLE rede_social (
 	idRede INT PRIMARY KEY AUTO_INCREMENT,
@@ -119,7 +129,7 @@ INSERT INTO genero_produtor (fkProdutor, fkGenero) VALUES
 
 (10, 5); -- Eletrônica
 
-
+SELECT * FROM rede_produtor;
 -- Associando cada produtor a pelo menos uma rede social
 INSERT INTO rede_produtor (fkProdutor, fkRede, usuario) VALUES
 (1, 1, 'dj_alme_insta'),  -- Instagram
