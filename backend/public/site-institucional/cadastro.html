@@ -13,8 +13,138 @@
             <header class="cabecalho">
                 <span>Cadastrar</span>
             </header>
-            <div id="forms" class="forms margin-top">
-                
+            <div id="inicial" class="forms margin-top">
+                <div class="campos-input">
+                    <div class="campo margin-top" >
+                        <label for="iptNome">Nome:</label>
+                        <input id="iptNome" type="text" placeholder="Informe seu nome completo">
+                    </div>
+                    <div class="campo margin-top" >
+                        <label for="iptApelido">Alias:</label>
+                        <input id="iptApelido" type="text" placeholder="Informe seu apelido">
+                    </div>
+                    <div class="campo margin-top" >
+                        <label for="iptEmail">Email:</label>
+                        <input id="iptEmail" type="email" placeholder="Informe seu email">
+                    </div>
+                    <div class="campo margin-top" >
+                        <label for="iptDescricao">Descrição:</label>
+                        <textarea id="iptDescricao" cols="30" rows="10" placeholder="Fale um pouco sobre sua experiência na música"></textarea>
+                    </div>
+                </div>
+                <footer>
+                    <div class="nav">
+                        <span></span>
+                        <a href="#" onclick="mudarPagina(2, document.getElementById('inicial'))"><span>Próxima<i class="fa-solid fa-arrow-right"></i></span></a>
+                    </div>
+                </footer>
+            </div>
+            <div id="meio" class="forms margin-top">
+                <div class="campos-input">
+                    <div class="campo margin-top" id="divRede">
+                        <div class="add-top">
+                            <label for="iptRede">Redes Sociais:</label>
+                            <a href="#" onclick="adicionarRede()"><span>Adicionar</span></a>
+                        </div>
+                        <div id="camposRedes" class="inputs-class">
+                            <select name="redesSociais" id="iptRede" class="scltRedes">
+                                
+                            </select>
+                            <input name="redesSociais" type="url" placeholder="Informe o user da mesma">
+                        </div>
+                    </div>
+                    <div class="campo margin-top" id="divGenero">
+                        <div class="add-top">
+                            <label for="slctGenero">Gêneros Produzidos:</label>
+                            <a href="#" onclick="adicionarGenero()"><span>Adicionar</span></a>
+                        </div>
+                        <div class="input-genero maximo">
+                            <select id="slctGenero" name="iptGeneros">
+                                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="campo margin-top" >
+                        <label for="iptAplicativo">Aplicativo que utiliza:</label>
+                        <select id="iptAplicativo">
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <option value="Ableton Live">Ableton Live</option>
+                            <option value="Acoustica Mixcraft">Acoustica Mixcraft</option>
+                            <option value="Amplitube">Amplitube</option>
+                            <option value="Audiotool">Audiotool</option>
+                            <option value="BandLab">BandLab</option>
+                            <option value="Bitwig Studio">Bitwig Studio</option>
+                            <option value="Cakewalk">Cakewalk</option>
+                            <option value="Cubase">Cubase</option>
+                            <option value="FL Studio">FL Studio</option>
+                            <option value="GarageBand">GarageBand</option>
+                            <option value="Logic Pro">Logic Pro</option>
+                            <option value="Magix Music Maker">Magix Music Maker</option>
+                            <option value="PreSonus Studio One">PreSonus Studio One</option>
+                            <option value="Pro Tools">Pro Tools</option>
+                            <option value="Reason">Reason</option>
+                        </select>
+                    </div>
+                    <div class="campo margin-top" >
+                        <label for="iptPontoForte">Qual o seu ponto forte:</label>
+                        <select id="iptPontoForte">
+                            <option value="" disabled selected selected>Selecione uma opção</option>
+                            <option value="Instrumental">Instrumental</option>
+                            <option value="Beat">Beat</option>
+                            <option value="Mix">Mix</option>
+                            <option value="Master">Master</option>
+                        </select>
+                    </div>
+                </div>
+                <footer>
+                    <div class="nav">
+                        <a href="#" onclick="mudarPagina(1, document.getElementById('meio'))"><span><i class="fa-solid fa-arrow-left"></i>Anterior</span></a>
+                        <a href="#" onclick="mudarPagina(3, document.getElementById('meio'))"><span>Próxima<i class="fa-solid fa-arrow-right"></i></span></a>
+                    </div>
+                </footer>
+            </div>
+            <div id="final" class="forms margin-top">
+                <div class="campos-input">
+                    <div class="campo senha">
+                        <label for="iptSenha">Senha:</label>
+                        <div class="ipt-senha">
+                            <input type="password" id="iptSenha" placeholder="Informe sua senha" oninput="validarSenha(this)">
+                            <button class="toggle-password" onclick="mudarVisibilidade(1)">
+                                <i id="iconSenha" class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="verificacoesSenha margin-top">
+                            <span id="caractere">8 caracteres Total</span>
+                            <span id="minusculo">1 caractere Minúcula</span>
+                            <span id="maiusculo">1 caractere Maiúscula</span>
+                            <span id="numero">1 Número</span>
+                            <span id="especial">1 Caractere Especial</span>
+                        </div>
+                    <div>
+                    <div class="campo margin-top" >
+                        <label for="iptConfirmar">Confirmar Senha:</label>
+                        <div class="ipt-senha">
+                            <input type="password" id="iptConfirmar" placeholder="Informe sua senha">
+                            <button class="toggle-password" onclick="mudarVisibilidade(2)">
+                                <i id="iconConfirmar" class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="campo-confirmacao ">
+                        <input id="iptConfirmarTermos" type="checkbox" />
+                        <label for="iptConfirmarTermos">Li e concordo com os termos e condições do site</label>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <footer class="margin-bottom">
+                    <div class="botao">
+                        <button onclick="cadastrar()">Cadastrar</button>
+                    </div>
+                    <div class="nav margin-top">
+                        <a href="#" onclick="mudarPagina(2, document.getElementById('final'))"><span><i class="fa-solid fa-arrow-left"></i>Anterior</span></a>
+                    </div>
+                </footer>
             </div>
         </div>
     </section>

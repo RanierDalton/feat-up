@@ -328,3 +328,7 @@ dialog::backdrop {
 
     transition: 0.5s;
 }
+
+#meio,#final{
+    display: none;
+}

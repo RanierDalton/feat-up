@@ -10,6 +10,8 @@ const opcoesRede = fetch('/redes')
 
 let optionsGeneros = ``;
 let optionsRedes = ``;
+let templateInputGeneros;
+let templateInputRedes;
 
 opcoesGenero.then((data) => {
     let options = `<option value="" disabled selected selected>Selecione um dos Gêneros</option>`;
@@ -27,7 +29,8 @@ function carregarGeneros(){
     if(optionsGeneros == ""){
         window.setTimeout(carregarGeneros, 100);
     } else{
-        return optionsGeneros;
+        slctGenero.innerHTML = optionsGeneros;
+        templateInputGeneros = slctGenero;
     }
 }
 
@@ -35,10 +38,12 @@ function carregarRedes(){
     if(optionsRedes == ""){
         window.setTimeout(carregarRedes, 100);
     } else{
-        return optionsRedes;
+        iptRede.innerHTML = optionsRedes;
+        templateInputRedes = iptRede;
     }
 }
-
+carregarGeneros();
+carregarRedes();
 
 let informacoesCadastro = {
     nome: '',
@@ -75,40 +80,18 @@ let confirmar = '';
 const divForm = document.getElementById("forms");
 const modal = document.getElementById('popUp');
 
-// CARREGAR E MUDAR CONTEÚDOS DAS PÁGINAS
-async function loadContent(){
-    if(telAtual==1){
-        divForm.innerHTML = telas.inicial;
-    } else if(telAtual==2){
-        divForm.innerHTML = telas.meio;
-    } else if(telAtual==3){
-        divForm.innerHTML = telas.final;
+function mudarPagina(numeroPagina, content){
+    if(numeroPagina == 1){
+        content.style.display = 'none';
+        inicial.style.display = 'flex';
+    } else if(numeroPagina == 2){
+        content.style.display = 'none';
+        meio.style.display = 'flex';
+    } else if(numeroPagina == 3){
+        content.style.display = 'none';
+        final.style.display = 'flex';
     }
-}
 
-function mudarPagina(numeroPagina, isVoltar){
-    var numeroPaginaAnterior = telAtual;
-    if(isVoltar){
-        telAtual = numeroPagina;
-        loadContent();
-
-        if(numeroPagina == 1){
-            iptNome.value = informacoesCadastro.nome;
-            iptApelido.value = informacoesCadastro.apelido;
-            iptEmail.value = informacoesCadastro.email;
-            iptDescricao.value = informacoesCadastro.descricao;
-        } else if(numeroPagina == 2){
-            assimilarRedes();
-            assimilarGeneros();
-
-            iptAplicativo.value = informacoesCadastro.aplicativo;
-            iptPontoForte.value = informacoesCadastro.pontoForte;
-        }
-
-    } else if(verificarInputs(numeroPaginaAnterior)){
-        telAtual = numeroPagina;
-        loadContent();
-    }   
     telAtual = numeroPagina; 
 }
 
@@ -382,11 +365,7 @@ function adicionarRede(){
 
     console.log(valoresInputs);
 
-    const inputRede = `<div class="inputs-class">
-                        <select name="redesSociais" id="iptRede" class="scltRedes">
-                            ${carregarRedes()}
-                            
-                        </select>
+    const inputRede = `<div class="inputs-class">`+templateInputRedes.outerHTML+`
                         <div class="ipt-rede">
                             <input name="redesSociais" type="url" placeholder="Informe o user da mesma">
                             <button class="toggle-password" onclick="removerRede(${contadorIptRedes})">
@@ -419,10 +398,7 @@ function adicionarGenero(){
 
     const inputGeneros = `
     <div class="input-genero">
-        <select id="slctGenero" name="iptGeneros">
-            ${carregarGeneros()}
-            
-        </select>
+        ${templateInputGeneros.outerHTML}
         <button class="toggle-password" onclick="removerGenero(${contadorIptRedes})">
             <i class="fa-solid fa-trash"></i>
         </button>
@@ -480,139 +456,3 @@ async function postCadastro(){
           
         });
 }
-
-let telas = {
-    inicial: `
-                <div class="campos-input">
-                    <div class="campo margin-top" >
-                        <label for="iptNome">Nome:</label>
-                        <input id="iptNome" type="text" placeholder="Informe seu nome completo">
-                    </div>
-                    <div class="campo margin-top" >
-                        <label for="iptApelido">Alias:</label>
-                        <input id="iptApelido" type="text" placeholder="Informe seu apelido">
-                    </div>
-                    <div class="campo margin-top" >
-                        <label for="iptEmail">Email:</label>
-                        <input id="iptEmail" type="email" placeholder="Informe seu email">
-                    </div>
-                    <div class="campo margin-top" >
-                        <label for="iptDescricao">Descrição:</label>
-                        <textarea id="iptDescricao" cols="30" rows="10" placeholder="Fale um pouco sobre sua experiência na música"></textarea>
-                    </div>
-                </div>
-            <footer>
-                <div class="nav">
-                    <span></span>
-                    <a href="#" onclick="mudarPagina(2, false)"><span>Próxima<i class="fa-solid fa-arrow-right"></i></span></a>
-                </div>
-            </footer>`,
-    meio:`
-            <div class="campos-input">
-                    <div class="campo margin-top" id="divRede">
-                        <div class="add-top">
-                            <label for="iptRede">Redes Sociais:</label>
-                            <a href="#" onclick="adicionarRede(0)"><span>Adicionar</span></a>
-                        </div>
-                        <div class="inputs-class">
-                            <select name="redesSociais" id="iptRede" class="scltRedes">
-                                ${carregarRedes()}
-                                
-                            </select>
-                            <input name="redesSociais" type="url" placeholder="Informe o user da mesma">
-                        </div>
-                    </div>
-                    <div class="campo margin-top" id="divGenero">
-                        <div class="add-top">
-                            <label for="slctGenero">Gêneros Produzidos:</label>
-                            <a href="#" onclick="adicionarGenero()"><span>Adicionar</span></a>
-                        </div>
-                        <div class="input-genero maximo">
-                            <select id="slctGenero" name="iptGeneros">
-                                ${carregarGeneros()}
-                                
-                            </select>
-                        </div>
-                    </div>
-                    <div class="campo margin-top" >
-                        <label for="iptAplicativo">Aplicativo que utiliza:</label>
-                        <select id="iptAplicativo">
-                            <option value="" disabled selected>Selecione uma opção</option>
-                            <option value="Ableton Live">Ableton Live</option>
-                            <option value="Acoustica Mixcraft">Acoustica Mixcraft</option>
-                            <option value="Amplitube">Amplitube</option>
-                            <option value="Audiotool">Audiotool</option>
-                            <option value="BandLab">BandLab</option>
-                            <option value="Bitwig Studio">Bitwig Studio</option>
-                            <option value="Cakewalk">Cakewalk</option>
-                            <option value="Cubase">Cubase</option>
-                            <option value="FL Studio">FL Studio</option>
-                            <option value="GarageBand">GarageBand</option>
-                            <option value="Logic Pro">Logic Pro</option>
-                            <option value="Magix Music Maker">Magix Music Maker</option>
-                            <option value="PreSonus Studio One">PreSonus Studio One</option>
-                            <option value="Pro Tools">Pro Tools</option>
-                            <option value="Reason">Reason</option>
-                        </select>
-                    </div>
-                    <div class="campo margin-top" >
-                        <label for="iptPontoForte">Qual o seu ponto forte:</label>
-                        <select id="iptPontoForte">
-                            <option value="" disabled selected selected>Selecione uma opção</option>
-                            <option value="Instrumental">Instrumental</option>
-                            <option value="Beat">Beat</option>
-                            <option value="Mix">Mix</option>
-                            <option value="Master">Master</option>
-                        </select>
-                    </div>
-                </div>
-            <footer>
-                <div class="nav">
-                    <a href="#" onclick="mudarPagina(1, true)"><span><i class="fa-solid fa-arrow-left"></i>Anterior</span></a>
-                    <a href="#" onclick="mudarPagina(3, false)"><span>Próxima<i class="fa-solid fa-arrow-right"></i></span></a>
-                </div>
-            </footer>`,
-    final:`     <div class="campos-input">
-                    <div class="campo senha">
-                        <label for="iptSenha">Senha:</label>
-                        <div class="ipt-senha">
-                            <input type="password" id="iptSenha" placeholder="Informe sua senha" oninput="validarSenha(this)">
-                            <button class="toggle-password" onclick="mudarVisibilidade(1)">
-                                <i id="iconSenha" class="fa-solid fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="verificacoesSenha margin-top">
-                            <span id="caractere">8 caracteres Total</span>
-                            <span id="minusculo">1 caractere Minúcula</span>
-                            <span id="maiusculo">1 caractere Maiúscula</span>
-                            <span id="numero">1 Número</span>
-                            <span id="especial">1 Caractere Especial</span>
-                        </div>
-                    <div>
-                    <div class="campo margin-top" >
-                        <label for="iptConfirmar">Confirmar Senha:</label>
-                        <div class="ipt-senha">
-                            <input type="password" id="iptConfirmar" placeholder="Informe sua senha">
-                            <button class="toggle-password" onclick="mudarVisibilidade(2)">
-                                <i id="iconConfirmar" class="fa-solid fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="campo-confirmacao ">
-                        <input id="iptConfirmarTermos" type="checkbox" />
-                        <label for="iptConfirmarTermos">Li e concordo com os termos e condições do site</label>
-                    </div>
-                    </div>
-                    </div>
-                </div>
-                <footer class="margin-bottom">
-                    <div class="botao">
-                        <button onclick="cadastrar()">Cadastrar</button>
-                    </div>
-                    <div class="nav margin-top">
-                        <a href="#" onclick="mudarPagina(2, true)"><span><i class="fa-solid fa-arrow-left"></i>Anterior</span></a>
-                    </div>
-                </footer>`
-};
-
-loadContent();
