@@ -6,8 +6,8 @@ const getGeneros = () =>{
     return db.executar(instrucao);
 }
 
-const postGeneroProdutor = (idProdutor, idGenero) => {
-    const instrucao = `INSERT INTO genero_produtor (fkProdutor, fkGenero) VALUES (${idProdutor}, ${idGenero})`;
+const postGeneroProdutor = (values) => {
+    const instrucao = `INSERT INTO genero_produtor (fkProdutor, fkGenero) VALUES ${values}`;
     return db.executar(instrucao);
 }
 

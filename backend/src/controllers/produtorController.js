@@ -15,48 +15,72 @@ const postProdutor = (req, res) =>{
     console.log(req.body);
     let nome = req.body.nome;
     let email = req.body.email;
-    let alias = req.body.alias;
+    let alias = req.body.apelido;
     let senha = req.body.senha;
+    let descricao = req.body.descricao;
+    let aplicativo = req.body.aplicativo;
+    let pontoForte = req.body.pontoForte;
 
     let redes = req.body.redes;
     let generos = req.body.generos;
 
-    const resValidation = cadastroValidation.validarCadastro(nome, email, alias, descricao, redes, generos, aplicativo, pontoForte, senha);
+    const resValidation = cadastroValidation.validarCadastro(nome, alias, email, descricao, redes, generos, aplicativo, pontoForte, senha);
 
     if(!resValidation.status){
         return res.status(400).json(resValidation);
     }
 
     produtorModel.postProdutor(nome, email, alias, descricao, aplicativo, pontoForte, senha) 
-    .then((resultado) => res.status(200).json(resultado))
+    .then((resultado) => console.log(resultado))
     .catch((erro) => {
             console.log(erro);
             console.log("\nHouve um erro ao realizar o cadastro do Produtor! Erro: ", erro.sqlMessage);
             res.status(500).json(erro.sqlMessage);
         }
     ); 
+
+    let idProdutor;
+
+    produtorModel.getProdutor(alias)
+    .then((resultado) => idProdutor = resultado)
+    .catch((erro) => {
+            console.log(erro);
+            console.log("\nHouve um erro ao realizar o cadastro de Redes! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+
+    let valuesRedes;
+    let valuesGeneros;
     
     for(let i = 0; i < redes.length; i++){
-        redeModel.postRedeProdutor(redes[i].idProdutor, redes[i].idRede, redes[i].user)
-        .then((resultado) => "Cadastrou rede!")
-        .catch((erro) => {
-                console.log(erro);
-                console.log("\nHouve um erro ao realizar o cadastro de Redes! Erro: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
+        valuesRedes += `(${idProdutor}, ${redes[i].idRede}, ${redes[i].user})${i != (redes.length -1) ? ",":""}`;
     }
+
+    console.log(valuesRedes);
  
+    // redeModel.postRedeProdutor(valuesRedes)
+    // .then((resultado) => console.log(resultado))
+    // .catch((erro) => {
+    //         console.log(erro);
+    //         console.log("\nHouve um erro ao realizar o cadastro de Redes! Erro: ", erro.sqlMessage);
+    //         res.status(500).json(erro.sqlMessage);
+    //     }
+    // );
 
     for(let i = 0; i < generos.length; i++){
-        generoModel.postGeneroProdutor(redes)
-        .then((resultado) => "Cadastrou genero!")
-        .catch((erro) => {
-            console.log(erro);
-            console.log("\nHouve um erro ao realizar o cadastro de Gêneros! Erro: ", erro.sqlMessage);
-            res.status(500).json(erro.sqlMessage);
-        });
+        valuesGeneros += `(${idProdutor}, ${generos[i]})${i != (redes.length -1) ? ",":""}`;
     }
+
+    console.log(valuesGeneros);
+
+    // generoModel.postGeneroProdutor(valuesGeneros)
+    // .then((resultado) => console.log(resultado))
+    // .catch((erro) => {
+    //     console.log(erro);
+    //     console.log("\nHouve um erro ao realizar o cadastro de Gêneros! Erro: ", erro.sqlMessage);
+    //     res.status(500).json(erro.sqlMessage);
+    // });
 
     res.status(200).json({message: "Cadastro feito com sucesso!"});
 }

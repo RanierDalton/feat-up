@@ -1,3 +1,4 @@
+const CARACTERES_ESPECIAIS = /[^A-Za-z0-9]/;
 const validarCadastro = (nome, email, apelido, descricao, redes, generos, aplicativo, pontoForte, senha) => {
     if(!validarNome(nome)){
         return {message:"Por favor, preencha corretmanete o campo de nome.", status:false};
@@ -64,7 +65,7 @@ function validarEmail(email){
     return true;
 }
 
-function validarSenha(ipt){
+function validarSenha(senha){
     var tamSenha = senha.length;
     var isEspecial = CARACTERES_ESPECIAIS.test(senha);
 
@@ -80,8 +81,6 @@ function validarSenha(ipt){
         if(senha[i] == senha[i].toLowerCase()){
             isMinuscula = true;
         }
-
-        console.log(Number(parseFloat(senha[i])) == Number(senha[i]));
 
         if(typeof Number(senha[i]) === 'number'){
             isNum = true;
@@ -105,7 +104,7 @@ function validarRedes(redes){
     return true;
 }
 
-function validarGeneros(nome){
+function validarGeneros(generos){
 
 
     for(let i=0; i<generos.length; i++){

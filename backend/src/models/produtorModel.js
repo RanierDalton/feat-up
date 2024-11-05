@@ -6,8 +6,8 @@ const getProdutores = () =>{
     return db.executar(instrucao);
 }
 
-const postProdutor = (nome, alias, email, descricao, aplicativo, pontoForte) => {
-    const instrucao = `INSERT INTO produtor (nome, alias, senha, email, descricao, pontoForte, aplicativo) VALUES (${nome}, ${alias}, ${senha}, ${email}, ${descricao}, ${pontoForte}, ${aplicativo})`;
+const postProdutor = (nome, alias, email, descricao, aplicativo, pontoForte, senha) => {
+    const instrucao = `INSERT INTO produtor (nome, alias, senha, email, descricao, pontoForte, aplicativo) VALUES ('${nome}', '${alias}', '${senha}', '${email}', '${descricao}', '${pontoForte}', '${aplicativo}')`;
     
     return db.executar(instrucao);
 }

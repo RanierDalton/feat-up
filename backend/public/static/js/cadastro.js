@@ -81,18 +81,20 @@ const divForm = document.getElementById("forms");
 const modal = document.getElementById('popUp');
 
 function mudarPagina(numeroPagina, content){
-    if(numeroPagina == 1){
-        content.style.display = 'none';
-        inicial.style.display = 'flex';
-    } else if(numeroPagina == 2){
-        content.style.display = 'none';
-        meio.style.display = 'flex';
-    } else if(numeroPagina == 3){
-        content.style.display = 'none';
-        final.style.display = 'flex';
+    if(verificarInputs(telAtual)){
+        if(numeroPagina == 1){
+            content.style.display = 'none';
+            inicial.style.display = 'flex';
+        } else if(numeroPagina == 2){
+            content.style.display = 'none';
+            meio.style.display = 'flex';
+        } else if(numeroPagina == 3){
+            content.style.display = 'none';
+            final.style.display = 'flex';
+        }
+    
+        telAtual = numeroPagina; 
     }
-
-    telAtual = numeroPagina; 
 }
 
 function assimilarRedes(){
@@ -134,10 +136,15 @@ function assimilarGeneros(){
 // VALIDAÇÕES 
 function verificarInputs(numeroPagina){
     if(numeroPagina==1){
-        nome = iptNome.value;
-        apelido = iptApelido.value;
-        email = iptEmail.value;
-        descricao = iptDescricao.value;
+        nome = document.getElementById('iptNome').value;
+        apelido = document.getElementById('iptApelido').value;
+        email = document.getElementById('iptEmail').value;
+        descricao = document.getElementById('iptDescricao').value;
+
+        nome = nome.trim();
+        apelido = apelido.trim();
+        email = email.trim();
+        descricao = descricao.trim();
 
         if(!validarNome(nome)){
             return false;
@@ -168,6 +175,9 @@ function verificarInputs(numeroPagina){
         aplicativo = document.getElementById('iptAplicativo').value;
         pontoForte = document.getElementById('iptPontoForte').value;
 
+        aplicativo = aplicativo.trim();
+        pontoForte = pontoForte.trim();
+
         if(!validarRedes('redesSociais')){
             console.log('Entrei no 1º');
             modal.showModal();
@@ -185,7 +195,7 @@ function verificarInputs(numeroPagina){
             modal.showModal();
             msgError.innerText ="Por favor, preencha o campo de aplicativo";
             return false;
-        }async
+        }
 
         if(pontoForte == ""){
             modal.showModal();
@@ -197,8 +207,11 @@ function verificarInputs(numeroPagina){
         informacoesCadastro.pontoForte = pontoForte;
 
     } else if(numeroPagina==3){
-        senha = iptSenha.value;
-        confirmar = iptConfirmar.value;
+        senha = document.getElementById('iptSenha').value;
+        confirmar = document.getElementById('iptConfirmar').value;
+
+        senha = senha.trim();
+        confirmar = confirmar.trim();
 
         if(!validarSenha(iptSenha)){
             modal.showModal();
@@ -326,7 +339,7 @@ function validarRedes(name){
         };
 
         if((i+1) % 2 == 0){
-            valor.idRede = redes[i-1].value;
+            valor.idRede = Number(redes[i-1].value);
             valor.user = redes[i].value;
             valoresInputs.push(valor);
         }
@@ -346,7 +359,7 @@ function validarGeneros(nome){
             return false; 
         }
 
-        valoresInputs.push(generos[i].value);
+        valoresInputs.push(Number(generos[i].value));
     }
 
     informacoesCadastro.generos = valoresInputs;
@@ -447,7 +460,7 @@ async function postCadastro(){
             location.href = '../../site-institucional/login.html';
             
           } else {
-            // mostrar o erro
+            console.log(resposta.body.message);
   
           }
         })
