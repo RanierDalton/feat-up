@@ -12,7 +12,6 @@ const getProdutores = (req, res) => {
 }
 
 const postProdutor = (req, res) =>{
-    console.log(req.body);
     let nome = req.body.nome;
     let email = req.body.email;
     let alias = req.body.apelido;
@@ -30,7 +29,7 @@ const postProdutor = (req, res) =>{
         return res.status(400).json(resValidation);
     }
 
-    produtorModel.postProdutor(nome, email, alias, descricao, aplicativo, pontoForte, senha) 
+    produtorModel.postProdutor(nome, alias, email, descricao, aplicativo, pontoForte, senha) 
     .then((resultado) => console.log(resultado))
     .catch((erro) => {
             console.log(erro);

@@ -57,8 +57,6 @@ function validarEmail(email){
     var isArroba = email.includes('@') && indiceArroba < indiceEnd;
 
     if((tamEmail < 8 || tamEmail > 45) && !isEnd && !isArroba || email == ''){
-        modal.showModal();
-        msgError.innerText ="Valor do email inválido";
         return false;
     }
 
