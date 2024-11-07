@@ -4,60 +4,212 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feats Ups | Feat Up</title>
+
+    <link rel="stylesheet" href="../static/styles/achar_feats.css">
 </head>
 <body>
-    <header>
-        <div>
-            <nav>
-                <div>
-                    <span></span>
+    <section class="cabecalho">
+        <header>
+            <div class="conteudo">
+                <div class="titulo">
+                    <span>FEAT UP</span>
                 </div>
-                <div>
-                    <span>Achar Feats</span>
-                    <span>Convites</span>
-                    <span class="atual">Feats Ups</span>
+                <nav>
+                    <ul class="navbar">
+                        <li><a href="./achar_feats.html">Achar Feats</a></li>
+                        <li><a href="./convites.html">Convites</a></li>
+                        <li><a href="./feat_ups.html" class="ativo">Feats Ups</a></li>
+                    </ul>
+                </nav>
+                <div class="profile">
+                    <button onclick="abrirPerfil()">
+                        <img src="../static/assets/default.png" alt="Imagem de perfil do seu usuário">
+                    </button>
+                    <div id="dropdownPerfil" class="dropdown-content">
+                        <a href="./self_perfil.html">Ver Perfil</a>
+                        <a href="../site-institucional/login.html" class="sair">Sair</a>
+                    </div>
                 </div>
-                <div>
-                    <img src="" alt="">
-                    <i class="fa-solid fa-caret-down"></i>
-                </div>
-            </nav>
-        </div>
-    </header>
-    <section>
-        <div>
-            <div>
-                <span></span>
-                <span></span>
             </div>
-            <div>
-                <div class="linha">
-                    <div>
-                        <div>
-                            <img src="" alt="">
-                            <span></span>
+        </header>
+    </section>
+    <section class="conteudo-achar">
+        <div class="body">
+            <div class="cabecalho-achar">
+                <div class="infos">
+                    <span class="titulo">Feats Ups</span>
+                    <span class="subtitle">Todos os Feats em que você enviou convite ou aceitou um</span>
+                </div>
+            </div>
+            <div class="produtores">
+                <div class="linha three-boxes">
+                    <div class="box">
+                        <div class="cabecalho-box">
+                            <img src="../static/assets/profiles/sonotws.jpg" alt="">
+                            <span>Sono TWS</span>
                         </div>
-                        <div>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                        <div class="corpo-box">
+                            <span><b>Pontos Fortes: </b>Instrumental</span>
+                            <span><b>Aplicativo: </b>Ableton</span>
+                            <span><b>Gêneros: </b>Hip Hop, Boombap</span>
                         </div>
-                        <div>
-                            <button>Ver Perfil</button>
+                        <div class="acoes-box">
+                            <button onclick="ver_perfil()">Ver Perfil</button>
                         </div>
+                    </div>
 
+                    <div class="box">
+                        <div class="cabecalho-box">
+                            <img src="../static/assets/profiles/sonotws.jpg" alt="">
+                            <span>Sono TWS</span>
+                        </div>
+                        <div class="corpo-box">
+                            <span><b>Pontos Fortes: </b>Instrumental</span>
+                            <span><b>Aplicativo: </b>Ableton</span>
+                            <span><b>Gêneros: </b>Hip Hop, Boombap</span>
+                        </div>
+                        <div class="acoes-box">
+                            <button onclick="ver_perfil()">Ver Perfil</button>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="cabecalho-box">
+                            <img src="../static/assets/profiles/sonotws.jpg" alt="">
+                            <span>Sono TWS</span>
+                        </div>
+                        <div class="corpo-box">
+                            <span><b>Pontos Fortes: </b>Instrumental</span>
+                            <span><b>Aplicativo: </b>Ableton</span>
+                            <span><b>Gêneros: </b>Hip Hop, Boombap</span>
+                        </div>
+                        <div class="acoes-box">
+                            <button onclick="ver_perfil()">Ver Perfil</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="linha three-boxes">
+                    <div class="box">
+                        <div class="cabecalho-box">
+                            <img src="../static/assets/profiles/sonotws.jpg" alt="">
+                            <span>Sono TWS</span>
+                        </div>
+                        <div class="corpo-box">
+                            <span><b>Pontos Fortes: </b>Instrumental</span>
+                            <span><b>Aplicativo: </b>Ableton</span>
+                            <span><b>Gêneros: </b>Hip Hop, Boombap</span>
+                        </div>
+                        <div class="acoes-box">
+                            <button onclick="ver_perfil()">Ver Perfil</button>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="cabecalho-box">
+                            <img src="../static/assets/profiles/sonotws.jpg" alt="">
+                            <span>Sono TWS</span>
+                        </div>
+                        <div class="corpo-box">
+                            <span><b>Pontos Fortes: </b>Instrumental</span>
+                            <span><b>Aplicativo: </b>Ableton</span>
+                            <span><b>Gêneros: </b>Hip Hop, Boombap</span>
+                        </div>
+                        <div class="acoes-box">
+                            <button onclick="ver_perfil()">Ver Perfil</button>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="cabecalho-box">
+                            <img src="../static/assets/profiles/sonotws.jpg" alt="">
+                            <span>Sono TWS</span>
+                        </div>
+                        <div class="corpo-box">
+                            <span><b>Pontos Fortes: </b>Instrumental</span>
+                            <span><b>Aplicativo: </b>Ableton</span>
+                            <span><b>Gêneros: </b>Hip Hop, Boombap</span>
+                        </div>
+                        <div class="acoes-box">
+                            <button onclick="ver_perfil()">Ver Perfil</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="linha three-boxes">
+                    <div class="box">
+                        <div class="cabecalho-box">
+                            <img src="../static/assets/profiles/sonotws.jpg" alt="">
+                            <span>Sono TWS</span>
+                        </div>
+                        <div class="corpo-box">
+                            <span><b>Pontos Fortes: </b>Instrumental</span>
+                            <span><b>Aplicativo: </b>Ableton</span>
+                            <span><b>Gêneros: </b>Hip Hop, Boombap</span>
+                        </div>
+                        <div class="acoes-box">
+                            <button onclick="ver_perfil()">Ver Perfil</button>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="cabecalho-box">
+                            <img src="../static/assets/profiles/sonotws.jpg" alt="">
+                            <span>Sono TWS</span>
+                        </div>
+                        <div class="corpo-box">
+                            <span><b>Pontos Fortes: </b>Instrumental</span>
+                            <span><b>Aplicativo: </b>Ableton</span>
+                            <span><b>Gêneros: </b>Hip Hop, Boombap</span>
+                        </div>
+                        <div class="acoes-box">
+                            <button onclick="ver_perfil()">Ver Perfil</button>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="cabecalho-box">
+                            <img src="../static/assets/profiles/sonotws.jpg" alt="">
+                            <span>Sono TWS</span>
+                        </div>
+                        <div class="corpo-box">
+                            <span><b>Pontos Fortes: </b>Instrumental</span>
+                            <span><b>Aplicativo: </b>Ableton</span>
+                            <span><b>Gêneros: </b>Hip Hop, Boombap</span>
+                        </div>
+                        <div class="acoes-box">
+                            <button onclick="ver_perfil()">Ver Perfil</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <dialog close id="modalPerfil">
+    <dialog close id="modalFiltro">
         <div>
-            <a href="perfil.html"><span>Ver Perfil</span></a>
-            <a href="../site-institucional/login.html"><span>Sair</span></a>
+            <div>
+                <div>
+                    <span></span>
+                    <a href="#" onclick="modalFiltro.close()"></a><i class="fa-solid fa-xmark"></i>
+                </div>
+                <div>
+                    <div>
+                        <span></span>
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                    <div>
+                        <span></span>
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                    <div>
+                        <span></span>
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                </div>
+            </div>
         </div>
     </dialog>
-
+    <script src="../static/js/public/perfil.js"></script>
     <!-- LIB FONT AWESOME-->
     <script src="https://kit.fontawesome.com/d5ea0dfb99.js" crossorigin="anonymous"></script>
 </body>
