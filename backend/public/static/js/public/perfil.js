@@ -1,4 +1,5 @@
 let isAberto = false;
+
 function abrirPerfil(){
   if(isAberto){
     dropdownPerfil.classList.remove('mostrar');
