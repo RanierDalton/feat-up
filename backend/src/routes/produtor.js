@@ -7,6 +7,20 @@ router.get("/produtores", (req, res) =>{
     
 });
 
+router.get("/produtores/achar", (req, res) =>{
+    // TODO return produtorController.getProdutoresAchar(req, res);
+    
+});
+
+router.get("/produtores/convites", (req, res) =>{
+    // TODO return produtorController.getProdutoresConvites(req, res);
+    
+});
+
+router.get("/produtores/feats", (req, res) =>{
+    // TODO return produtorController.getProdutoresFeats(req, res);
+});
+
 router.post("/produtor/cadastrar", (req, res) =>{
     return produtorController.postProdutor(req, res);
 });
