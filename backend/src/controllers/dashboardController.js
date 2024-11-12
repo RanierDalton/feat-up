@@ -52,8 +52,6 @@ const getData = (req, res) => {
         .catch((err) => res.status(500).json(err.sqlMessage))
     })
     .catch((err) => res.status(500).json(err.sqlMessage))
-
-    
 };
 
 module.exports = {getData};
