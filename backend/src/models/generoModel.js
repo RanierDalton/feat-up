@@ -12,7 +12,7 @@ const postGeneroProdutor = (values) => {
 }
 
 const getGenerosRecorrentes = () => {
-    const instrucao = `SELECT COUNT(fkGenero) as resultado, nome as genero FROM genero_produtor JOIN genero ON genero.idGenero = fkGenero GROUP BY fkGenero ORDER BY resultado DESC`;
+    const instrucao = `SELECT COUNT(fkGenero) as total, nome FROM genero_produtor JOIN genero ON genero.idGenero = fkGenero GROUP BY fkGenero ORDER BY total DESC`;
     return db.executar(instrucao);
 }
 

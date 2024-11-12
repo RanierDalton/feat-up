@@ -35,7 +35,7 @@ const getProdutoresAtivos = () => {
 }
 
 const getAplicativosUsados = () => {
-    const instrucao = `SELECT COUNT(aplicativo), aplicativo FROM produtor GROUP BY aplicativo`;
+    const instrucao = `SELECT COUNT(aplicativo) as total, aplicativo as nome FROM produtor GROUP BY aplicativo`;
     return db.executar(instrucao);
 }
 

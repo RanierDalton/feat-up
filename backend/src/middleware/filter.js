@@ -1,24 +1,22 @@
-const filtrarGenerosRecorrentes = (dados) => {
+const filtrarPodio = (dados) => {
     let resposta = [];
-
-    
 
     let i = 0;
     let contador = 0;
-    dados.forEach((genero) => {
+    dados.forEach((item) => {
         if(i < 3){
-            resposta.push(genero);
+            resposta.push(item);
         } else {
-            contador += genero.resultado;
+            contador += item.total;
         }
         i++;
     });
 
-    const objOutros = {genero: 'Outros', resultado: contador};
+    const objOutros = {nome: 'Outros', total: contador};
 
     resposta.push(objOutros);
 
     return resposta;
 }
 
-module.exports = {filtrarGenerosRecorrentes};
+module.exports = {filtrarPodio};

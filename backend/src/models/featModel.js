@@ -6,7 +6,13 @@ const getFeatsTotais = () => {
     return db.executar(instrucao);
 };
 
-module.exports = {getFeatsTotais};
+const getStatusFeats = () => {
+    const instrucao = `SELECT COUNT(statusFeat) as total, CASE WHEN statusFeat = 0 THEN 'Pendente' WHEN statusFeat = 1 THEN 'Aceito' ELSE 'Recusado' END AS nome FROM feat GROUP BY statusFeat`;
+
+    return db.executar(instrucao);
+};
+
+module.exports = {getFeatsTotais, getStatusFeats};
 
 
 
@@ -27,4 +33,4 @@ module.exports = {getFeatsTotais};
 // -- INSERT INTO feat (dtFeat, fkProdutorSolicita, fkProdutorAceita) VALUES (now(), idSolicita, idAceita);
 
 // -- SCRIPT STATUS DOS FEATS
-// -- SELECT COUNT(statusFeat), CASE WHEN statusFeat = 0 THEN 'Pendente' WHEN statusFeat = 1 THEN 'Aceito' ELSE 'Recusado' END AS stausFeat FROM feat GROUP BY statusFeat;
+// -- SELECT COUNT(statusFeat) as total, CASE WHEN statusFeat = 0 THEN 'Pendente' WHEN statusFeat = 1 THEN 'Aceito' ELSE 'Recusado' END AS resultado FROM feat GROUP BY statusFeat;

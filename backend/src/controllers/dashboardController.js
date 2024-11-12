@@ -28,24 +28,28 @@ const getData = (req, res) => {
 
                 generoModel.getGenerosRecorrentes()
                 .then((resultado) => {
-                    dados.generosRecorrentes = filterMiddleware.filtrarGenerosRecorrentes(resultado);
+                    dados.generosRecorrentes = filterMiddleware.filtrarPodio(resultado);
 
-                    console.log(dados);
+                    featModel.getStatusFeats()
+                    .then((resultado) => {
+                        dados.statusFeats = resultado;
+
+                        produtorModel.getAplicativosUsados()
+                        .then((resultado) => {
+                            dados.appsRecorrentes = filterMiddleware.filtrarPodio(resultado);
+
+                            console.log(dados)
+                            res.json(dados);
+                        })
+                        .catch((err) => res.status(500).json(err.sqlMessage))
+                    })
+                    .catch((err) => res.status(500).json(err.sqlMessage))
                 })
                 .catch((err) => res.status(500).json(err.sqlMessage))
             })
             .catch((err) => res.status(500).json(err.sqlMessage))
         })
         .catch((err) => res.status(500).json(err.sqlMessage))
-
-        // TODO
-        // COLETAR FEATS TOTAIS
-    
-        // COLETAR GENEROS MAIS USADOS 
-            // FILTRAR OS TOP 3 GENEROS E SOMAR OS OUTROS
-        // COLETAR FEATS ATIVOS E INATIVOS
-        // COLETAR APPS MAIS USADOS
-            // FILTRAR OS TOP 3 APPS E SOMAR OS OUTROS
     })
     .catch((err) => res.status(500).json(err.sqlMessage))
 
