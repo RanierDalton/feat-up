@@ -1,5 +1,8 @@
 const produtorModel = require('../models/produtorModel');
 const generoModel = require('../models/generoModel');
+const featModel = require('../models/featModel');
+
+const filterMiddleware = require('../middleware/filter');
 
 const getData = (req, res) => {
     let dados = {
@@ -13,11 +16,25 @@ const getData = (req, res) => {
 
     produtorModel.getProdutoresTotais()
     .then((resultado) => {
-        dados.usuariosTotais = resultado[0].total;
+        dados.usuariosTotais = resultado[0].resultado;
 
         produtorModel.getProdutoresAtivos()
         .then((resultado) => {
-            dados.usuariosAtivos = resultado[0].total;
+            dados.usuariosAtivos = resultado[0].resultado;
+
+            featModel.getFeatsTotais()
+            .then((resultado) => {
+                dados.featsTotais = resultado[0].resultado;
+
+                generoModel.getGenerosRecorrentes()
+                .then((resultado) => {
+                    dados.generosRecorrentes = filterMiddleware.filtrarGenerosRecorrentes(resultado);
+
+                    console.log(dados);
+                })
+                .catch((err) => res.status(500).json(err.sqlMessage))
+            })
+            .catch((err) => res.status(500).json(err.sqlMessage))
         })
         .catch((err) => res.status(500).json(err.sqlMessage))
 
@@ -30,7 +47,7 @@ const getData = (req, res) => {
         // COLETAR APPS MAIS USADOS
             // FILTRAR OS TOP 3 APPS E SOMAR OS OUTROS
     })
-    .catch((err) => console.log(err))
+    .catch((err) => res.status(500).json(err.sqlMessage))
 
     
 };

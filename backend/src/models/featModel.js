@@ -1,6 +1,12 @@
+const db = require('../db/connection');
 
+const getFeatsTotais = () => {
+    const instrucao = 'SELECT COUNT(idFeat) as resultado FROM feat';
 
+    return db.executar(instrucao);
+};
 
+module.exports = {getFeatsTotais};
 
 
 
@@ -19,9 +25,6 @@
 
 // -- SCRIPT INSERIR UM NOVO FEAT 
 // -- INSERT INTO feat (dtFeat, fkProdutorSolicita, fkProdutorAceita) VALUES (now(), idSolicita, idAceita);
-
-// -- SCRIPT FEATS FEITOS
-// -- SELECT COUNT(idFeat) FROM feat;
 
 // -- SCRIPT STATUS DOS FEATS
 // -- SELECT COUNT(statusFeat), CASE WHEN statusFeat = 0 THEN 'Pendente' WHEN statusFeat = 1 THEN 'Aceito' ELSE 'Recusado' END AS stausFeat FROM feat GROUP BY statusFeat;

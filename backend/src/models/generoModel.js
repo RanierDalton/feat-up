@@ -11,8 +11,13 @@ const postGeneroProdutor = (values) => {
     return db.executar(instrucao);
 }
 
+const getGenerosRecorrentes = () => {
+    const instrucao = `SELECT COUNT(fkGenero) as resultado, nome as genero FROM genero_produtor JOIN genero ON genero.idGenero = fkGenero GROUP BY fkGenero ORDER BY resultado DESC`;
+    return db.executar(instrucao);
+}
+
 // -- SCRIPT GENEROS MAIS USADOS
 // -- SELECT COUNT(fkGenero), nome as genero FROM genero_produtor JOIN genero ON genero.idGenero = fkGenero GROUP BY fkGenero;
 
 
-module.exports = {getGeneros, postGeneroProdutor};
+module.exports = {getGeneros, postGeneroProdutor, getGenerosRecorrentes};
