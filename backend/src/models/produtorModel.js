@@ -25,12 +25,12 @@ const auth = (alias, senha) =>{
 };
 
 const getProdutoresTotais = () => {
-    const instrucao = `SELECT COUNT(idProdutor) FROM produtor`;
+    const instrucao = `SELECT COUNT(idProdutor) as total FROM produtor`;
     return db.executar(instrucao);
 }
 
 const getProdutoresAtivos = () => {
-    const instrucao = `SELECT COUNT(idProdutor) FROM produtor WHERE TIMESTAMPDIFF(DAY,now(),lastLogin) <= 10`;
+    const instrucao = `SELECT COUNT(idProdutor) as total FROM produtor WHERE TIMESTAMPDIFF(DAY,now(),lastLogin) <= 10`;
     return db.executar(instrucao);
 }
 

@@ -1,4 +1,5 @@
 const mysql = require("mysql2");
+require("dotenv").config({path: '.env'});
 
 // CONEXÃO DO BANCO MYSQL SERVER
 var mySqlConfig = {
