@@ -1,11 +1,5 @@
 const db = require('../db/connection');
 
-const getProdutores = () =>{
-    const instrucao = 'SELECT * FROM produtor';
-
-    return db.executar(instrucao);
-};
-
 const postProdutor = (nome, alias, email, descricao, aplicativo, pontoForte, senha) => {
     const instrucao = `INSERT INTO produtor (nome, alias, senha, email, descricao, pontoForte, aplicativo) VALUES ('${nome}', '${alias}', '${senha}', '${email}', '${descricao}', '${pontoForte}', '${aplicativo}')`;
     
@@ -46,12 +40,10 @@ const getAcharFeats = (condicoesGeneros) => {
     return db.executar(instrucao);
 };
 
-/* 
+const getPerfil = (id) => {
+    const instrucao = `SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero WHERE idProdutor = ${id}`;
 
--- SCRIPT PARA ACESSAR INFORMAÇÕES DO PERFIL DE USUÁRIO
--- SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero WHERE idProdutor = idPerfilQueUserClicou;
--- --------------------------------------------------------------------------------------------------
+    return db.executar(instrucao);
+};
 
-*/
-
-module.exports = {getProdutores, postProdutor, getProdutor, auth, getProdutoresTotais, getProdutoresAtivos, getAplicativosUsados, getAcharFeats};
+module.exports = {postProdutor, getProdutor, auth, getProdutoresTotais, getProdutoresAtivos, getAplicativosUsados, getAcharFeats, getPerfil};

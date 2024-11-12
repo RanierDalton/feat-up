@@ -1,5 +1,10 @@
 const db = require('../db/connection');
 
+const getConvites = (id) => {
+    const instrucao = `SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero JOIN feat ON idProdutor = feat.fkProdutorSolicita WHERE feat.statusFeat = 0 AND fkProdutorAceita = ${id}`
+    return db.executar(instrucao);
+};
+
 const getFeatsTotais = () => {
     const instrucao = 'SELECT COUNT(idFeat) as resultado FROM feat';
 
@@ -12,7 +17,7 @@ const getStatusFeats = () => {
     return db.executar(instrucao);
 };
 
-module.exports = {getFeatsTotais, getStatusFeats};
+module.exports = {getFeatsTotais, getStatusFeats, getConvites};
 
 
 

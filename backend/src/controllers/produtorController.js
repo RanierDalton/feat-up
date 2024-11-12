@@ -1,9 +1,30 @@
 const produtorModel = require('../models/produtorModel');
 const generoModel = require('../models/generoModel');
 const redeModel = require('../models/redeModel');
+const featController = require('../models/featModel');
 
 const cadastroValidation = require('../validation/cadastroValidation');
 const filterMiddleware = require('../middleware/filter');
+
+const getConvites = (req, res) => {
+    let id = req.body.id;
+
+    featController.getConvites(id)
+    .then((data) =>{
+        return res.status(200).json(filterMiddleware.filtrarGenerosCard(data));
+    })
+    .catch((err) => res.status(500).json(err.sqlMessage)); 
+};
+
+const getPerfil = (req, res) => {
+    let id = req.body.id;
+
+    produtorModel.getPerfil(id)
+    .then((data) =>{
+        return res.status(200).json(data);
+    })
+    .catch((err) => res.status(500).json(err.sqlMessage)); 
+};
 
 const getProdutores = (req, res) => {
     produtorModel.getProdutores()
@@ -22,7 +43,7 @@ const getAcharFeats = (req, res) => {
         let condicoesGeneros = filterMiddleware.filtrarGenerosProdutor(resultado);
 
         produtorModel.getAcharFeats(condicoesGeneros)
-        .then((resultado)=> res.status(200).json(resultado))
+        .then((resultado) => res.status(200).json(filterMiddleware.filtrarGenerosCard(resultado)))
         .catch((err) => res.status(500).json(err.sqlMessage))
     })
     .catch((err) => res.status(500).json(err.sqlMessage))
@@ -134,4 +155,4 @@ const authProdutor = (req, res) => {
 
 }
 
-module.exports = {getProdutores, postProdutor, authProdutor, getAcharFeats};
+module.exports = {getProdutores, postProdutor, authProdutor, getAcharFeats, getPerfil, getConvites};

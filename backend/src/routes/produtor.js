@@ -2,19 +2,17 @@ const produtorController = require('../controllers/produtorController');
 const express = require("express");
 const router = express.Router();
 
-router.get("/produtores", (req, res) =>{
-    return produtorController.getProdutores(req, res);
-    
-});
-
 router.get("/produtores/achar", (req, res) =>{
     return produtorController.getAcharFeats(req, res);    
 });
 
 router.get("/produtores/convites", (req, res) =>{
-    // TODO return produtorController.getProdutoresConvites(req, res);
-    
+    return produtorController.getConvites(req, res);
 });
+
+router.get("produtores/perfil", (req, res) =>{
+    return produtorController.getPerfil(req, res);    
+})
 
 router.get("/produtores/feats", (req, res) =>{
     // TODO return produtorController.getProdutoresFeats(req, res);

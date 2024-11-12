@@ -17,7 +17,7 @@ const filtrarPodio = (dados) => {
     resposta.push(objOutros);
 
     return resposta;
-}
+};
 
 const filtrarGenerosProdutor = (generos) => {
     let resposta = "";
@@ -29,4 +29,31 @@ const filtrarGenerosProdutor = (generos) => {
     return resposta;
 };
 
-module.exports = {filtrarPodio, filtrarGenerosProdutor};
+const filtrarGenerosCard = (dados) => {
+    let produtores = [];
+    
+    for(let i=0; i<dados.length;i++){
+        let idProdutorAtual = dados[i].idProdutor;
+        let indexProdutor = produtores.findIndex(produtor => produtor.idProdutor == idProdutorAtual);
+
+        console.log()
+        if(indexProdutor == -1){
+            let produtorAtual = {
+                idProdutor: dados[i].idProdutor,
+                alias: dados[i].alias,
+                aplicativo: dados[i].aplicativo,
+                pontoForte: dados[i].pontoForte,
+                genero: [dados[i].genero]
+            };
+
+            produtores.push(produtorAtual);
+        } else {
+            let generosProdutor = produtores[indexProdutor].genero;
+            generosProdutor.push(dados[i].genero);
+        }       
+    }  
+    
+    return produtores;
+};
+
+module.exports = {filtrarPodio, filtrarGenerosProdutor,filtrarGenerosCard};
