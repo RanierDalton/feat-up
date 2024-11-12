@@ -8,8 +8,7 @@ router.get("/produtores", (req, res) =>{
 });
 
 router.get("/produtores/achar", (req, res) =>{
-    // TODO return produtorController.getProdutoresAchar(req, res);
-    
+    return produtorController.getAcharFeats(req, res);    
 });
 
 router.get("/produtores/convites", (req, res) =>{

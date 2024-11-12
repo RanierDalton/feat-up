@@ -19,4 +19,14 @@ const filtrarPodio = (dados) => {
     return resposta;
 }
 
-module.exports = {filtrarPodio};
+const filtrarGenerosProdutor = (generos) => {
+    let resposta = "";
+
+    for(let i=0; i<generos.length; i++){
+        resposta += `g.nome = '${generos[i].nome}' ${i != generos.length-1? 'OR ': ''} `;
+    }
+
+    return resposta;
+};
+
+module.exports = {filtrarPodio, filtrarGenerosProdutor};

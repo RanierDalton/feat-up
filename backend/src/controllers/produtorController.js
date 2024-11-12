@@ -3,13 +3,30 @@ const generoModel = require('../models/generoModel');
 const redeModel = require('../models/redeModel');
 
 const cadastroValidation = require('../validation/cadastroValidation');
+const filterMiddleware = require('../middleware/filter');
 
 const getProdutores = (req, res) => {
-    const produtores = produtorModel.getProdutores();
-    produtores.then((data) =>{
+    produtorModel.getProdutores()
+    .then((data) =>{
         return res.status(200).json(data);
-    });    
+    })
+    .catch((err) => res.status(500).json(err.sqlMessage));    
 }
+
+const getAcharFeats = (req, res) => {
+    console.log(req.body);
+    const idProdutor = req.body.id;
+
+    generoModel.getGenerosProdutor(idProdutor)
+    .then((resultado) => {
+        let condicoesGeneros = filterMiddleware.filtrarGenerosProdutor(resultado);
+
+        produtorModel.getAcharFeats(condicoesGeneros)
+        .then((resultado)=> res.status(200).json(resultado))
+        .catch((err) => res.status(500).json(err.sqlMessage))
+    })
+    .catch((err) => res.status(500).json(err.sqlMessage))
+};
 
 const postProdutor = (req, res) =>{
     let nome = req.body.nome;
@@ -117,4 +134,4 @@ const authProdutor = (req, res) => {
 
 }
 
-module.exports = {getProdutores, postProdutor, authProdutor};
+module.exports = {getProdutores, postProdutor, authProdutor, getAcharFeats};
