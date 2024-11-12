@@ -3,9 +3,8 @@ function validarSessao() {
     var email = sessionStorage.EMAIL_USUARIO;
     var nome = sessionStorage.NOME_USUARIO;
 
-    if (alias != null && email != null && nome != null) {
-        // TODO
-    } else {
+    if (alias == null || email == null || nome != null) {
+        sessionStorage.clear();
         window.location = "../login.html";
     }
 }
@@ -15,9 +14,8 @@ function validarSessaoAdmin(){
     var email = sessionStorage.EMAIL_USUARIO;
     var nome = sessionStorage.NOME_USUARIO;
 
-    if (alias == "admin" && nome == "admin" && email == "admin@email.com") {
-        // TODO
-    } else {
+    if (alias != "admin" || nome != "admin" || email != "admin@email.com") {
+        sessionStorage.clear();
         window.location = "../login.html";
     }
 }
