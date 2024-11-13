@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Feat Up</title>
-
     <link rel="stylesheet" href="../static/styles/dashboard.css">
+
+    <script src="../static/js/public/session.js"></script>
 </head>
-<body onload="validarSessaoAdmin(), carregarDashboard()">
+<body onload="validarSessaoAdmin(), charts()">
     <section class="cabecalho">
         <header>
             <div class="conteudo">
@@ -65,11 +66,10 @@
             </div>
         </div>
     </section>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../static/js/dashboard.js"></script>
     <script src="../static/js/public/perfil.js"></script>
-    <script src="../static/js/public/session.js"></script>
+    <script src="../static/js/dashboard.js"></script>
     <!-- LIB FONT AWESOME-->
     <script src="https://kit.fontawesome.com/d5ea0dfb99.js" crossorigin="anonymous"></script>
 </body>

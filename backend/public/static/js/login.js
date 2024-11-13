@@ -30,7 +30,8 @@ function entrar(){
         if (resposta.ok) {
             console.log(resposta);
 
-            resposta.json().then(json => {
+            resposta.json()
+            .then(json => {
                 console.log(json);
                 console.log(JSON.stringify(json));
 
@@ -39,16 +40,14 @@ function entrar(){
                 sessionStorage.APELIDO_USUARIO = json.alias;
                 sessionStorage.ID_USUARIO = json.id;
 
-                if(sessionStorage.APELIDO_USUARIO  == "admin"){
-                    window.location = "../../featup/dashboard.html";
+                if(sessionStorage.APELIDO_USUARIO == "admin"){
+                    return window.location = "../../featup/dashboard.html";
                 }
 
-                window.location = "../../featup/achar_feats.html";
-                
+                return window.location = "../../featup/achar_feats.html";
             });
 
         } else {
-
             console.log("Houve um erro ao tentar realizar o login!");
 
             resposta.text().then(texto => {
