@@ -207,11 +207,10 @@ nav{
     width: 50%;
     display: flex;
     flex-direction: column;
-
 }
 
 .texto-sobre{
-    margin-top: 5vh;
+    margin-top: 2.5vh;
 }
 
 .conteudo-sobre .texto span{
