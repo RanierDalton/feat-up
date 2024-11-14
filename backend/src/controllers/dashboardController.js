@@ -14,44 +14,23 @@ const getData = (req, res) => {
         appsRecorrentes:{},
     }
 
-    produtorModel.getProdutoresTotais()
-    .then((resultado) => {
-        dados.usuariosTotais = resultado[0].resultado;
+    Promise.all([produtorModel.getProdutoresTotais(), produtorModel.getProdutoresAtivos(), featModel.getFeatsTotais(), generoModel.getGenerosRecorrentes(), featModel.getStatusFeats(), produtorModel.getAplicativosUsados()])
+    .then((resultados) => {
+ 
+        dados.usuariosTotais = resultados[0][0].resultado;
+        dados.usuariosAtivos = resultados[1][0].resultado;
+        dados.featsTotais = resultados[2][0].resultado;
+        dados.generosRecorrentes = filterMiddleware.filtrarPodio(resultados[3]);
+        dados.statusFeats = resultados[4];
+        dados.appsRecorrentes = filterMiddleware.filtrarPodio(resultados[5]);
+        console.log(dados)
+        res.status(200).json(dados);
 
-        produtorModel.getProdutoresAtivos()
-        .then((resultado) => {
-            dados.usuariosAtivos = resultado[0].resultado;
-
-            featModel.getFeatsTotais()
-            .then((resultado) => {
-                dados.featsTotais = resultado[0].resultado;
-
-                generoModel.getGenerosRecorrentes()
-                .then((resultado) => {
-                    dados.generosRecorrentes = filterMiddleware.filtrarPodio(resultado);
-
-                    featModel.getStatusFeats()
-                    .then((resultado) => {
-                        dados.statusFeats = resultado;
-
-                        produtorModel.getAplicativosUsados()
-                        .then((resultado) => {
-                            dados.appsRecorrentes = filterMiddleware.filtrarPodio(resultado);
-
-                            console.log(dados)
-                            res.json(dados);
-                        })
-                        .catch((err) => res.status(500).json(err.sqlMessage))
-                    })
-                    .catch((err) => res.status(500).json(err.sqlMessage))
-                })
-                .catch((err) => res.status(500).json(err.sqlMessage))
-            })
-            .catch((err) => res.status(500).json(err.sqlMessage))
-        })
-        .catch((err) => res.status(500).json(err.sqlMessage))
     })
-    .catch((err) => res.status(500).json(err.sqlMessage))
+    .catch((err) => {
+        console.log(err);
+        res.status(503).json(err.sqlMessage);
+    });
 };
 
 module.exports = {getData};
