@@ -15,7 +15,7 @@ router.get("produtores/perfil", (req, res) =>{
 })
 
 router.get("/produtores/feats", (req, res) =>{
-    // TODO return produtorController.getProdutoresFeats(req, res);
+    return produtorController.getFeatsAtivos(req, res);
 });
 
 router.post("/produtor/cadastrar", (req, res) =>{
@@ -24,6 +24,14 @@ router.post("/produtor/cadastrar", (req, res) =>{
 
 router.post("/auth/produtor", (req, res) =>{
     return produtorController.authProdutor(req, res);
+});
+
+router.post("/produtores/feat/cadastrar", (req, res) =>{
+    return produtorController.postFeat(req, res);
+});
+
+router.put("/produtores/feat/atualizar", (req, res) =>{
+    return produtorController.putStatusFeat(req, res);
 });
 
 module.exports = router;

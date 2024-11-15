@@ -11,5 +11,4 @@ const postRedeProdutor = (values) => {
     return db.executar(instrucao);
 }
 
-
 module.exports = {getRedes, postRedeProdutor};

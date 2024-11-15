@@ -1,15 +1,48 @@
 const produtorModel = require('../models/produtorModel');
 const generoModel = require('../models/generoModel');
 const redeModel = require('../models/redeModel');
-const featController = require('../models/featModel');
+const featModel = require('../models/featModel');
 
 const cadastroValidation = require('../validation/cadastroValidation');
 const filterMiddleware = require('../middleware/filter');
 
+const putStatusFeat = (req, res) => {
+    const idSolicita = req.body.idSolicita;
+    const idAceita = req.body.idAceita;
+    const status = req.body.status;
+
+    featModel.putStatusFeat(idSolicita, idAceita, status)
+    .then((resultado) =>{
+        return res.status(200).json(resultado);
+    })
+    .catch((err) => res.status(500).json(err.sqlMessage)); 
+};
+
+const postFeat = (req, res) => {
+    const idSolicita = req.body.idSolicita;
+    const idAceita = req.body.idAceita;
+
+    featModel.postFeat(idSolicita, idAceita)
+    .then((resultado) =>{
+        return res.status(200).json(resultado);
+    })
+    .catch((err) => res.status(500).json(err.sqlMessage)); 
+};
+
+const getFeatsAtivos = (req, res) => {
+    let id = req.body.id;
+
+    featModel.getFeatsAtivos(id)
+    .then((data) =>{
+        return res.status(200).json(filterMiddleware.filtrarGenerosCard(data));
+    })
+    .catch((err) => res.status(500).json(err.sqlMessage)); 
+};
+
 const getConvites = (req, res) => {
     let id = req.body.id;
 
-    featController.getConvites(id)
+    featModel.getConvites(id)
     .then((data) =>{
         return res.status(200).json(filterMiddleware.filtrarGenerosCard(data));
     })
@@ -120,8 +153,8 @@ const postProdutor = (req, res) =>{
 }
 
 const authProdutor = (req, res) => {
-    var alias = req.body.alias;
-    var senha = req.body.senha;
+    const alias = req.body.alias;
+    const senha = req.body.senha;
 
     if (alias == undefined || alias == "") {
         res.status(400).send("Apelido Incorreto");
@@ -155,4 +188,4 @@ const authProdutor = (req, res) => {
 
 }
 
-module.exports = {getProdutores, postProdutor, authProdutor, getAcharFeats, getPerfil, getConvites};
+module.exports = {getProdutores, postProdutor, authProdutor, getAcharFeats, getPerfil, getConvites,getFeatsAtivos,putStatusFeat,postFeat};

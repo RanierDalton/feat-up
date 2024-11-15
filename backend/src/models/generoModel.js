@@ -22,8 +22,4 @@ const getGenerosRecorrentes = () => {
     return db.executar(instrucao);
 }
 
-// -- SCRIPT GENEROS MAIS USADOS
-// -- SELECT COUNT(fkGenero), nome as genero FROM genero_produtor JOIN genero ON genero.idGenero = fkGenero GROUP BY fkGenero;
-
-
 module.exports = {getGeneros, postGeneroProdutor, getGenerosRecorrentes, getGenerosProdutor};
