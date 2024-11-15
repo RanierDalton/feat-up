@@ -6,9 +6,10 @@
 
     <link rel="stylesheet" href="../static/styles/achar_feats.css">
 
-    <title>Nome | Perfil</title>
+    <title id="title">Nome | Perfil</title>
 </head>
-<body onload="validarSessao(), carregarPerfil()">
+<body >
+    <!-- onload="validarSessao(), carregarPerfil()" -->
     <section class="cabecalho">
         <header>
             <div class="conteudo">
@@ -33,52 +34,65 @@
             </div>
         </header>
     </section>
-    <section>
-        <div>
-            <div>
-                <div>
-                    <div>
+    <section class="corpo-perfil">
+        <div class="divisoes-perfil">
+            <div class="column-esquerda-perfil">
+                <div class="foto-perfil">
+                    <div class="conteudo-foto-perfil">
                         <img src="" alt="">
                         <span></span>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <div>
+                <div class="redes-perfil">
+                    <div class="lista-redes-perfil">
+                        <div class="rede-social">
                             <i></i>
                             <span></span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div>
-                <div>
-                    <div>
-                        <span>Sobre</span>
+            <div class="column-direita-perfil">
+                <div class="conteudo-direita-perfil">
+                    <div class="descricao-perfil">
+                        <div class="titulo-perfil">
+                            <span>Sobre</span>
+                        </div>
                         <div>
-                            <span>Lorem ipsum</span>
+                            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel elit convallis, varius elit vel, maximus tellus. Proin ullamcorper varius sem ac rutrum. Sed euismod ante at nisi dignissim, luctus dapibus nibh efficitur. Ut ante dui, condimentum iaculis lacus quis, varius euismod felis. Cras viverra elit ex, quis eleifend nisi luctus ornare. Morbi at orci aliquet, rutrum velit in, aliquet massa. Donec accumsan mauris id justo maximus mattis. Proin congue, mi ut commodo lobortis, odio sem auctor nulla, ut efficitur tellus risus sed lorem.</span>
                         </div>
                     </div>
-                    <div>
-                        <div>
-                            <span>Ponto Forte</span>
-                            <div>
-                                <span>Beat</span>
+                    <div class="informacoes-perfil">
+                        <div class="infos-unicas-perfil">
+                            <div class="ponto-forte-perfil">
+                                <div class="titulo-perfil">
+                                    <span>Ponto Forte</span>
+                                </div>
+                                <div>
+                                    <span>Beat</span>
+                                </div>
+                            </div>
+                            <div class="aplicativo-perfil">
+                                <div class="titulo-perfil">
+                                    <span>Aplicativo</span>
+                                </div>
+                                <div>
+                                    <span>FL Studio</span>
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <span>Ponto Forte</span>
-                            <div>
-                                <span>Beat</span>
+                        
+                        <div class="generos-perfil">
+                            <div class="titulo-perfil">
+                                <span>Gênero</span>
                             </div>
-                        </div>
-                        <div>
-                            <span>Gênero</span>
-                            <div>
-                                <span>Trap</span>
-                            </div>
-                            <div>
-                                <span>Hip Hop</span>
+                            <div class="lista-generos-perfil">
+                                <div class="genero-perfil">
+                                    <span>Trap</span>
+                                </div>
+                                <div class="genero-perfil">
+                                    <span>Hip Hop</span>
+                                </div>
                             </div>
                         </div>
                     </div>
