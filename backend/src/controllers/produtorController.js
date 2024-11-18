@@ -30,7 +30,7 @@ const postFeat = (req, res) => {
 };
 
 const getFeatsAtivos = (req, res) => {
-    let id = req.body.id;
+    let id = req.params.id;
 
     featModel.getFeatsAtivos(id)
     .then((data) =>{
@@ -40,7 +40,7 @@ const getFeatsAtivos = (req, res) => {
 };
 
 const getConvites = (req, res) => {
-    let id = req.body.id;
+    let id = req.params.id;
 
     featModel.getConvites(id)
     .then((data) =>{
@@ -50,7 +50,7 @@ const getConvites = (req, res) => {
 };
 
 const getPerfil = (req, res) => {
-    let id = req.body.id;
+    let id = req.params.id;
 
     produtorModel.getPerfil(id)
     .then((data) =>{
@@ -68,7 +68,7 @@ const getProdutores = (req, res) => {
 }
 
 const getAcharFeats = (req, res) => {
-    const idProdutor = req.body.id;
+    const idProdutor = req.params.id;
 
     generoModel.getGenerosProdutor(idProdutor)
     .then((resultado) => {
