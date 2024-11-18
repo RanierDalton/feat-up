@@ -468,12 +468,12 @@ nav{
 
 .caixa-item{
     background-color: var(--adm-bg-color);
-    padding: 1.5px 12px 1.5px 12px;
+    padding: 2px 12px 2px 12px;
     border-radius: 4px;
 }
 
 .caixa-item span{
-    font-size: var(--tamanho-texto-nav);
+    font-size: var(--tamanho-item-perfil);
 }
 
 .genero-perfil{
