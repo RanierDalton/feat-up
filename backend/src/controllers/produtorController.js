@@ -68,7 +68,6 @@ const getProdutores = (req, res) => {
 }
 
 const getAcharFeats = (req, res) => {
-    console.log(req.body);
     const idProdutor = req.body.id;
 
     generoModel.getGenerosProdutor(idProdutor)
