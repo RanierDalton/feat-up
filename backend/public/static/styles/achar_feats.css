@@ -4,6 +4,10 @@ body{
     background-color: var(--normal-bg-color);
 }
 
+a{
+    text-decoration: none;
+}
+
 /* CABEÇALHO */
 .cabecalho{
     width: 100%;
@@ -282,6 +286,14 @@ nav{
 }
 
 /* TELA DE PERIL*/
+.margin-bottom{
+    margin-bottom: 5%;
+}
+
+.margin-top{
+    margin-top: 0.7vh;
+}
+
 .corpo-perfil{
     height: 80vh;
     width: 100%;
@@ -313,11 +325,67 @@ nav{
     border-radius: 20px;
 }
 
+.conteudo-foto-perfil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.conteudo-foto-perfil img{
+    border-radius: 50%;
+    height:250px;
+    width: 250px;
+}
+
+.conteudo-foto-perfil span{
+    color: black;
+    font-size: var(--tamanho-sub);
+    font-weight: var(--bold-leve);
+}
+
 .redes-perfil{
     width: 100%;
     background-color: #f1f1f1;
     height: 40%;
     border-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lista-redes-perfil{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.rede-social{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    gap:5%
+}
+
+.rede-social i{
+    font-size: var(--tamanho-icone-redes-perfil);
+    color: black;
+}
+
+.rede-social span{
+    font-size: var(--tamanho-desc);
+    color: var(--primary-color);
+}
+
+.user{
+    height: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .column-direita-perfil{
@@ -339,6 +407,15 @@ nav{
     align-items: center;
 }
 
+.organizar-infos{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
 .descricao-perfil{
     width: 93%;
     display: flex;
@@ -346,10 +423,25 @@ nav{
     align-items: flex-start;
 }
 
+.txt-descricao-perfil{
+    display: flex;
+    align-items: flex-start;
+}
+
+.txt-descricao-perfil span{
+    text-align: left;
+}
+
+.titulo-perfil{
+    display: flex;
+    align-items: flex-start;
+}
+
 .titulo-perfil span{
     color: black;
     font-size: var(--tamanho-desc);
     font-weight: var(--bold-leve);
+    text-align: left;
 }
 
 .informacoes-perfil{
@@ -363,4 +455,27 @@ nav{
     width: 40%;
     justify-content: space-between;
     display: flex;   
+}
+
+.generos-perfil{
+    width: 100%;
+}
+
+.lista-generos-perfil{
+    display: flex;
+    width: 100%;
+}
+
+.caixa-item{
+    background-color: var(--adm-bg-color);
+    padding: 1.5px 12px 1.5px 12px;
+    border-radius: 4px;
+}
+
+.caixa-item span{
+    font-size: var(--tamanho-texto-nav);
+}
+
+.genero-perfil{
+    margin-right: 3%;
 }
