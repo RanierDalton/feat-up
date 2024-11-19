@@ -54,7 +54,7 @@ const getPerfil = (req, res) => {
 
     produtorModel.getPerfil(id)
     .then((data) =>{
-        return res.status(200).json(data);
+        return res.status(200).json(filterMiddleware.filtrarPerfilInfo(data));
     })
     .catch((err) => res.status(500).json(err.sqlMessage)); 
 };

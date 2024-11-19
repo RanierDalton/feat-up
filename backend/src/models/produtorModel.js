@@ -41,7 +41,15 @@ const getAcharFeats = (condicoesGeneros) => {
 };
 
 const getPerfil = (id) => {
-    const instrucao = `SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero WHERE idProdutor = ${id}`;
+    const instrucao = `
+        SELECT descricao, pathFotoPerfil as pathFoto, alias, aplicativo, pontoForte, g.nome as genero,r.url as url, r.fontAwesomeTag as class, rp.usuario as 'user' 
+        FROM produtor 
+        JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor 
+        JOIN genero as g ON gp.fkGenero = g.idGenero 
+        JOIN rede_produtor as rp ON rp.fkProdutor = idProdutor 
+        JOIN rede_social as r ON fkRede = idRede
+        WHERE idProdutor = ${id};
+    `;
 
     return db.executar(instrucao);
 };

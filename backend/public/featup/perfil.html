@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="../static/styles/achar_feats.css">
 
     <title id="title">Nome | Perfil</title>
+
+    <script src="../static/js/profile.js"></script>
 </head>
-<body >
-    <!-- onload="validarSessao(), carregarPerfil()" -->
+<body onload="validarSessao(), carregarPerfil()">
+    
     <section class="cabecalho">
         <header>
             <div class="conteudo">
@@ -45,24 +47,7 @@
                 </div>
                 <div class="redes-perfil">
                     <div class="lista-redes-perfil" id="divRedes">
-                        <a href="">
-                            <div class="rede-social">
-                                <i class="fa-brands fa-instagram"></i>
-                                <span>ranierdcpop</span>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="rede-social">
-                                <i class="fa-brands fa-instagram"></i>
-                                <span>ranierdcpop</span>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="rede-social">
-                                <i class="fa-brands fa-instagram"></i>
-                                <span>ranierdcpop</span>
-                            </div>
-                        </a>
+                    
                     </div>
                 </div>
             </div>
@@ -87,7 +72,7 @@
                                 </div>
                                 <div class="txt-descricao-perfil margin-top">
                                     <div class="caixa-item">
-                                        <span>Beat</span>
+                                        <span id="pontoForte">Beat</span>
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +82,7 @@
                                 </div>
                                 <div class="txt-descricao-perfil margin-top">
                                     <div class="caixa-item">
-                                        <span>FL Studio</span>
+                                        <span id="appUtiliza">FL Studio</span>
                                     </div>
                                 </div>
                             </div>
@@ -108,16 +93,7 @@
                                 <span>Gênero</span>
                             </div>
                             <div id="divGeneros" class="lista-generos-perfil margin-top">
-                                <div class="genero-perfil">
-                                    <div class="caixa-item">
-                                        <span>Trap</span>
-                                    </div>
-                                </div>
-                                <div class="genero-perfil">
-                                    <div class="caixa-item">
-                                        <span>Hip Hop</span>
-                                    </div>
-                                </div>
+                        
                             </div>
                         </div>
                     </div>

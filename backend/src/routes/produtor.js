@@ -10,7 +10,7 @@ router.get("/produtores/convites/:id", (req, res) =>{
     return produtorController.getConvites(req, res);
 });
 
-router.get("produtores/perfil/:id", (req, res) =>{
+router.get("/produtores/perfil/:id", (req, res) =>{
     return produtorController.getPerfil(req, res);    
 })
 

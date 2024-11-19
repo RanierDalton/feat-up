@@ -56,4 +56,29 @@ const filtrarGenerosCard = (dados) => {
     return produtores;
 };
 
-module.exports = {filtrarPodio, filtrarGenerosProdutor,filtrarGenerosCard};
+const filtrarPerfilInfo = (data)=> {
+    console.log(data);
+    let info = {
+        alias: data[0].alias,
+        aplicativo: data[0].aplicativo,
+        pontoForte: data[0].pontoForte,
+        descricao: data[0].descricao,
+        pathFoto: data[0].pathFoto,
+        generos:[],
+        redes:[]
+    };
+
+    for(let i=0; i<data.length;i++){
+        if(!info.generos.includes(data[i].genero)){
+            info.generos.push(data[i].genero);
+        }
+        
+        if(info.redes.findIndex(rede => rede.url == data[i].url) == -1){
+            info.redes.push({url:data[i].url, class:data[i].class, user:data[i].user});
+        }
+    }  
+    
+    return info;
+};
+
+module.exports = {filtrarPodio, filtrarGenerosProdutor,filtrarGenerosCard,filtrarPerfilInfo};
