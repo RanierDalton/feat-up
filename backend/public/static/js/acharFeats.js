@@ -17,63 +17,24 @@ function carregarProdutoresAchar(){
 }
 
 function organizarCards(data){
-    /*
-    <div class="linha three-boxes">
-        <div class="box">
-            <div class="cabecalho-box">
-                <img src="../static/assets/profiles/sonotws.jpg" alt="">
-                <span>Sono TWS</span>
-            </div>
-            <div class="corpo-box">
-                <span><b>Pontos Fortes: </b>Instrumental</span>
-                <span><b>Aplicativo: </b>Ableton</span>
-                <span><b>Gêneros: </b>Hip Hop, Boombap</span>
-            </div>
-            <div class="acoes-box">
-                <button onclick="convidar()">Convidar</button>
-            </div>
-        i
-        <div class="box">
-            <div class="cabecalho-box">
-                <isrc="../static/assets/profiles/sonotws.jpg" alt="">
-                <span>Sono TWS</span>
-            </div>
-            <div class="corpo-box">
-                <span><b>Pontos Fortes: </b>Instrumental</span>
-                <span><b>Aplicativo: </b>Ableton</span>
-                <span><b>Gêneros: </b>Hip Hop, Boombap</span>
-            </div>
-            <div class="acoes-box">
-                <button onclick="convidar()">Convidar</button>
-            </div>
-        i
-        <div class="box">
-            <div class="cabecalho-box">
-                <img src="../static/assets/profiles/sonotws.jpg" alt="">
-                <span>Sono TWS</span>
-            </div>
-            <div class="corpo-box">
-                <span><b>Pontos Fortes: </b>Instrumental</span>
-                <span><b>Aplicativo: </b>Ableton</span>
-                <span><b>Gêneros: </b>Hip Hop, Boombap</span>
-            </div>
-            <div class="acoes-box">
-                <button onclick="convidar()">Convidar</button>
-            </div>
-        </div>
-    </div>
-    */
-
     let qtdLinhas = Math.floor(data.length / 3);
+    let cardsSobrar = data.length - (qtdLinhas * 3);
     let contadorLinhas = 0;
     let contadorCards = 0;
     let divProdutores = document.getElementById("produtores");
     let linhaAtual;
+
     for(let i=1; i<=data.length;i++){
-        if(contadorCards == 0 && contadorLinhas <= qtdLinhas){
+        if(contadorCards == 0 && contadorLinhas < qtdLinhas){
             linhaAtual = document.createElement("div");
             linhaAtual.classList.add("linha");
             linhaAtual.classList.add("three-boxes");
+        }  else if(contadorCards == 0 && contadorLinhas == qtdLinhas){
+            if(cardsSobrar == 2){
+                linhaAtual = document.createElement("div");
+                linhaAtual.classList.add("linha");
+                linhaAtual.classList.add("two-boxes");
+            }
         }
 
         let caixa = `
@@ -96,7 +57,7 @@ function organizarCards(data){
         linhaAtual.innerHTML += caixa;
         contadorCards++;
 
-        if(contadorCards == 3){
+        if(contadorCards == 3 || (contadorCards == cardsSobrar && contadorLinhas == qtdLinhas)){
             contadorCards = 0;
             contadorLinhas++;
             divProdutores.appendChild(linhaAtual);
