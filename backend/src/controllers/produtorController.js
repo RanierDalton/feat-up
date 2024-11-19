@@ -161,17 +161,16 @@ const authProdutor = (req, res) => {
         res.status(400).send("Senha Incorreto");
     } else {
         produtorModel.auth(alias, senha)
-        .then(
-            function (resAuth) {
-                console.log(`\nResultados encontrados: ${resAuth.length}`);
-                console.log(`Resultados: ${JSON.stringify(resAuth)}`); // transforma JSON em String
+        .then((resAuth) => {
                 if(resAuth[0].auth == 1){
-                    res.status(200).json({
-                        id: resAuth[0].idProdutor,
-                        email: resAuth[0].email,
-                        senha: resAuth[0].senha,
-                        alias: resAuth[0].alias
-                    });
+                    produtorModel.patchHorarioLogin(alias).then(() =>
+                        res.status(200).json({
+                            id: resAuth[0].idProdutor,
+                            email: resAuth[0].email,
+                            senha: resAuth[0].senha,
+                            alias: resAuth[0].alias
+                        })
+                    );
                 } else {
                     res.status(403).send("Email e/ou senha inválido(s)");
                 }

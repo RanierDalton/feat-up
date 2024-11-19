@@ -54,4 +54,12 @@ const getPerfil = (id) => {
     return db.executar(instrucao);
 };
 
-module.exports = {postProdutor, getProdutor, auth, getProdutoresTotais, getProdutoresAtivos, getAplicativosUsados, getAcharFeats, getPerfil};
+const patchHorarioLogin = (alias) => {
+    const instrucao = `
+        UPDATE produtor SET lastLogin = now() WHERE alias = '${alias}';
+    `;
+
+    return db.executar(instrucao);
+};
+
+module.exports = {postProdutor, getProdutor, auth, getProdutoresTotais, getProdutoresAtivos, getAplicativosUsados, getAcharFeats, getPerfil, patchHorarioLogin};
