@@ -16,6 +16,24 @@ function carregarPerfil(){
     });
 }
 
+function carregarSelfPerfil(){
+    fetch(`/produtores/perfil/${sessionStorage.ID_USUARIO}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+    })
+    .then((resposta) => {
+        resposta.json()
+        .then((data)=>{
+            organizarInformacoes(data);
+        });
+    })
+    .catch((resposta) => {
+        console.log(`#ERRO: ${resposta}`);
+    });
+}
+
 function organizarInformacoes(data){
     title.innerText = `${data.alias} | Perfil`;
 
@@ -63,4 +81,3 @@ function organizarGeneros(generos){
 
     return html;
 }
-
