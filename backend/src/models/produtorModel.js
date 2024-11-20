@@ -55,11 +55,15 @@ const getPerfil = (id) => {
 };
 
 const patchHorarioLogin = (alias) => {
-    const instrucao = `
-        UPDATE produtor SET lastLogin = now() WHERE alias = '${alias}';
-    `;
+    const instrucao = `UPDATE produtor SET lastLogin = now() WHERE alias = '${alias}'`;
 
     return db.executar(instrucao);
 };
 
-module.exports = {postProdutor, getProdutor, auth, getProdutoresTotais, getProdutoresAtivos, getAplicativosUsados, getAcharFeats, getPerfil, patchHorarioLogin};
+const patchPathFotoPerfil = (path, id) => {
+    const instrucao = `UPDATE produtor SET pathFotoPerfil = '${path}' WHERE idProdutor = ${id}`;
+
+    return db.executar(instrucao);
+}
+
+module.exports = {postProdutor, getProdutor, auth, getProdutoresTotais, getProdutoresAtivos, getAplicativosUsados, getAcharFeats, getPerfil, patchHorarioLogin, patchPathFotoPerfil};

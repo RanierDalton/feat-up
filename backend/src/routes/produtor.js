@@ -1,5 +1,6 @@
 const produtorController = require('../controllers/produtorController');
 const express = require("express");
+const upload = require("../middleware/uploadImage")
 const router = express.Router();
 
 router.get("/produtores/achar/:id", (req, res) =>{
@@ -28,6 +29,10 @@ router.post("/auth/produtor", (req, res) =>{
 
 router.post("/produtores/feat/cadastrar", (req, res) =>{
     return produtorController.postFeat(req, res);
+});
+
+router.post('/produtor/uploadFoto/:id', upload.single('image'), (req, res) => {
+    return produtorController.patchPathFotoPerfil(req, res)
 });
 
 router.put("/produtores/feat/atualizar", (req, res) =>{

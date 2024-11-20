@@ -10,7 +10,8 @@
 
     <script src="../static/js/profile.js"></script>
 </head>
-<body onload="validarSessao(), carregarSelfPerfil()">
+<body onload="carregarSelfPerfil()"> 
+    <!-- validarSessao(),  -->
     
     <section class="cabecalho">
         <header>
@@ -43,6 +44,8 @@
                     <div class="conteudo-foto-perfil">
                         <img id="imgPerfil" src="../static/assets/profiles/default.png" alt="">
                         <span id="alias"></span>
+                       
+                        <button class="botao" onclick="editarFoto()">Editar Foto</button>
                     </div>
                 </div>
                 <div class="redes-perfil">
@@ -101,6 +104,20 @@
             </div>
         </div>
     </section>
+    <dialog class="modal" close id="editarFotoModal">
+        <div class="content-modal">
+            <div class="corpo-modal">
+                <form id="uploadForm">
+                    <input type="file" id="image" name="image" accept="image/*">
+                    <button type="submit">Salvar</button>
+                </form>
+            </div>
+            <div class="rodape">
+                <button onclick="editarFotoModal.close()">Cancelar</button>
+            </div>
+        </div>
+    </dialog>
+    <script src="../static/js/uploadImage.js"></script>
     <script src="https://kit.fontawesome.com/d5ea0dfb99.js" crossorigin="anonymous"></script>
     <script src="../static/js/public/perfil.js"></script>
     <script src="../static/js/public/session.js"></script>

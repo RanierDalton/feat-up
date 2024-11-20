@@ -81,3 +81,7 @@ function organizarGeneros(generos){
 
     return html;
 }
+
+function editarFoto(){
+    editarFotoModal.showModal();
+}

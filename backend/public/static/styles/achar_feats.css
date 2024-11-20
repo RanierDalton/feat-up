@@ -479,3 +479,31 @@ nav{
 .genero-perfil{
     margin-right: 3%;
 }
+
+.botao{
+    border: 1px solid var(--button-color);
+
+    background-color: var(--btn-cadastrar-background);
+    border-radius: 10px;
+    font-size: var(--tamanho-texto-nav);
+    color: var(--button-color);
+
+    width: 100px;
+    height: 30px;
+
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.botao:hover{
+    background-color:var(--button-color);
+    color: white;
+}
+
+.modal{
+    margin: auto;
+}
+
+.content-modal{
+    margin: auto;
+}

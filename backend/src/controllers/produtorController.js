@@ -183,7 +183,21 @@ const authProdutor = (req, res) => {
             }
         );
     }
-
 }
 
-module.exports = {getProdutores, postProdutor, authProdutor, getAcharFeats, getPerfil, getConvites,getFeatsAtivos,putStatusFeat,postFeat};
+const patchPathFotoPerfil = (req, res) => {
+    let idProdutor = req.params.id;
+    try {
+        produtorModel.patchPathFotoPerfil(`../static/assets/profiles/${req.file.filename}`,idProdutor)
+        .then((resultado) => res.status(200).json({message: "Upload feito com sucesso!"}))
+        .catch((erro) => {
+            console.log(erro);
+            console.log("\nHouve um erro ao realizar o upload! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
+module.exports = {getProdutores, postProdutor, authProdutor, getAcharFeats, getPerfil, getConvites,getFeatsAtivos,putStatusFeat,postFeat, patchPathFotoPerfil};
