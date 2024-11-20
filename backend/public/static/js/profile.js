@@ -54,7 +54,7 @@ function organizarRedes(redes){
 
     redes.forEach(rede => {
         html += `
-        <a href="${rede.url+rede.user}">
+        <a href="${rede.url+rede.user}" target="_blank" rel="noopener">
             <div class="rede-social">
                 <i class="fa-brands ${rede.class}"></i>
                 <span>${rede.user}</span>
@@ -71,7 +71,7 @@ function organizarGeneros(generos){
 
     generos.forEach(genero => {
         html += `
-        <div class="genero-perfil">
+        <div class="genero-perfil" target="_blank" rel="noopener">
             <div class="caixa-item">
                 <span>${genero}</span>
             </div>

@@ -4,7 +4,7 @@ function validarSessao() {
 
     if (alias == null || email == null) {
         sessionStorage.clear();
-        window.location = "../login.html";
+        window.location = "../site-institucional/login.html";
     }
 }
 
@@ -14,11 +14,11 @@ function validarSessaoAdmin(){
 
     if (alias != "admin" || email != "admin@email.com") {
         sessionStorage.clear();
-        window.location = "../../login.html";
+        window.location = "../site-institucional/login.html";
     }
 }
 
 function limparSessao() {
     sessionStorage.clear();
-    window.location = "../../login.html";
+    window.location = "../site-institucional/login.html";
 }
