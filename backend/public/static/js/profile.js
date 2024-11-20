@@ -18,7 +18,11 @@ function carregarPerfil(){
 
 function organizarInformacoes(data){
     title.innerText = `${data.alias} | Perfil`;
-    imgPerfil.src = `${data.pathFoto}`;
+
+    if(data.pathFoto != null){
+        imgPerfil.src = data.pathFoto;
+    }
+    
     alias.innerText = `${data.alias}`;
     perfil.innerText = `${data.descricao}`;
     pontoForte.innerText = `${data.pontoForte}`;

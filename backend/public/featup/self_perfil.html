@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../static/styles/achar_feats.css">
+
+    <title id="title">Perfil</title>
+
+    <script src="../static/js/profile.js"></script>
+</head>
+<body> <!--onload="validarSessao(), carregarPerfil()"> -->
+    
+    <section class="cabecalho">
+        <header>
+            <div class="conteudo">
+                <div class="titulo">
+                    <span>FEAT UP</span>
+                </div>
+                <nav>
+                    <ul class="navbar">
+                        <li><a href="./achar_feats.html">Achar Feats</a></li>
+                        <li><a href="./convites.html">Convites</a></li>
+                        <li><a href="./feat_ups.html">Feats Ups</a></li>
+                    </ul>
+                </nav>
+                <div class="profile">
+                    <button onclick="abrirPerfil()">
+                        <img src="../static/assets/default.png" alt="Imagem de perfil do seu usuário">
+                    </button>
+                    <div id="dropdownPerfil" class="dropdown-content">
+                        <a href="#" onclick="limparSessao()" class="sair">Sair</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </section>
+    <section class="corpo-perfil">
+        <div class="divisoes-perfil">
+            <div class="column-esquerda-perfil">
+                <div class="foto-perfil">
+                    <div class="conteudo-foto-perfil">
+                        <img id="imgPerfil" src="../static/assets/profiles/default.png" alt="">
+                        <span id="alias"></span>
+                    </div>
+                </div>
+                <div class="redes-perfil">
+                    <div class="lista-redes-perfil" id="divRedes">
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="column-direita-perfil">
+                <div class="conteudo-direita-perfil">
+                    <div class="organizar-infos">
+                        <div class="descricao-perfil margin-bottom">
+                            <div class="titulo-perfil">
+                                <span>Sobre</span>
+                            </div>
+                            <div class="txt-descricao-perfil">
+                                <span id="perfil"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="infos-unicas-perfil margin-bottom">
+                            <div class="ponto-forte-perfil">
+                                <div class="titulo-perfil">
+                                    <div>
+                                        <span>Ponto Forte</span>
+                                    </div>
+                                </div>
+                                <div class="txt-descricao-perfil margin-top">
+                                    <div class="caixa-item">
+                                        <span id="pontoForte"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="aplicativo-perfil">
+                                <div class="titulo-perfil">
+                                    <span>Aplicativo</span>
+                                </div>
+                                <div class="txt-descricao-perfil margin-top">
+                                    <div class="caixa-item">
+                                        <span id="appUtiliza"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="generos-perfil">
+                            <div class="titulo-perfil">
+                                <span>Gênero</span>
+                            </div>
+                            <div id="divGeneros" class="lista-generos-perfil margin-top">
+                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://kit.fontawesome.com/d5ea0dfb99.js" crossorigin="anonymous"></script>
+    <script src="../static/js/public/perfil.js"></script>
+    <script src="../static/js/public/session.js"></script>
+</body>
+</html>

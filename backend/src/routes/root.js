@@ -1,8 +1,8 @@
 var express = require("express");
 var router = express.Router();
 
-router.get("/", function (req, res) {
-    res.render("html/index");
+router.get("/", (req, res) => {
+    res.render("index.html", { root: __dirname });
 });
 
 module.exports = router;
