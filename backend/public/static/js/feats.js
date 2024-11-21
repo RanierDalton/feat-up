@@ -17,11 +17,8 @@ function carregarProdutoresFeats(){
 }
 
 function organizarCards(data){
-    console.log(data);
-
     let qtdLinhas = Math.floor(data.length / 3);
     let cardsSobrar = data.length - (qtdLinhas * 3);
-    console.log(cardsSobrar);
     let contadorLinhas = 0;
     let contadorCards = 0;
     let divProdutores = document.getElementById("produtores");
@@ -37,7 +34,6 @@ function organizarCards(data){
             linhaAtual.classList.add("linha");
 
             if(cardsSobrar == 2){
-                console.log("entrei");
                 linhaAtual.classList.add("two-boxes");
             }
         }
