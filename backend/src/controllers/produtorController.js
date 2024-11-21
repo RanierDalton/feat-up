@@ -6,6 +6,10 @@ const featModel = require('../models/featModel');
 const cadastroValidation = require('../validation/cadastroValidation');
 const filterMiddleware = require('../middleware/filter');
 
+const postFiltrarAcharFeats = (req, res) =>{
+    // TODO
+};
+
 const putStatusFeat = (req, res) => {
     const idSolicita = req.body.idSolicita;
     const idAceita = req.body.idAceita;
@@ -54,6 +58,9 @@ const getPerfil = (req, res) => {
 
     produtorModel.getPerfil(id)
     .then((data) =>{
+
+        // TODO Fazer com que tenha filtros de pessoas que o jogador já tem contato ele mesmo não sejam enviados ao front
+        // e ver se tem pessoas (pelo mesmo 1), de acordo com os dados do cara, caso não tenha, pegue uma lista com 12 de ordem alfabética
         return res.status(200).json(filterMiddleware.filtrarPerfilInfo(data));
     })
     .catch((err) => res.status(500).json(err.sqlMessage)); 
@@ -93,8 +100,10 @@ const postProdutor = (req, res) =>{
     let redes = req.body.redes;
     let generos = req.body.generos;
 
-    const resValidation = cadastroValidation.validarCadastro(nome, alias, email, descricao, redes, generos, aplicativo, pontoForte, senha);
+    console.log(req.body);
 
+    const resValidation = cadastroValidation.validarCadastro(nome, email, alias, descricao, redes, generos, aplicativo, pontoForte, senha);
+    console.log(resValidation)
     if(!resValidation.status){
         return res.status(400).json(resValidation);
     }
@@ -122,7 +131,7 @@ const postProdutor = (req, res) =>{
                 let valuesGeneros = "";
         
                 for(let i = 0; i < generos.length; i++){
-                    valuesGeneros += `(${idProdutor}, ${generos[i]})${i != (redes.length -1) ? ",":""}`;
+                    valuesGeneros += `(${idProdutor}, ${generos[i]})${i == (generos.length -1) ? "":","}`;
                 }
             
                 console.log(valuesGeneros);

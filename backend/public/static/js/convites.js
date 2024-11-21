@@ -30,9 +30,9 @@ function organizarCards(data){
             linhaAtual.classList.add("linha");
             linhaAtual.classList.add("three-boxes");
         }  else if(contadorCards == 0 && contadorLinhas == qtdLinhas){
+            linhaAtual = document.createElement("div");
+            linhaAtual.classList.add("linha");
             if(cardsSobrar == 2){
-                linhaAtual = document.createElement("div");
-                linhaAtual.classList.add("linha");
                 linhaAtual.classList.add("two-boxes");
             }
         }
@@ -66,7 +66,21 @@ function organizarCards(data){
     }
 }
 
-
 function atualizarStatusFeat(idAceita, status){
-    // TODO
+    fetch(`/produtores/feat/atualizar`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify({idSolicita: sessionStorage.ID_USUARIO, idAceita: idAceita, status: status})
+    })
+    .then((resposta) => {
+        resposta.json()
+        .then((data)=>{
+            console.log(data);
+        });
+    })
+    .catch((resposta) => {
+        console.log(`#ERRO: ${resposta}`);
+    });
 }

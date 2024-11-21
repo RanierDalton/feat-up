@@ -50,11 +50,16 @@ function validarNome(nome){
 }
 
 function validarEmail(email){
+    console.log(email);
     var tamEmail = email.length;
     var isEnd = email.endsWith('.com') || email.endsWith('.br') || email.endsWith('.gov');
     var indiceEnd = email.indexOf('.com') || email.indexOf('.br') || email.indexOf('.gov') ;
     var indiceArroba = email.indexOf('@'); 
     var isArroba = email.includes('@') && indiceArroba < indiceEnd;
+
+    console.log(isArroba);
+    console.log(tamEmail);
+    console.log(isEnd);
 
     if((tamEmail < 8 || tamEmail > 45) && !isEnd && !isArroba || email == ''){
         return false;

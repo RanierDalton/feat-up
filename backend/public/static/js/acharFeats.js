@@ -30,9 +30,10 @@ function organizarCards(data){
             linhaAtual.classList.add("linha");
             linhaAtual.classList.add("three-boxes");
         }  else if(contadorCards == 0 && contadorLinhas == qtdLinhas){
+            linhaAtual = document.createElement("div");
+            linhaAtual.classList.add("linha");
             if(cardsSobrar == 2){
-                linhaAtual = document.createElement("div");
-                linhaAtual.classList.add("linha");
+                
                 linhaAtual.classList.add("two-boxes");
             }
         }
@@ -56,7 +57,7 @@ function organizarCards(data){
 
         linhaAtual.innerHTML += caixa;
         contadorCards++;
-
+        
         if(contadorCards == 3 || (contadorCards == cardsSobrar && contadorLinhas == qtdLinhas)){
             contadorCards = 0;
             contadorLinhas++;
@@ -66,5 +67,20 @@ function organizarCards(data){
 }
 
 function convidarProdutor(idAceita){
-    // TODO
+    fetch(`/produtores/feat/cadastrar`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify({idSolicita: sessionStorage.ID_USUARIO, idAceita: idAceita})
+    })
+    .then((resposta) => {
+        resposta.json()
+        .then((data)=>{
+            console.log(data);
+        });
+    })
+    .catch((resposta) => {
+        console.log(`#ERRO: ${resposta}`);
+    });
 }

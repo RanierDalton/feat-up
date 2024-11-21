@@ -1,18 +1,17 @@
 function validarSessao() {
-    var alias = sessionStorage.APELIDO_USUARIO;
-    var email = sessionStorage.EMAIL_USUARIO;
+    let alias = sessionStorage.APELIDO_USUARIO;
+    let id = sessionStorage.ID_USUARIO;
 
-    if (alias == null || email == null) {
+    if (alias == null || id == null) {
         sessionStorage.clear();
         window.location = "../site-institucional/login.html";
     }
 }
 
 function validarSessaoAdmin(){
-    var alias = sessionStorage.APELIDO_USUARIO;
-    var email = sessionStorage.EMAIL_USUARIO;
+    let alias = sessionStorage.APELIDO_USUARIO;
 
-    if (alias != "admin" || email != "admin@email.com") {
+    if (alias != "admin") {
         sessionStorage.clear();
         window.location = "../site-institucional/login.html";
     }

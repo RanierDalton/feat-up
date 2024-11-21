@@ -35,8 +35,6 @@ function entrar(){
                 console.log(json);
                 console.log(JSON.stringify(json));
 
-                // TODO - GUARDAR TODAS AS INFORMAÇÕES DO USER NO SESSION
-                sessionStorage.EMAIL_USUARIO = json.email;
                 sessionStorage.APELIDO_USUARIO = json.alias;
                 sessionStorage.ID_USUARIO = json.id;
 
