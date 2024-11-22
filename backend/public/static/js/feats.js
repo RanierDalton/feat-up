@@ -1,4 +1,5 @@
 function carregarProdutoresFeats(){
+    loading();
     fetch(`/produtores/feats/${sessionStorage.ID_USUARIO}`, {
         method: "GET",
         headers: {
@@ -64,6 +65,7 @@ function organizarCards(data){
             divProdutores.appendChild(linhaAtual);
         }
     }
+    finalizarLoading();
 }
 
 function abrirPerfilProdutor(idProdutor){

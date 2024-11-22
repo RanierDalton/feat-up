@@ -1,17 +1,8 @@
-// TODO
-
+let divLoad = document.getElementById("loadingModal");
 function loading() {
-    var divAguardar = document.getElementById("");
-    divAguardar.style.display = "flex";
+    divLoad.showModal();
 }
 
 function finalizarLoading(texto) {
-    var divAguardar = document.getElementById("");
-    divAguardar.style.display = "none";
-
-    var divErrosLogin = document.getElementById("");
-    if (texto) {
-        divErrosLogin.style.display = "flex";
-        divErrosLogin.innerHTML = texto;
-    }
+    divLoad.close();
 }

@@ -1,4 +1,5 @@
 function carregarProdutoresConvite(){
+    loading();
     fetch(`/produtores/convites/${sessionStorage.ID_USUARIO}`, {
         method: "GET",
         headers: {
@@ -8,6 +9,7 @@ function carregarProdutoresConvite(){
     .then((resposta) => {
         resposta.json()
         .then((data)=>{
+            
             organizarCards(data);
         });
     })
@@ -64,6 +66,8 @@ function organizarCards(data){
             divProdutores.appendChild(linhaAtual);
         }
     }
+
+    finalizarLoading();
 }
 
 function atualizarStatusFeat(idAceita, status){

@@ -1,4 +1,5 @@
 function carregarPerfil(){
+    loading();
     fetch(`/produtores/perfil/${sessionStorage.ID_PRODUTOR_PERFIL}`, {
         method: "GET",
         headers: {
@@ -17,6 +18,7 @@ function carregarPerfil(){
 }
 
 function carregarSelfPerfil(){
+    loading();
     fetch(`/produtores/perfil/${sessionStorage.ID_USUARIO}`, {
         method: "GET",
         headers: {
@@ -47,6 +49,8 @@ function organizarInformacoes(data){
     appUtiliza.innerText = `${data.aplicativo}`;
     divGeneros.innerHTML = organizarGeneros(data.generos);
     divRedes.innerHTML = organizarRedes(data.redes);
+
+    finalizarLoading();
 }
 
 function organizarRedes(redes){

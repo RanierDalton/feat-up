@@ -1,4 +1,5 @@
 function carregarProdutoresAchar(){
+    loading();
     fetch(`/produtores/achar/${sessionStorage.ID_USUARIO}`, {
         method: "GET",
         headers: {
@@ -64,6 +65,8 @@ function organizarCards(data){
             divProdutores.appendChild(linhaAtual);
         }
     }
+
+    finalizarLoading();
 }
 
 function convidarProdutor(idAceita){
