@@ -35,7 +35,7 @@ const getAplicativosUsados = () => {
 
 const getAcharFeats = (condicoesGeneros, idProdutor) => {
     // SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero WHERE
-    const instrucao = `SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero JOIN feat ON fkProdutorSolicita = idProdutor WHERE ${condicoesGeneros} AND idProdutor <> ${idProdutor} AND (fkProdutorAceita <> 1 AND fkProdutorSolicita <> 1)`;
+    const instrucao = `SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero JOIN feat ON fkProdutorSolicita = idProdutor WHERE ${condicoesGeneros} AND idProdutor <> ${idProdutor} AND (fkProdutorAceita <> ${idProdutor} AND fkProdutorSolicita <> ${idProdutor})`;
     console.log(instrucao);
     return db.executar(instrucao);
 };
