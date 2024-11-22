@@ -70,13 +70,13 @@ function organizarCards(data){
     finalizarLoading();
 }
 
-function atualizarStatusFeat(idAceita, status){
+function atualizarStatusFeat(idSolicita, status){
     fetch(`/produtores/feat/atualizar`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body:JSON.stringify({idSolicita: sessionStorage.ID_USUARIO, idAceita: idAceita, status: status})
+        body:JSON.stringify({idSolicita: idSolicita, idAceita: sessionStorage.ID_USUARIO, status: status})
     })
     .then((resposta) => {
         resposta.json()

@@ -58,9 +58,6 @@ const getPerfil = (req, res) => {
 
     produtorModel.getPerfil(id)
     .then((data) =>{
-
-        // TODO Fazer com que tenha filtros de pessoas que o jogador já tem contato ele mesmo não sejam enviados ao front
-        // e ver se tem pessoas (pelo mesmo 1), de acordo com os dados do cara, caso não tenha, pegue uma lista com 12 de ordem alfabética
         return res.status(200).json(filterMiddleware.filtrarPerfilInfo(data));
     })
     .catch((err) => res.status(500).json(err.sqlMessage)); 
@@ -81,7 +78,7 @@ const getAcharFeats = (req, res) => {
     .then((resultado) => {
         let condicoesGeneros = filterMiddleware.filtrarGenerosProdutor(resultado);
 
-        produtorModel.getAcharFeats(condicoesGeneros)
+        produtorModel.getAcharFeats(condicoesGeneros, idProdutor)
         .then((resultado) => res.status(200).json(filterMiddleware.filtrarGenerosCard(resultado)))
         .catch((err) => res.status(500).json(err.sqlMessage))
     })

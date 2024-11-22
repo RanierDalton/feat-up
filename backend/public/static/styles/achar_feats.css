@@ -8,6 +8,12 @@ a{
     text-decoration: none;
 }
 
+#loadingModal{
+    margin: auto;
+    background: none;
+    border: none;
+}
+
 /* CABEÇALHO */
 .cabecalho{
     width: 100%;

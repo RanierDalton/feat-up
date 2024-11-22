@@ -108,7 +108,7 @@ function charts() {
 }
 
 function obterDadosGrafico() {
-
+  // TODO botar pra funfar
   if (proximaAtualizacao != undefined) {
       clearTimeout(proximaAtualizacao);
   }

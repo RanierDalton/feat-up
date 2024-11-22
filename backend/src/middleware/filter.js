@@ -20,10 +20,10 @@ const filtrarPodio = (dados) => {
 };
 
 const filtrarGenerosProdutor = (generos) => {
-    let resposta = "";
+    let resposta = "g.nome IN (";
 
     for(let i=0; i<generos.length; i++){
-        resposta += `g.nome = '${generos[i].nome}' ${i != generos.length-1? 'OR ': ''} `;
+        resposta += `'${generos[i].nome}'${i != generos.length-1? ',': ')'} `;
     }
 
     return resposta;
