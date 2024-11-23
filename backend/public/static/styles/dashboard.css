@@ -4,6 +4,13 @@ body{
     background-color: var(--adm-bg-color);
 }
 
+#loadingModal{
+    margin: auto;
+    background: none;
+    border: none !important;
+    box-shadow: none;
+    outline: none;
+}
 
 /* CABEÇALHO */
 .cabecalho{
@@ -85,7 +92,7 @@ nav{
 
 .profile button img{
     width: 45px;
-    border-radius:20px;
+    border-radius:50%;
 }
 
 .profile button:hover img{

@@ -8,7 +8,7 @@
 
     <script src="../static/js/public/session.js"></script>
 </head>
-<body onload="validarSessaoAdmin(), charts()">
+<body onload="validarSessaoAdmin(), obterDadosGrafico()">
     <section class="cabecalho">
         <header>
             <div class="conteudo">
@@ -39,15 +39,15 @@
                 <div class="kpis-dash">
                     <div class="kpi">
                         <span class="titulo">Usuários Totais</span>
-                        <span class="dado">2045</span>
+                        <span class="dado" id="usuariosTotal"></span>
                     </div>
                     <div class="kpi">
                         <span class="titulo">Usuários Ativos</span>
-                        <span class="dado">2003</span>
+                        <span class="dado" id="usuariosAtivos"></span>
                     </div>
                     <div class="kpi">
                         <span class="titulo">Feats Totais</span>
-                        <span class="dado">1209</span>
+                        <span class="dado" id="featsTotais"></span>
                     </div>
                 </div>
             </div>

@@ -100,7 +100,7 @@ nav{
 
 .profile button img{
     width: 45px;
-    border-radius:20px;
+    border-radius:50%;
 }
 
 .profile button:hover img{
