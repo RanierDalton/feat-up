@@ -9,6 +9,7 @@ function carregarProdutoresAchar(){
     .then((resposta) => {
         resposta.json()
         .then((data)=>{
+            console.log(data);
             organizarCards(data);
         });
     })
@@ -42,7 +43,7 @@ function organizarCards(data){
         let caixa = `
             <div class="box">
                 <div class="cabecalho-box">
-                    <img src="../static/assets/profiles/default.png" alt="Foto de perfil do Produtor">
+                    <img src="${data[i-1].foto}" alt="Foto de perfil do Produtor">
                     <span>${data[i-1].alias}</span>
                 </div>
                 <div class="corpo-box">
@@ -81,6 +82,7 @@ function convidarProdutor(idAceita){
         resposta.json()
         .then((data)=>{
             console.log(data);
+            location.replace(location.href);
         });
     })
     .catch((resposta) => {

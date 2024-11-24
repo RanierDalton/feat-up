@@ -35,7 +35,21 @@ const getAplicativosUsados = () => {
 
 const getAcharFeats = (condicoesGeneros, idProdutor) => {
     // SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero WHERE
-    const instrucao = `SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero JOIN feat ON fkProdutorSolicita = idProdutor WHERE ${condicoesGeneros} AND idProdutor <> ${idProdutor} AND (fkProdutorAceita <> ${idProdutor} AND fkProdutorSolicita <> ${idProdutor})`;
+    const instrucao = `SELECT idProdutor, alias, aplicativo, pontoForte, pathFotoPerfil as foto, g.nome as genero FROM produtor 
+JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor 
+JOIN genero as g ON gp.fkGenero = g.idGenero 
+JOIN feat ON fkProdutorSolicita = idProdutor 
+WHERE ${condicoesGeneros} AND idProdutor <> ${idProdutor} AND (
+	fkProdutorAceita NOT IN (
+		SELECT idProdutor FROM produtor 
+        JOIN feat ON idProdutor = fkProdutorsOLICITA
+		WHERE fkProdutorAceita = ${idProdutor}
+	) 
+    AND fkProdutorSolicita NOT IN (
+		SELECT idProdutor FROM produtor 
+        JOIN feat ON idProdutor = fkProdutorAceita
+		WHERE fkProdutorSolicita = ${idProdutor}
+	));`;
     console.log(instrucao);
     return db.executar(instrucao);
 };

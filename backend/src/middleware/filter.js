@@ -43,6 +43,7 @@ const filtrarGenerosCard = (dados) => {
                 alias: dados[i].alias,
                 aplicativo: dados[i].aplicativo,
                 pontoForte: dados[i].pontoForte,
+                foto: dados[i].foto,
                 genero: [dados[i].genero]
             };
 
