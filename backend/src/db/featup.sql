@@ -16,9 +16,6 @@ CREATE TABLE produtor (
     CONSTRAINT chkPontoForte CHECK(pontoForte IN ('Instrumental','Beat','Mix','Master'))
 );
 
-SELECT * from produtor;
-DELETE FROM produtor WHERE idProdutor = 34;
-
 CREATE TABLE feat (
 	idFeat INT PRIMARY KEY AUTO_INCREMENT,
     dtFeat DATETIME NOT NULL DEFAULT now(),
@@ -69,15 +66,15 @@ INSERT INTO produtor (nome, alias, senha, email, descricao, pontoForte, aplicati
 ('Pedro Rocha', 'PRock', 'senha888', 'pedro.rocha@example.com', 'Especialista em beats de trap.', 'Beat', 'Ableton Live', DEFAULT),
 ('Carla Martins', 'CarlaM', 'senha777', 'carla.martins@example.com', 'Produção de beats para hip-hop.', 'Beat', 'FL Studio', DEFAULT),
 ('Fábio Lima', 'FabSound', 'senha222', 'fabio.lima@example.com', 'Engenheiro de som para pop.', 'Master', 'Pro Tools', DEFAULT),
-('André Mafra','China Mafra','Urubu#100','email', 'Sou André Mafra, mais conhecido como “China”, baixista, produtor e sócio fundador do selo/gravadora UCLÃ.', 'Instrumental', 'Ableton Live', '../static/assets/profiles/chinamatra.jpg'),
+('André Mafra','China Mafra','Urubu#100','email', 'Sou André Mafra, mais conhecido como “China”, baixista, produtor e sócio fundador do selo/gravadora UCLÃ.', 'Instrumental', 'Ableton Live', '../static/assets/profiles/chinamafra.jpg'),
 ('Rafael', '6ee','Urubu#100','6ee@gmail.com','Sou 6ee, produtor musical focado em trap e rap, apaixonado por criar beats que combinam 808s impactantes, melodias cativantes e percussões dinâmicas. Busco sempre inovar, misturando influências para entregar sons autênticos e de alta qualidade. Minha missão é ajudar artistas a traduzirem suas ideias em músicas que conectem e inspirem o público.', 'Beat', 'FL Studio', '../static/assets/profiles/6ee.jpg'),
 ('admin', 'admin','Urubu#100','admin@email.com','Usuário Admin', 'Master', 'FL Studio', '../static/assets/profiles/admin.jpg'),
 ('Ajaxx', 'Ajaxx','Urubu#100','ajaxx@gmail.com','Sou Ajaxx, produtor musical focado em trap e rap, apaixonado por criar beats que combinam 808s impactantes, melodias cativantes e percussões dinâmicas. Busco sempre inovar, misturando influências para entregar sons autênticos e de alta qualidade. Minha missão é ajudar artistas a traduzirem suas ideias em músicas que conectem e inspirem o público.', 'Beat', 'Pro Tools', '../static/assets/profiles/ajaxx.jpg'),
 ('Allan Portugal', 'Alllan Portuga','Urubu#100','allan@gmail.com','Sou Allan Portuga, produtor musical dedicado ao rap nacional, com trabalhos marcantes ao lado dos Racionais MC’s e outros grandes artistas. Minha paixão está em criar beats autênticos, explorando samplers e melodias únicas para dar vida a músicas que conectam e inspiram.', 'Instrumental', 'FL Studio', '../static/assets/profiles/allanportuga.jpeg'),
 ('Bighead', 'Bighead','Urubu#100','bighead@gmail.com','Sou Bighead, produtor musical focado no trap, conhecido por criar beats energéticos e diretos, marcados por melodias simples e impacto cru. Já trabalhei com artistas como Lil Pump e Smokepurpp, ajudando a moldar o som do trap da era SoundCloud.', 'Beat', 'FL Studio', '../static/assets/profiles/bighead.jpg'),
 ('Celo', 'CeloBeats', 'Urubu#100', 'celo.beats@example.com', 'Produtor focado em criar beats autênticos para o trap, misturando elementos melódicos e pesados.', 'Beat', 'FL Studio', '../static/assets/profiles/celo.jpg'),
-('Coyote Beatz', 'Coyote Beatz', 'Urubu#100', 'coyotebatz@example.com', 'Produtor de trap e hip-hop com estilo único, conhecido por beats pesados e inovadores.', 'Beat', 'FL Studio', '../static/assets/profiles/coyotebeatz.jpg'),
-('Dallas', 'Dallas', 'Urubu#100', 'dallas.beats@example.com', 'Especialista em beats melódicos para trap, com foco em atmosferas imersivas e sons intensos.', 'Beat', 'Ableton Live', '../static/assets/profiles/dallas.jpg'),
+('Coyote Beatz', 'Coyote Beatz', 'Urubu#100', 'coyotebatz@example.com', 'Produtor de trap e hip-hop com estilo único, conhecido por beats pesados e inovadores.', 'Beat', 'FL Studio', '../static/assets/profiles/coyotebeatz.jpeg'),
+('Dallas', 'Dallas', 'Urubu#100', 'dallas.beats@example.com', 'Especialista em beats melódicos para trap, com foco em atmosferas imersivas e sons intensos.', 'Beat', 'Ableton Live', '../static/assets/profiles/dallas.jpeg'),
 ('DJ Khaled', 'DJ Khaled', 'Urubu#100', 'djkhaled@example.com', 'Sou DJ Khaled, um dos maiores produtores e executivos da música. Com uma carreira marcada por hits colaborativos, trago energia, visibilidade e sucesso para o rap e hip-hop, sempre buscando juntar os melhores talentos do jogo.', 'Master', 'FL Studio', '../static/assets/profiles/djkhaled.jpg'),
 ('DJ Kore', 'DJ Kore', 'Urubu#100', 'djkore@example.com', 'Produtor com uma longa trajetória na cena do rap e trap, com beats e remixes pesados e marcantes.', 'Mix', 'Pro Tools', '../static/assets/profiles/djkore.jpg'),
 ('DJ Mustard', 'DJ Mustard', 'Urubu#100', 'djmustard@example.com', 'Sou DJ Mustard, produtor e DJ reconhecido por definir o som do West Coast rap. Com batidas pesadas e o estilo "Mustard on the beat", ajudo a criar músicas que ficam na cabeça e fazem a festa, com grandes sucessos ao lado de artistas de peso.', 'Beat', 'FL Studio', '../static/assets/profiles/djmustard.jpg'),
@@ -101,7 +98,7 @@ INSERT INTO produtor (nome, alias, senha, email, descricao, pontoForte, aplicati
 ('Pedro Lotto', 'Pedro Lotto', 'Urubu#100', 'pedrolotto@example.com', 'Produtor de trap e rap, sempre criando beats energéticos com influências modernas e inovadoras, trazendo frescor à cena musical.', 'Master', 'Pro Tools', '../static/assets/profiles/pedrolotto.jpg'),
 ('Pedro Qualy', 'Pedro Qualy', 'Urubu#100', 'pedroqualy@example.com', 'Sou PedroQualy, produtor musical de trap e hip-hop, criando beats que misturam sonoridades eletrônicas com o peso do rap moderno.', 'Beat', 'Ableton Live', '../static/assets/profiles/pedroqualy.jpg'),
 ('RayNier', 'RayNier', 'Urubu#100', 'raynier@example.com', 'Eu sou Ranier, tenho 18 anos apaixonado por música. Os gêneros que mais me fascinaram são trap e a eletrônica. Com um computador e fones de ouvido, começo a transformar minhas inspirações musicais em realidade.', 'Mix', 'FL Studio', '../static/assets/profiles/raynier.jpg'),
-('Retroboy', 'Retroboy', 'Urubu#100', 'retroboy@example.com', 'Sou RetroBoy, produtor com foco em trap e beats experimentais, trazendo um estilo único que mistura influências do passado com o som moderno. Meu objetivo é criar atmosferas sonoras envolventes que conectam com os ouvintes de maneira autêntica.', 'Beat', 'Logic Pro', '../static/assets/profiles/retroboy.jpeg'),
+('Retroboy', 'Retroboy', 'Urubu#100', 'retroboy@example.com', 'Sou RetroBoy, produtor com foco em trap e beats experimentais, trazendo um estilo único que mistura influências do passado com o som moderno. Meu objetivo é criar atmosferas sonoras envolventes que conectam com os ouvintes de maneira autêntica.', 'Beat', 'Logic Pro', '../static/assets/profiles/retroboy.jpg'),
 ('Rincon Sapiencia', 'Rincon Sapiência', 'Urubu#100', 'rinconsapiencia@example.com', 'Sou RinconSapiencia, produtor e rapper, trazendo beats que mesclam elementos tradicionais e contemporâneos, com um toque único de autenticidade.', 'Instrumental', 'Pro Tools', '../static/assets/profiles/rinconsapiencia.jpg'),
 ('Sonny Digital', 'Sonny Digital', 'Urubu#100', 'sonnydigital@example.com', 'Sou Sonny Digital, produtor e beatmaker. Com um estilo único e sonoridades cativantes, crio beats que marcam a diferença no trap e rap. Fui pioneiro na cena do SoundCloud e continuo a criar músicas que moldam o futuro do gênero.', 'Beat', 'FL Studio', '../static/assets/profiles/sonnydigital.png'),
 ('Sono TWS', 'Sono TWS', 'Urubu#100', 'sonotws@example.com', 'Sou Sono TWS, produtor de Boom Bap focado em batidas pesadas e melodiosas. Com uma vibe única, crio músicas que misturam elementos melódicos e energéticos, ajudando a contar histórias através do som e sempre inovando no processo criativo.', 'Instrumental', 'Ableton Live', '../static/assets/profiles/sonotws.jpg'),
@@ -470,6 +467,23 @@ INSERT INTO feat (dtFeat, statusFeat, fkProdutorSolicita, fkProdutorAceita) VALU
 ('2024-04-30 22:00:00', 0, 30, 31),
 ('2024-05-01 10:00:00', 0, 32, 33);
 
+SELECT * FROM feat WHERE fkProdutorSolicita = 42;
+
+SELECT idProdutor, alias, aplicativo, pontoForte, pathFotoPerfil as foto, g.nome as genero FROM produtor 
+JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor 
+JOIN genero as g ON gp.fkGenero = g.idGenero 
+JOIN feat ON fkProdutorSolicita = idProdutor 
+WHERE idProdutor <> 42 AND (
+	fkProdutorAceita NOT IN (
+		SELECT idProdutor FROM produtor 
+        JOIN feat ON idProdutor = fkProdutorsOLICITA
+		WHERE fkProdutorAceita = 42
+	) 
+    AND fkProdutorSolicita NOT IN (
+		SELECT idProdutor FROM produtor 
+        JOIN feat ON idProdutor = fkProdutorAceita
+		WHERE fkProdutorSolicita = 42
+	));
 
 -- ----------------------------
 -- SRCIPTS DO PRÓPRIO SISTEMA

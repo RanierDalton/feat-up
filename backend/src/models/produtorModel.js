@@ -42,7 +42,7 @@ JOIN feat ON fkProdutorSolicita = idProdutor
 WHERE ${condicoesGeneros} AND idProdutor <> ${idProdutor} AND (
 	fkProdutorAceita NOT IN (
 		SELECT idProdutor FROM produtor 
-        JOIN feat ON idProdutor = fkProdutorsOLICITA
+        JOIN feat ON idProdutor = fkProdutorSolicita
 		WHERE fkProdutorAceita = ${idProdutor}
 	) 
     AND fkProdutorSolicita NOT IN (
