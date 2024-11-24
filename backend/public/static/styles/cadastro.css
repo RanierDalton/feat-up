@@ -31,6 +31,14 @@ section{
     align-items: center;
 }
 
+#loadingModal{
+    margin: auto;
+    background: none;
+    border: none !important;
+    box-shadow: none;
+    outline: none;
+}
+
 .box{
     background-color: white;
     display: flex;

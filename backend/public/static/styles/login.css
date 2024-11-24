@@ -30,6 +30,14 @@ section{
     align-items: center;
 }
 
+#loadingModal{
+    margin: auto;
+    background: none;
+    border: none !important;
+    box-shadow: none;
+    outline: none;
+}
+
 .box{
     border-radius: 10px;
     background-color: white;

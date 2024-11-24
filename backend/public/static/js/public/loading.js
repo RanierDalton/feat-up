@@ -3,6 +3,6 @@ function loading() {
     divLoad.showModal();
 }
 
-function finalizarLoading(texto) {
+function finalizarLoading() {
     divLoad.close();
 }

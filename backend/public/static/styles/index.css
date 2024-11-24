@@ -19,6 +19,14 @@ button{
     cursor: pointer;
 }
 
+#loadingModal{
+    margin: auto;
+    background: none;
+    border: none !important;
+    box-shadow: none;
+    outline: none;
+}
+
 /* HOME */
 .landing{
     width: 100%;

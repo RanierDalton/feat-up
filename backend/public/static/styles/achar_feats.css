@@ -11,7 +11,9 @@ a{
 #loadingModal{
     margin: auto;
     background: none;
-    border: none;
+    border: none !important;
+    box-shadow: none;
+    outline: none;
 }
 
 /* CABEÇALHO */

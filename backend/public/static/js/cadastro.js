@@ -42,6 +42,7 @@ function carregarRedes(){
         templateInputRedes = iptRede;
     }
 }
+
 carregarGeneros();
 carregarRedes();
 
@@ -78,7 +79,6 @@ let senha = '';
 let confirmar = '';
 
 const divForm = document.getElementById("forms");
-const modal = document.getElementById('popUp');
 
 function mudarPagina(numeroPagina, content){
     if(verificarInputs(telAtual)){
@@ -151,8 +151,7 @@ function verificarInputs(numeroPagina){
         }
         
         if(apelido == ""){
-            modal.showModal();
-            msgError.innerText ="Por favor, preencha o valor do apelido";
+            errorModal("Por favor, preencha o valor do apelido");
             return false;
         }
 
@@ -161,8 +160,7 @@ function verificarInputs(numeroPagina){
         }
 
         if(descricao == ""){
-            modal.showModal();
-            msgError.innerText ="Por favor, preencha o campo descrição";
+            errorModal("Por favor, preencha o campo descrição");
             return false;
         }
 
@@ -180,26 +178,22 @@ function verificarInputs(numeroPagina){
 
         if(!validarRedes('redesSociais')){
             console.log('Entrei no 1º');
-            modal.showModal();
-            msgError.innerText ="Por favor, preencha os campos das redes sociais";
+            errorModal("Por favor, preencha os campos das redes sociais");
             return false;
         }
 
         if(!validarGeneros('iptGeneros')){
-            modal.showModal();
-            msgError.innerText ="Por favor, preencha os campos dos Generos";
+            errorModal("Por favor, preencha os campos dos Generos");
             return false;
         }
 
         if(aplicativo == ""){
-            modal.showModal();
-            msgError.innerText ="Por favor, preencha o campo de aplicativo";
+            errorModal("Por favor, preencha o campo de aplicativo");
             return false;
         }
 
         if(pontoForte == ""){
-            modal.showModal();
-            msgError.innerText ="Por favor, preencha o campo de ponto forte";
+            errorModal("Por favor, preencha o campo de ponto forte");
             return false;
         }
 
@@ -214,20 +208,17 @@ function verificarInputs(numeroPagina){
         confirmar = confirmar.trim();
 
         if(!validarSenha(iptSenha)){
-            modal.showModal();
-            msgError.innerText ="O valor de ambas as senhas não batem";
+            errorModal("O valor de ambas as senhas não batem");
             return false;
         }
 
         if(senha != confirmar){
-            modal.showModal();
-            msgError.innerText ="O valor de ambas as senhas não batem";
+            errorModal("O valor de ambas as senhas não batem");
             return false;
         }
 
         if(!iptConfirmarTermos.checked){
-            modal.showModal();
-            msgError.innerText ="Concorde com nossos termos e licenças para se cadastrar";
+            errorModal("Concorde com nossos termos e licenças para se cadastrar");
             return false;
         }
 
@@ -240,8 +231,7 @@ function verificarInputs(numeroPagina){
 function validarNome(nome){
     nome = nome.split(" ");
     if(nome.length < 2 || nome == ''){
-        modal.showModal();
-        msgError.innerText ="Valor do nome inválido";
+        errorModal("Valor do nome inválido");
         return false
     }
 
@@ -256,8 +246,7 @@ function validarEmail(email){
     var isArroba = email.includes('@') && indiceArroba < indiceEnd;
 
     if((tamEmail < 8 || tamEmail > 45) && !isEnd && !isArroba || email == ''){
-        modal.showModal();
-        msgError.innerText ="Valor do email inválido";
+        errorModal("Valor do email inválido");
         return false;
     }
 
@@ -434,6 +423,7 @@ function removerGenero(indexInput){
 }
 
 function cadastrar(){
+    loading();
     if(verificarInputs(telAtual)){
         postCadastro();
     }
@@ -446,26 +436,25 @@ async function postCadastro(){
           "Content-Type": "application/json",
         },
         body: JSON.stringify(informacoesCadastro),
-      })
-        .then(function (resposta) {
+    })
+    // TODO ARRUMAR IDENTAÇÃO DO CÓDIGO
+        .then((resposta) => {
           console.log("resposta: ", resposta);
   
           if (resposta.ok) {
-            modal.showModal();
-            msgError.innerText ="Cadastrou legal";
-            iconModal.classList.remove('fa-circle-exclamation');
-            iconModal.style.color = 'green';
-            iconModal.classList.add('fa-circle-check');
-
-            location.href = '../../site-institucional/login.html';
+            successModal("Cadastrou efetuado com sucesso! Redirecionando para o Login...");
             
+            setTimeout(() => {
+                location.href = '../../site-institucional/login.html';
+              }, 4000);
+                        
           } else {
             console.log(resposta.body.message);
-  
+            finalizarLoading();
           }
         })
-        .catch(function (resposta) {
-          console.log(`#ERRO: ${resposta}`);
-          
+        .catch((resposta) => {
+          errorModal(`Erro ao efetuar o cadastro, tente novamente mais tarde!`);
+          finalizarLoading();
         });
 }

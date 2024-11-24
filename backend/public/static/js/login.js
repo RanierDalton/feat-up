@@ -1,22 +1,21 @@
 let isVisivel = false;
 let inputApelido = document.getElementById('iptApelido');
 let inputSenha = document.getElementById('iptSenha');
-let modal = document.getElementById('popUp');
 
 function entrar(){
+    loading();
     let apelido = inputApelido.value;
     let senha = inputSenha.value;
 
     if(apelido == '' || senha == ''){
-        return modal.showModal();
+        finalizarLoading();
+        return errorModal("Preencha os campos corretamente");
     }
 
     let credenciais = {
         alias:apelido,
         senha:senha
     }
-
-    console.log(credenciais);
 
     fetch("/auth/produtor", {
         method: "POST",
@@ -46,17 +45,16 @@ function entrar(){
             });
 
         } else {
-            console.log("Houve um erro ao tentar realizar o login!");
-
             resposta.text().then(texto => {
-                console.error(texto);
-                finalizarAguardar(texto);
+                finalizarLoading();
+                errorModal(texto);
             });
         }
 
-    }).catch(function (erro) {
-        console.log(erro);
-    })
+    }).catch((erro) => {
+        errorModal(erro);
+        finalizarLoading();
+    });
 
     return false;
 }

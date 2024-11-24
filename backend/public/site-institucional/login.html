@@ -43,7 +43,7 @@
         <div class="content">
             <div class="corpo">
                 <i class="fa-solid fa-circle-exclamation"></i>
-                <span>Apelido ou senha incorretos</span>
+                <span id="msgPopUp"></span>
             </div>
                 
             <div class="rodape">
@@ -51,6 +51,24 @@
             </div>
         </div>
     </dialog>
+
+    <dialog close id="successModal">
+        <div class="content">
+            <div class="corpo">
+                <i class="fa-solid fa-circle-check" style="color: green;"></i>
+                <span id="msgModalSuccess"></span>
+            </div>
+                
+            <div class="rodape">
+                <button style="background-color: green;" onclick="successModal.close();">OK</button>
+            </div>
+        </div>
+    </dialog>
+    <dialog close id="loadingModal">
+        <img src="../static/assets/load.gif" alt="">
+    </dialog>
+    <script src="../static/js/public/loading.js"></script>
+    <script src="../static/js/public/modal.js"></script>
     <script src="../static/js/login.js"></script>
     <!-- LIB FONT AWESOME-->
     <script src="https://kit.fontawesome.com/d5ea0dfb99.js" crossorigin="anonymous"></script>
