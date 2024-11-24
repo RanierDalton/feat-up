@@ -467,24 +467,6 @@ INSERT INTO feat (dtFeat, statusFeat, fkProdutorSolicita, fkProdutorAceita) VALU
 ('2024-04-30 22:00:00', 0, 30, 31),
 ('2024-05-01 10:00:00', 0, 32, 33);
 
-SELECT * FROM feat WHERE fkProdutorSolicita = 42;
-
-SELECT idProdutor, alias, aplicativo, pontoForte, pathFotoPerfil as foto, g.nome as genero FROM produtor 
-JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor 
-JOIN genero as g ON gp.fkGenero = g.idGenero 
-JOIN feat ON fkProdutorSolicita = idProdutor 
-WHERE idProdutor <> 42 AND (
-	fkProdutorAceita NOT IN (
-		SELECT idProdutor FROM produtor 
-        JOIN feat ON idProdutor = fkProdutorsOLICITA
-		WHERE fkProdutorAceita = 42
-	) 
-    AND fkProdutorSolicita NOT IN (
-		SELECT idProdutor FROM produtor 
-        JOIN feat ON idProdutor = fkProdutorAceita
-		WHERE fkProdutorSolicita = 42
-	));
-
 -- ----------------------------
 -- SRCIPTS DO PRÓPRIO SISTEMA
 -- ----------------------------
