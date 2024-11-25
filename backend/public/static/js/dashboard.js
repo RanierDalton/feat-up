@@ -1,7 +1,6 @@
-Chart.defaults.color = "#fff";
-
 function obterDadosGrafico() {
   loading();
+  Chart.defaults.color = "#fff";
   fetch(`/dashboard`, { cache: 'no-store' })
   .then((response) => {
       if (response.ok) {

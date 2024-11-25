@@ -427,6 +427,7 @@ function cadastrar(){
     if(verificarInputs(telAtual)){
         postCadastro();
     }
+    finalizarLoading();
 }
 
 async function postCadastro(){
