@@ -76,8 +76,9 @@ const getAcharFeats = (req, res) => {
 
     generoModel.getGenerosProdutor(idProdutor)
     .then((resultado) => {
+        console.log(resultado);
         let condicoesGeneros = filterMiddleware.filtrarGenerosProdutor(resultado);
-
+        console.log(condicoesGeneros);
         produtorModel.getAcharFeats(condicoesGeneros, idProdutor)
         .then((resultado) => res.status(200).json(filterMiddleware.filtrarGenerosCard(resultado)))
         .catch((err) => res.status(500).json(err.sqlMessage))

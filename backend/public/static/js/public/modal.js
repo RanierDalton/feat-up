@@ -13,3 +13,7 @@ function successModal(text){
     modalSuccess.showModal();
     msgSuccess.innerText = text;
 }
+
+function closeSuccessModal(){
+    modalSuccess.close();
+}

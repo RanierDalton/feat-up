@@ -37,6 +37,8 @@ function sendEmail() {
         Mensagem: ${ipt_mensagem.value}
     `;
 
+    console.log(credenciais);
+
     Email.send({
         Host: credenciais.host,
         Port: credenciais.porta,
@@ -61,7 +63,7 @@ function sendEmail() {
 async function coletarCredenciais(){
     await fetch('/credenciais')
     .then((res) => {
-        Promise.resolve(res.json())
+        res.json()
         .then(post => credenciais = post);
     })
     .catch(e => {

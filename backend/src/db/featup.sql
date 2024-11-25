@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS dbFeatUp;
 CREATE DATABASE dbFeatUp;
 USE dbFeatUp;
 
@@ -70,10 +71,10 @@ INSERT INTO produtor (nome, alias, senha, email, descricao, pontoForte, aplicati
 ('Rafael', '6ee','Urubu#100','6ee@gmail.com','Sou 6ee, produtor musical focado em trap e rap, apaixonado por criar beats que combinam 808s impactantes, melodias cativantes e percussões dinâmicas. Busco sempre inovar, misturando influências para entregar sons autênticos e de alta qualidade. Minha missão é ajudar artistas a traduzirem suas ideias em músicas que conectem e inspirem o público.', 'Beat', 'FL Studio', '../static/assets/profiles/6ee.jpg'),
 ('admin', 'admin','Urubu#100','admin@email.com','Usuário Admin', 'Master', 'FL Studio', '../static/assets/profiles/admin.jpg'),
 ('Ajaxx', 'Ajaxx','Urubu#100','ajaxx@gmail.com','Sou Ajaxx, produtor musical focado em trap e rap, apaixonado por criar beats que combinam 808s impactantes, melodias cativantes e percussões dinâmicas. Busco sempre inovar, misturando influências para entregar sons autênticos e de alta qualidade. Minha missão é ajudar artistas a traduzirem suas ideias em músicas que conectem e inspirem o público.', 'Beat', 'Pro Tools', '../static/assets/profiles/ajaxx.jpg'),
-('Allan Portugal', 'Alllan Portuga','Urubu#100','allan@gmail.com','Sou Allan Portuga, produtor musical dedicado ao rap nacional, com trabalhos marcantes ao lado dos Racionais MC’s e outros grandes artistas. Minha paixão está em criar beats autênticos, explorando samplers e melodias únicas para dar vida a músicas que conectam e inspiram.', 'Instrumental', 'FL Studio', '../static/assets/profiles/allanportuga.jpeg'),
+('Allan Portuga', 'Alllan Portuga','Urubu#100','allan@gmail.com','Sou Allan Portuga, produtor musical dedicado ao rap nacional, com trabalhos marcantes ao lado dos Racionais MC’s e outros grandes artistas. Minha paixão está em criar beats autênticos, explorando samplers e melodias únicas para dar vida a músicas que conectam e inspiram.', 'Instrumental', 'FL Studio', '../static/assets/profiles/allanportuga.jpg'),
 ('Bighead', 'Bighead','Urubu#100','bighead@gmail.com','Sou Bighead, produtor musical focado no trap, conhecido por criar beats energéticos e diretos, marcados por melodias simples e impacto cru. Já trabalhei com artistas como Lil Pump e Smokepurpp, ajudando a moldar o som do trap da era SoundCloud.', 'Beat', 'FL Studio', '../static/assets/profiles/bighead.jpg'),
-('Celo', 'CeloBeats', 'Urubu#100', 'celo.beats@example.com', 'Produtor focado em criar beats autênticos para o trap, misturando elementos melódicos e pesados.', 'Beat', 'FL Studio', '../static/assets/profiles/celo.jpg'),
-('Coyote Beatz', 'Coyote Beatz', 'Urubu#100', 'coyotebatz@example.com', 'Produtor de trap e hip-hop com estilo único, conhecido por beats pesados e inovadores.', 'Beat', 'FL Studio', '../static/assets/profiles/coyotebeatz.jpeg'),
+('Celo', 'CeloBeats', 'Urubu#100', 'celo.beats@example.com', 'Produtor focado em criar beats autênticos para o trap, misturando elementos melódicos e pesados.', 'Beat', 'FL Studio', '../static/assets/profiles/celo.jpeg'),
+('Coyote Beatz', 'Coyote Beatz', 'Urubu#100', 'coyotebatz@example.com', 'Produtor de trap e hip-hop com estilo único, conhecido por beats pesados e inovadores.', 'Beat', 'FL Studio', '../static/assets/profiles/coyotebeatz.jpg'),
 ('Dallas', 'Dallas', 'Urubu#100', 'dallas.beats@example.com', 'Especialista em beats melódicos para trap, com foco em atmosferas imersivas e sons intensos.', 'Beat', 'Ableton Live', '../static/assets/profiles/dallas.jpeg'),
 ('DJ Khaled', 'DJ Khaled', 'Urubu#100', 'djkhaled@example.com', 'Sou DJ Khaled, um dos maiores produtores e executivos da música. Com uma carreira marcada por hits colaborativos, trago energia, visibilidade e sucesso para o rap e hip-hop, sempre buscando juntar os melhores talentos do jogo.', 'Master', 'FL Studio', '../static/assets/profiles/djkhaled.jpg'),
 ('DJ Kore', 'DJ Kore', 'Urubu#100', 'djkore@example.com', 'Produtor com uma longa trajetória na cena do rap e trap, com beats e remixes pesados e marcantes.', 'Mix', 'Pro Tools', '../static/assets/profiles/djkore.jpg'),
@@ -126,22 +127,22 @@ INSERT INTO rede_social (nome, url, fontAwesomeTag) VALUES
 ('Reddit', 'https://reddit.com/u/', 'fa-square-reddit');
 
 INSERT INTO genero (nome) VALUES
-('Hip Hop'), -- 1
-('Trap'), -- 2
-('Rock'), -- 3
-('Pop'), -- 4
-('Eletrônica'), -- 5
-('Jazz'), -- 6
-('Reggae'), -- 7
-('R&B'), -- 8
-('Funk'), -- 9
-('Sertanejo'), -- 10
-('MPB'), -- 11
-('KPOP'), -- 12
-('Boom Bap'), -- 13
-('Forró'), -- 14
-('Lo-Fi'), -- 15
-('Afrobeat'); -- 16
+('Hip Hop'), 
+('Trap'), 
+('Rock'), 
+('Pop'),
+('Eletrônica'), 
+('Jazz'), 
+('Reggae'), 
+('R&B'), 
+('Funk'), 
+('Sertanejo'),
+('MPB'),
+('KPOP'), 
+('Boom Bap'), 
+('Forró'),
+('Lo-Fi'), 
+('Afrobeat'); 
 
 INSERT INTO genero_produtor (fkProdutor, fkGenero) VALUES
 (1, 1),  
@@ -245,155 +246,115 @@ INSERT INTO genero_produtor (fkProdutor, fkGenero) VALUES
 (53, 2),   
 (5, 1);   
 
--- Associando cada produtor a pelo menos uma rede social
+
 INSERT INTO rede_produtor (fkProdutor, fkRede, usuario) VALUES
-(1, 1, 'dj_alme_insta'),  -- Instagram
-(1, 4, 'dj_alme_yt'),     -- YouTube
-(2, 2, 'ana_beats'),      -- Twitter
-(2, 5, 'ana_beats_sc'),   -- SoundCloud
-(3, 3, 'mksound_fb'),     -- Facebook
-(3, 6, 'mksound_spotify'),-- Spotify
-(4, 8, 'bia_mix'),        -- LinkedIn
-(4, 9, 'bia_mix_dzr'),    -- Deezer
-(5, 1, 'zebeats_insta'),  -- Instagram
-(5, 11, 'zebeats_tw'),    -- Twitch
-(6, 2, 'rafmix_tw'),      -- Twitter
-(6, 4, 'rafmix_yt'),      -- YouTube
-(7, 10, 'larisound_bc'),  -- Bandcamp
-(7, 3, 'larisound_fb'),   -- Facebook
-(8, 5, 'prock_sc'),       -- SoundCloud
-(8, 12, 'prock_reddit'),  -- Reddit
-(9, 7, 'carla_m_tiktok'), -- TikTok
-(9, 6, 'carla_m_spotify'),-- Spotify
-(10, 1, 'fabsound_insta'),-- Instagram
-(10, 8, 'fabsound_li'),   -- LinkedIn
-(11, 2, 'china_mafra_tw'),   -- Twitter
-(11, 4, 'china_mafra_yt'),   -- YouTube
-(12, 5, 'rafael6ee_sc'),     -- SoundCloud
-(12, 7, 'rafael6ee_tiktok'), -- TikTok
-
-(14, 1, 'ajaxx_insta'),  -- Ajaxx no Instagram
-(14, 2, 'ajaxx_twitter'),  -- Ajaxx no Twitter
-
-(15, 1, 'allanportuga_insta'),  -- Allan Portuga no Instagram
-(15, 3, 'allanportuga_facebook'),  -- Allan Portuga no Facebook
-
-(16, 1, 'bighead_insta'),  -- Bighead no Instagram
-(16, 4, 'bighead_linkedin'),  -- Bighead no LinkedIn
-
-(17, 2, 'celobeats_twitter'),  -- CeloBeats no Twitter
-(17, 5, 'celobeats_soundcloud'),  -- CeloBeats no SoundCloud
-
-(18, 1, 'coyotebeatz_insta'),  -- Coyote Beatz no Instagram
-(18, 6, 'coyotebeatz_spotify'),  -- Coyote Beatz no Spotify
-
-(19, 7, 'dallas_tiktok'),  -- Dallas no TikTok
-(19, 1, 'dallas_instagram'),  -- Dallas no Instagram
-
-(20, 8, 'djkhaled_linkedin'),  -- DJ Khaled no LinkedIn
-(20, 2, 'djkhaled_twitter'),  -- DJ Khaled no Twitter
-
-(21, 1, 'djkore_insta'),  -- DJ Kore no Instagram
-(21, 9, 'djkore_reddit'),  -- DJ Kore no Reddit
-
-(22, 3, 'djmustard_facebook'),  -- DJ Mustard no Facebook
-(22, 10, 'djmustard_bandcamp'),  -- DJ Mustard no Bandcamp
-
-(23, 4, 'djthg_youtube'),  -- DJ THG no YouTube
-(23, 2, 'djthg_twitter'),  -- DJ THG no Twitter
-
-(24, 1, 'drdre_insta'),  -- Dr. Dre no Instagram
-(24, 5, 'drdre_soundcloud'),  -- Dr. Dre no SoundCloud
-
-(25, 7, 'ecologyk_tiktok'),  -- EcologyK no TikTok
-(25, 3, 'ecologyk_facebook'),  -- EcologyK no Facebook
-
-(26, 6, 'ghosty_spotify'),  -- Ghosty no Spotify
-(26, 1, 'ghosty_instagram'),  -- Ghosty no Instagram
-
-(27, 9, 'gordox_reddit'),  -- Gordox no Reddit
-(27, 1, 'gordox_insta'),  -- Gordox no Instagram
-
-(28, 2, 'hitboy_twitter'),  -- Hit-Boy no Twitter
-(28, 5, 'hitboy_soundcloud'),  -- Hit-Boy no SoundCloud
-
-(29, 8, 'jxnv_linkedin'),  -- JXNV no LinkedIn
-(29, 6, 'jxnv_spotify'),  -- JXNV no Spotify
-
-(30, 7, 'kljay_tiktok'),  -- KL Jay no TikTok
-(30, 3, 'kljay_facebook'),  -- KL Jay no Facebook
-
-(31, 1, 'londonondatrack_insta'),  -- London On Da Track no Instagram
-(31, 2, 'londonondatrack_twitter'),  -- London On Da Track no Twitter
-
-(32, 5, 'lucasboombeat_soundcloud'),  -- LucasBoomBeat no SoundCloud
-(32, 8, 'lucasboombeat_linkedin'),  -- LucasBoomBeat no LinkedIn
-
-(33, 9, 'm1onthebeat_reddit'),  -- M1On The Beat no Reddit
-(33, 3, 'm1onthebeat_facebook'),  -- M1On The Beat no Facebook
-
-(34, 1, 'metroboomin_insta'),  -- Metro Boomin no Instagram
-(34, 6, 'metroboomin_spotify'),  -- Metro Boomin no Spotify
-
-(35, 4, 'murdabeatz_youtube'),  -- MurdaBeatz no YouTube
-(35, 2, 'murdabeatz_twitter'),  -- MurdaBeatz no Twitter
-
-(36, 1, 'nagallibeats_insta'),  -- NagalliBeats no Instagram
-(36, 7, 'nagallibeats_tiktok'),  -- NagalliBeats no TikTok
-
-(37, 5, 'neobeats_soundcloud'),  -- Neobeats no SoundCloud
-(37, 8, 'neobeats_linkedin'),  -- Neobeats no LinkedIn
-
-(38, 6, 'nobrebeats_spotify'),  -- Nobre Beats no Spotify
-(38, 3, 'nobrebeats_facebook'),  -- Nobre Beats no Facebook
-
-(39, 1, 'papatinho_insta'),  -- Papatinho no Instagram
-(39, 2, 'papatinho_twitter'),  -- Papatinho no Twitter
-
-(40, 9, 'pedrolotto_reddit'),  -- Pedro Lotto no Reddit
-(40, 5, 'pedrolotto_soundcloud'),  -- Pedro Lotto no SoundCloud
-
-(41, 6, 'pedroqualy_spotify'),  -- Pedro Qualy no Spotify
-(41, 7, 'pedroqualy_tiktok'),  -- Pedro Qualy no TikTok
-
-(42, 2, 'raynier_twitter'),  -- RayNier no Twitter
-(42, 1, 'raynier_insta'),  -- RayNier no Instagram
-
-(43, 3, 'retroboy_facebook'),  -- Retroboy no Facebook
-(43, 8, 'retroboy_linkedin'),  -- Retroboy no LinkedIn
-
-(44, 4, 'rinconsapiencia_youtube'),  -- Rincon Sapiência no YouTube
-(44, 6, 'rinconsapiencia_spotify'),  -- Rincon Sapiência no Spotify
-
-(45, 7, 'sonnydigital_tiktok'),  -- Sonny Digital no TikTok
-(45, 1, 'sonnydigital_instagram'),  -- Sonny Digital no Instagram
-
-(46, 2, 'sonotws_twitter'),  -- Sono TWS no Twitter
-(46, 3, 'sonotws_facebook'),  -- Sono TWS no Facebook
-
-(47, 8, 'southside_linkedin'),  -- Southside no LinkedIn
-(47, 7, 'southside_tiktok'),  -- Southside no TikTok
-
-(48, 9, 'taykeith_reddit'),  -- Tay Keith no Reddit
-(48, 5, 'taykeith_soundcloud'),  -- Tay Keith no SoundCloud
-
-(49, 1, 'tm88_insta'),  -- TM88 no Instagram
-(49, 3, 'tm88_facebook'),  -- TM88 no Facebook
-
-(50, 6, 'wcnobeat_spotify'),  -- WC no Beat no Spotify
-(50, 2, 'wcnobeat_twitter'),  -- WC no Beat no Twitter
-
-(51, 8, 'wheezy_linkedin'),  -- Wheezy no LinkedIn
-(51, 7, 'wheezy_tiktok'),  -- Wheezy no TikTok
-
-(52, 4, 'youngchop_youtube'),  -- Young Chop no YouTube
-(52, 1, 'youngchop_insta'),  -- Young Chop no Instagram
-
-(53, 5, 'yungbuda_soundcloud'),  -- Yung Buda no SoundCloud
-(53, 2, 'yungbuda_twitter'),  -- Yung Buda no Twitter
-
-(54, 1, 'zaytoven_insta'),  -- Zaytoven no Instagram
-(54, 3, 'zaytoven_facebook');  -- Zaytoven no Facebook
+(1, 1, 'dj_alme_insta'),  
+(1, 4, 'dj_alme_yt'),    
+(2, 2, 'ana_beats'),      
+(2, 5, 'ana_beats_sc'),   
+(3, 3, 'mksound_fb'),     
+(3, 6, 'mksound_spotify'),
+(4, 8, 'bia_mix'),        
+(4, 9, 'bia_mix_dzr'),    
+(5, 1, 'zebeats_insta'),  
+(5, 11, 'zebeats_tw'),    
+(6, 2, 'rafmix_tw'),     
+(6, 4, 'rafmix_yt'), 
+(7, 10, 'larisound_bc'),
+(7, 3, 'larisound_fb'),   
+(8, 5, 'prock_sc'),       
+(8, 12, 'prock_reddit'), 
+(9, 7, 'carla_m_tiktok'), 
+(9, 6, 'carla_m_spotify'),
+(10, 1, 'fabsound_insta'),
+(10, 8, 'fabsound_li'), 
+(11, 2, 'china_mafra_tw'),
+(11, 4, 'china_mafra_yt'),  
+(12, 5, 'rafael6ee_sc'),     
+(12, 7, 'rafael6ee_tiktok'), 
+(14, 1, 'ajaxx_insta'),  
+(14, 2, 'ajaxx_twitter'),  
+(15, 1, 'allanportuga_insta'), 
+(15, 3, 'allanportuga_facebook'), 
+(16, 1, 'bighead_insta'), 
+(16, 4, 'bighead_linkedin'), 
+(17, 2, 'celobeats_twitter'),
+(17, 5, 'celobeats_soundcloud'),
+(18, 1, 'coyotebeatz_insta'), 
+(18, 6, 'coyotebeatz_spotify'),  
+(19, 7, 'dallas_tiktok'), 
+(19, 1, 'dallas_instagram'), 
+(20, 8, 'djkhaled_linkedin'),  
+(20, 2, 'djkhaled_twitter'), 
+(21, 1, 'djkore_insta'),  
+(21, 9, 'djkore_reddit'),  
+(22, 3, 'djmustard_facebook'), 
+(22, 10, 'djmustard_bandcamp'),  
+(23, 4, 'djthg_youtube'),  
+(23, 2, 'djthg_twitter'),  
+(24, 1, 'drdre_insta'), 
+(24, 5, 'drdre_soundcloud'), 
+(25, 7, 'ecologyk_tiktok'),  
+(25, 3, 'ecologyk_facebook'),  
+(26, 6, 'ghosty_spotify'),
+(26, 1, 'ghosty_instagram'), 
+(27, 9, 'gordox_reddit'),
+(27, 1, 'gordox_insta'), 
+(28, 2, 'hitboy_twitter'),
+(28, 5, 'hitboy_soundcloud'), 
+(29, 8, 'jxnv_linkedin'), 
+(29, 6, 'jxnv_spotify'),
+(30, 7, 'kljay_tiktok'),
+(30, 3, 'kljay_facebook'),
+(31, 1, 'londonondatrack_insta'), 
+(31, 2, 'londonondatrack_twitter'),  
+(32, 5, 'lucasboombeat_soundcloud'),
+(32, 8, 'lucasboombeat_linkedin'), 
+(33, 9, 'm1onthebeat_reddit'),  
+(33, 3, 'm1onthebeat_facebook'),  
+(34, 1, 'metroboomin_insta'), 
+(34, 6, 'metroboomin_spotify'), 
+(35, 4, 'murdabeatz_youtube'),
+(35, 2, 'murdabeatz_twitter'),  
+(36, 1, 'nagallibeats_insta'),  
+(36, 7, 'nagallibeats_tiktok'),  
+(37, 5, 'neobeats_soundcloud'),  
+(37, 8, 'neobeats_linkedin'),  
+(38, 6, 'nobrebeats_spotify'),  
+(38, 3, 'nobrebeats_facebook'), 
+(39, 1, 'papatinho_insta'), 
+(39, 2, 'papatinho_twitter'), 
+(40, 9, 'pedrolotto_reddit'), 
+(40, 5, 'pedrolotto_soundcloud'),  
+(41, 6, 'pedroqualy_spotify'), 
+(41, 7, 'pedroqualy_tiktok'), 
+(42, 2, 'CoutoRanier'), 
+(42, 1, 'ranierdcpop'),  
+(42, 5, 'ranierd'),
+(43, 3, 'retroboy_facebook'),  
+(43, 8, 'retroboy_linkedin'),  
+(44, 4, 'rinconsapiencia_youtube'), 
+(44, 6, 'rinconsapiencia_spotify'),  
+(45, 7, 'sonnydigital_tiktok'), 
+(45, 1, 'sonnydigital_instagram'),  
+(46, 2, 'sonotws_twitter'), 
+(46, 3, 'sonotws_facebook'),  
+(47, 8, 'southside_linkedin'),  
+(47, 7, 'southside_tiktok'),  
+(48, 9, 'taykeith_reddit'), 
+(48, 5, 'taykeith_soundcloud'), 
+(49, 1, 'tm88_insta'), 
+(49, 3, 'tm88_facebook'), 
+(50, 6, 'wcnobeat_spotify'),  
+(50, 2, 'wcnobeat_twitter'), 
+(51, 8, 'wheezy_linkedin'), 
+(51, 7, 'wheezy_tiktok'), 
+(52, 4, 'youngchop_youtube'),  
+(52, 1, 'youngchop_insta'),  
+(53, 5, 'yungbuda_soundcloud'),  
+(53, 2, 'yungbuda_twitter'), 
+(54, 1, 'zaytoven_insta'), 
+(54, 3, 'zaytoven_facebook'); 
 
 
 INSERT INTO feat (dtFeat, statusFeat, fkProdutorSolicita, fkProdutorAceita) VALUES
