@@ -36,6 +36,7 @@ function entrar(){
 
                 sessionStorage.APELIDO_USUARIO = json.alias;
                 sessionStorage.ID_USUARIO = json.id;
+                sessionStorage.PATH_FOTO = json.foto;
 
                 if(sessionStorage.APELIDO_USUARIO == "admin"){
                     return window.location = "../../featup/dashboard.html";

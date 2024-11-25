@@ -1,5 +1,6 @@
 function carregarProdutoresFeats(){
     loading();
+    document.getElementById("fotoPerfil").src = sessionStorage.PATH_FOTO;
     fetch(`/produtores/feats/${sessionStorage.ID_USUARIO}`, {
         method: "GET",
         headers: {

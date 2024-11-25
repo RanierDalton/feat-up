@@ -1,5 +1,6 @@
 function obterDadosGrafico() {
   loading();
+  document.getElementById("fotoPerfil").src = sessionStorage.PATH_FOTO;
   Chart.defaults.color = "#fff";
   fetch(`/dashboard`, { cache: 'no-store' })
   .then((response) => {

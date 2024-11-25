@@ -2,7 +2,7 @@ function validarSessao() {
     let alias = sessionStorage.APELIDO_USUARIO;
     let id = sessionStorage.ID_USUARIO;
 
-    if (alias == null || id == null) {
+    if ((alias == null || alias == undefined) || (id == null || id == undefined)) {
         sessionStorage.clear();
         window.location = "../site-institucional/login.html";
     }

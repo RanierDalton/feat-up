@@ -173,8 +173,7 @@ const authProdutor = (req, res) => {
                     produtorModel.patchHorarioLogin(alias).then(() =>
                         res.status(200).json({
                             id: resAuth[0].idProdutor,
-                            email: resAuth[0].email,
-                            senha: resAuth[0].senha,
+                            foto: resAuth[0].foto,
                             alias: resAuth[0].alias
                         })
                     );

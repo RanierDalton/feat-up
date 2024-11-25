@@ -1,8 +1,8 @@
-let isVisivel = false;
+let isVisivelSenha = false;
 
 function mudarVisibilidade(number){
-    if(isVisivel){
-        isVisivel = false;
+    if(isVisivelSenha){
+        isVisivelSenha = false;
         if(number == 1){
             iptSenha.type = 'password';
             iconSenha.classList.remove('fa-eye-slash');
@@ -13,7 +13,7 @@ function mudarVisibilidade(number){
             iconConfirmar.classList.add('fa-eye');
         }
     } else{
-        isVisivel = true;
+        isVisivelSenha = true;
         if(number == 1){
             iptSenha.type = 'text';
             iconSenha.classList.remove('fa-eye');

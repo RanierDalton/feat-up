@@ -26,11 +26,11 @@
                 </nav>
                 <div class="profile">
                     <button onclick="abrirPerfil()">
-                        <img src="../static/assets/default.png" alt="Imagem de perfil do seu usuário">
+                        <img id="fotoPerfil" src="../static/assets/default.png" alt="Imagem de perfil do seu usuário">
                     </button>
                     <div id="dropdownPerfil" class="dropdown-content">
                         <a href="./self_perfil.html">Ver Perfil</a>
-                        <a href="../site-institucional/login.html" class="sair">Sair</a>
+                        <a href="#" onclick="limparSessao()" class="sair">Sair</a>
                     </div>
                 </div>
             </div>
@@ -43,12 +43,12 @@
                     <span class="titulo">Achar Feats</span>
                     <span class="subtitle">Encontre produtores para colaborarem juntos</span>
                 </div>
-                <div class="filtro">
+                <!-- <div class="filtro">
                     <a href="#" onclick="abrirFiltro()">
                         <span>Filtrar</span>
                         <i class="fa-solid fa-filter"></i>
                     </a>
-                </div>
+                </div> -->
             </div>
             <div id="produtores" class="produtores">
                 

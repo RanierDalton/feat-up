@@ -50,7 +50,9 @@ const filtrarGenerosCard = (dados) => {
             produtores.push(produtorAtual);
         } else {
             let generosProdutor = produtores[indexProdutor].genero;
-            generosProdutor.push(dados[i].genero);
+            if(!generosProdutor.includes(dados[i].genero)){
+                generosProdutor.push(dados[i].genero);
+            } 
         }       
     }  
     

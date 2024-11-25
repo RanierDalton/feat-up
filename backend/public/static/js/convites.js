@@ -1,5 +1,6 @@
 function carregarProdutoresConvite(){
     loading();
+    document.getElementById("fotoPerfil").src = sessionStorage.PATH_FOTO;
     fetch(`/produtores/convites/${sessionStorage.ID_USUARIO}`, {
         method: "GET",
         headers: {

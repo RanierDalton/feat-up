@@ -13,7 +13,7 @@ const getProdutor = (alias) => {
 };
 
 const auth = (alias, senha) =>{
-    const instrucao = `SELECT COUNT(idProdutor) as auth, idProdutor, alias, email FROM produtor WHERE alias = '${alias}' AND senha = '${senha}'`;
+    const instrucao = `SELECT COUNT(idProdutor) as auth, idProdutor, alias, email, pathFotoPerfil as foto FROM produtor WHERE alias = '${alias}' AND senha = '${senha}'`;
 
     return db.executar(instrucao);
 };
@@ -47,7 +47,7 @@ const getAcharFeats = (condicoesGeneros, idProdutor) => {
                 JOIN feat ON prod.idProdutor = fkProdutorAceita AND fkProdutorSolicita = ${idProdutor}
                 WHERE fkProdutorAceita = p.idProdutor
                 GROUP BY feat.fkProdutorAceita
-                
+
         	)) and 
         	isNull((
         		SELECT COUNT(feat.fkProdutorSolicita) FROM produtor as prod
