@@ -75,15 +75,27 @@ const getAcharFeats = (req, res) => {
     const idProdutor = req.params.id;
 
     generoModel.getGenerosProdutor(idProdutor)
-    .then((resultado) => {
-        console.log(resultado);
-        let condicoesGeneros = filterMiddleware.filtrarGenerosProdutor(resultado);
-        console.log(condicoesGeneros);
+    .then((resultadoGenero) => {
+        let condicoesGeneros = filterMiddleware.filtrarGenerosProdutor(resultadoGenero);
+        
         produtorModel.getAcharFeats(condicoesGeneros, idProdutor)
-        .then((resultado) => res.status(200).json(filterMiddleware.filtrarGenerosCard(resultado)))
-        .catch((err) => res.status(500).json(err.sqlMessage))
+        .then((resultado) => {
+            let resFiltro = filterMiddleware.filtrarGenerosCard(resultado);
+            
+            if(resultado.length > 0){
+                return res.status(200).json(resFiltro);                
+            } else {
+                produtorModel.getAcharFeatsGenericos(idProdutor)
+                .then((resultadoGenerico) => {
+                    return res.status(200).json(filterMiddleware.filtrarGenerosCard(resultadoGenerico));
+                })
+                .catch((err) => res.status(500).json(err.sqlMessage));
+            }
+            
+        })
+        .catch((err) => res.status(500).json(err.sqlMessage));
     })
-    .catch((err) => res.status(500).json(err.sqlMessage))
+    .catch((err) => res.status(500).json(err.sqlMessage));
 };
 
 const postProdutor = (req, res) =>{

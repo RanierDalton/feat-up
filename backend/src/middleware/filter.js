@@ -31,7 +31,11 @@ const filtrarGenerosProdutor = (generos) => {
 
 const filtrarGenerosCard = (dados) => {
     let produtores = [];
-    console.log(dados);
+    
+    if(dados.length <= 0){
+        return true;
+    }
+
     for(let i=0; i<dados.length;i++){
         let idProdutorAtual = dados[i].idProdutor;
         let indexProdutor = produtores.findIndex(produtor => produtor.idProdutor == idProdutorAtual);

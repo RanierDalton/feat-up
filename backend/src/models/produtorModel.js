@@ -34,8 +34,6 @@ const getAplicativosUsados = () => {
 };
 
 const getAcharFeats = (condicoesGeneros, idProdutor) => {
-    console.log(condicoesGeneros);
-    // SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero WHERE
     const instrucao = `SELECT p.idProdutor, p.alias, p.aplicativo, p.pontoForte, p.pathFotoPerfil as foto, g.nome as genero
         FROM produtor AS p
         JOIN genero_produtor as gp ON gp.fkProdutor = p.idProdutor 
@@ -55,9 +53,35 @@ const getAcharFeats = (condicoesGeneros, idProdutor) => {
                 WHERE fkProdutorSolicita = p.idProdutor
                 GROUP BY feat.fkProdutorSolicita
         	));`;
-    console.log(instrucao);
+    
     return db.executar(instrucao);
 };
+
+const getAcharFeatsGenericos = (idProdutor) => {
+    const instrucao = `SELECT p.idProdutor, p.alias, p.aplicativo, p.pontoForte, p.pathFotoPerfil as foto, g.nome as genero
+        FROM produtor AS p
+        JOIN genero_produtor as gp ON gp.fkProdutor = p.idProdutor 
+        JOIN genero as g ON gp.fkGenero = g.idGenero 
+        JOIN feat ON fkProdutorSolicita = idProdutor 
+        WHERE p.idProdutor <> ${idProdutor} and
+        	isNull((
+        		SELECT COUNT(feat.fkProdutorAceita) FROM produtor as prod
+                JOIN feat ON prod.idProdutor = fkProdutorAceita AND fkProdutorSolicita = ${idProdutor}
+                WHERE fkProdutorAceita = p.idProdutor
+                GROUP BY feat.fkProdutorAceita
+
+        	)) and 
+        	isNull((
+        		SELECT COUNT(feat.fkProdutorSolicita) FROM produtor as prod
+                JOIN feat ON prod.idProdutor = fkProdutorSolicita AND fkProdutorAceita = ${idProdutor}
+                WHERE fkProdutorSolicita = p.idProdutor
+                GROUP BY feat.fkProdutorSolicita
+        	))
+        ORDER BY p.alias
+        LIMIT 60;`;
+
+    return db.executar(instrucao);
+}
 
 const getPerfil = (id) => {
     const instrucao = `
@@ -85,4 +109,4 @@ const patchPathFotoPerfil = (path, id) => {
     return db.executar(instrucao);
 }
 
-module.exports = {postProdutor, getProdutor, auth, getProdutoresTotais, getProdutoresAtivos, getAplicativosUsados, getAcharFeats, getPerfil, patchHorarioLogin, patchPathFotoPerfil};
+module.exports = {getAcharFeatsGenericos, postProdutor, getProdutor, auth, getProdutoresTotais, getProdutoresAtivos, getAplicativosUsados, getAcharFeats, getPerfil, patchHorarioLogin, patchPathFotoPerfil};
