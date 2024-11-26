@@ -9,15 +9,21 @@ form.addEventListener('submit', async (e) => {
     formData.append('image', file);
     console.log(formData);
 
-    try {
-        const response = await fetch(`/produtor/uploadFoto/${sessionStorage.ID_USUARIO}`, {
-            method: 'POST',
-            body: formData,
-        });
+    fetch(`/produtor/uploadFoto/${sessionStorage.ID_USUARIO}`, {
+        method: 'POST',
+        body: formData,
+    })
+    .then((res) => {
+        res.json()
+        .then((e) => {
+            sessionStorage.PATH_FOTO = e.path;
+            fotoPerfil.src = sessionStorage.PATH_FOTO;
+            imgPerfil.src = sessionStorage.PATH_FOTO;
+        })
+    })
+    .catch((err) => {
+        console.log(`#ERRO: ${err}`);
+    });
 
-        const data = await response.json();
-        console.log(data);
-    } catch (error) {
-        console.error('Erro no upload:', error);
-    }
+    
 });

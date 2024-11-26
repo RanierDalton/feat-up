@@ -55,9 +55,18 @@ function sendEmail() {
             errorModal('Erro ao enviar o email, tente novamente mais tarde!');
         } else{
             successModal('Email enviado com sucesso!');
+            limparCampos();
         }
         finalizarLoading();
     });
+}
+
+function limparCampos(){
+    ipt_nome.reset();
+    ipt_email.reset();
+    ipt_assunto.reset();
+    ipt_mensagem.reset();
+    ipt_confirmar.reset();
 }
 
 async function coletarCredenciais(){
