@@ -374,7 +374,12 @@ function adicionarRede(){
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </div>
-                    </div>`;
+                    </div>
+    `;
+
+    if(contadorIptRedes >= 5){
+        return errorModal("Não é possível inserir mais de 5 redes sociais");
+    }
     
     divRede.innerHTML += inputRede;
     contadorIptRedes++;
@@ -406,11 +411,14 @@ function adicionarGenero(){
         </button>
     </div>
     `;
-    
+
+    if(contadorIptGeneros >= 7){
+        return errorModal("Não é possível inserir mais de 7 gêneros");
+    }
+
     divGenero.innerHTML += inputGeneros;
     contadorIptGeneros++;
     
-
     for(let i=0; i<valoresInputs.length;i++){
         generos[i].value = valoresInputs[i];
     }
@@ -438,24 +446,23 @@ async function postCadastro(){
         },
         body: JSON.stringify(informacoesCadastro),
     })
-    // TODO ARRUMAR IDENTAÇÃO DO CÓDIGO
-        .then((resposta) => {
-          console.log("resposta: ", resposta);
-  
-          if (resposta.ok) {
-            successModal("Cadastrou efetuado com sucesso! Redirecionando para o Login...");
-            
-            setTimeout(() => {
-                location.href = '../../site-institucional/login.html';
-              }, 4000);
-                        
-          } else {
-            console.log(resposta.body.message);
-            finalizarLoading();
-          }
-        })
-        .catch((resposta) => {
-          errorModal(`Erro ao efetuar o cadastro, tente novamente mais tarde!`);
-          finalizarLoading();
-        });
+    .then((resposta) => {
+      console.log("resposta: ", resposta);
+
+      if (resposta.ok) {
+        successModal("Cadastrou efetuado com sucesso! Redirecionando para o Login...");
+        
+        setTimeout(() => {
+            location.href = '../../site-institucional/login.html';
+          }, 4000);
+               
+      } else {
+        console.log(resposta.body.message);
+        finalizarLoading();
+      }
+    })
+    .catch((resposta) => {
+      errorModal(`Erro ao efetuar o cadastro, tente novamente mais tarde!`);
+      finalizarLoading();
+    });
 }
