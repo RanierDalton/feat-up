@@ -4,7 +4,7 @@ const getFeatsAtivos = (id) => {
     const instrucao = `SELECT idProdutor, alias, aplicativo, pontoForte, pathFotoPerfil as foto, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor 
 JOIN genero as g ON gp.fkGenero = g.idGenero
 JOIN feat ON idProdutor = fkProdutorAceita OR idProdutor = fkProdutorSolicita
-WHERE idProdutor <> ${id} AND statusFeat = 1;`;
+WHERE idProdutor <> ${id} AND statusFeat = 1  AND (fkProdutorAceita = ${id} or fkProdutorSolicita= ${id});`;
     return db.executar(instrucao);
 };
 

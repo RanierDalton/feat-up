@@ -58,7 +58,7 @@ let informacoesCadastro = {
     senha: ''
 };
 
-const CARACTERES_ESPECIAIS = /[^A-Za-z0-9]/;
+const CARACTERES_ESPECIAIS = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g;
 
 let contadorIptRedes = 1;
 let contadorIptGeneros = 1;
@@ -213,7 +213,7 @@ function verificarInputs(numeroPagina){
         }
 
         if(senha != confirmar){
-            errorModal("O valor de ambas as senhas não batem");
+            errorModal("Ambas as senhas não coincidem!");
             return false;
         }
 
@@ -263,23 +263,22 @@ function validarSenha(ipt){
     var senha = ipt.value;
     var tamSenha = senha.length;
     var isEspecial = CARACTERES_ESPECIAIS.test(senha);
-
+    var senhaSemEspecial = senha.replace(CARACTERES_ESPECIAIS, '');
+     
     var isMinuscula = false;
     var isMaiuscula = false;
-    var isNum = false;        
+    var isNum = false;    
 
-    for(var i = 0; i < tamSenha; i++){
-        if(senha[i] == senha[i].toUpperCase()){
+    for(var i = 0; i < senhaSemEspecial.length; i++){
+        if(senhaSemEspecial[i] == senhaSemEspecial[i].toUpperCase()){
             isMaiuscula = true;
         }
 
-        if(senha[i] == senha[i].toLowerCase()){
+        if(senhaSemEspecial[i] == senhaSemEspecial[i].toLowerCase()){
             isMinuscula = true;
         }
 
-        console.log(Number(parseFloat(senha[i])) == Number(senha[i]));
-
-        if(typeof Number(senha[i]) === 'number'){
+        if(typeof Number(senhaSemEspecial[i]) === 'number'){
             isNum = true;
         }
     }

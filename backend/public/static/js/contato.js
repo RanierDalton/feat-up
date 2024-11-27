@@ -62,11 +62,11 @@ function sendEmail() {
 }
 
 function limparCampos(){
-    ipt_nome.reset();
-    ipt_email.reset();
-    ipt_assunto.reset();
-    ipt_mensagem.reset();
-    ipt_confirmar.reset();
+    ipt_nome.value = '';
+    ipt_email.value = '';
+    ipt_assunto.value = '';
+    ipt_mensagem.value = '';
+    ipt_confirmar.value = '';
 }
 
 async function coletarCredenciais(){
