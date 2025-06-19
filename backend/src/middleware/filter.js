@@ -1,4 +1,4 @@
-const filtrarPodio = (dados) => {
+function filtrarPodio(dados) {
     let resposta = [];
 
     let i = 0;
@@ -17,7 +17,7 @@ const filtrarPodio = (dados) => {
     resposta.push(objOutros);
 
     return resposta;
-};
+}
 
 const filtrarGenerosProdutor = (generos) => {
     let resposta = "g.nome IN (";
