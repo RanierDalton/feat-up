@@ -56,6 +56,50 @@ CREATE TABLE genero_produtor (
     CONSTRAINT fkGeneroProdutor FOREIGN KEY (fkGenero) REFERENCES genero(idGenero)
 );
 
+CREATE TABLE album (
+    idAlbum INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45) NOT NULL,
+    imgCapa VARCHAR(45) DEFAULT '../static/assets/covers/default.png',
+    dtLancamento DATETIME NOT NULL DEFAULT now(),
+    fkProdutor INT NOT NULL,
+    CONSTRAINT fkProdutorAlbum FOREIGN KEY (fkProdutor) REFERENCES produtor(idProdutor)
+);
+
+CREATE TABLE musica (
+    idMusica INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45) NOT NULL,
+    caminho VARCHAR(200) NOT NULL,
+    imgCapa VARCHAR(45) DEFAULT '../static/assets/covers/default.png',
+    fkAlbum INT NOT NULL,
+    CONSTRAINT fkAlbumMusica FOREIGN KEY (fkAlbum) REFERENCES album(idAlbum)
+);
+
+CREATE TABLE genero_musica (
+    fkMusica INT NOT NULL,
+    fkGenero INT NOT NULL,
+    PRIMARY KEY(fkMusica, fkGenero),
+    CONSTRAINT fkMusicaGenero FOREIGN KEY (fkMusica) REFERENCES musica(idMusica),
+    CONSTRAINT fkGeneroMusica FOREIGN KEY (fkGenero) REFERENCES genero(idGenero)
+);
+
+CREATE TABLE playlist (
+    fkProdutor INT NOT NULL,
+    fkAlbum INT NOT NULL,
+
+    CONSTRAINT fkProdutorPlaylist FOREIGN KEY (fkProdutor) REFERENCES produtor(idProdutor),
+    CONSTRAINT fkAlbumPlaylist FOREIGN KEY (fkAlbum) REFERENCES album(idAlbum)
+);
+
+CREATE TABLE comentario (
+    idComentario INT PRIMARY KEY AUTO_INCREMENT,
+    texto VARCHAR(45) NOT NULL,
+    dtComentario DATETIME NOT NULL DEFAULT now(),
+    fkProdutor INT NOT NULL,
+    fkAlbum INT NOT NULL,
+    CONSTRAINT fkProdutorComentario FOREIGN KEY (fkProdutor) REFERENCES produtor(idProdutor),
+    CONSTRAINT fkAlbumComentario FOREIGN KEY (fkAlbum) REFERENCES album(idAlbum)
+);
+
 INSERT INTO produtor (nome, alias, senha, email, descricao, pontoForte, aplicativo, pathFotoPerfil) VALUES
 ('Carlos Almeida', 'DJ Alme', 'Urubu#100', 'carlos.almeida@example.com', 'Produtor focado em beats eletrônicos.', 'Beat', 'FL Studio', DEFAULT),
 ('Ana Souza', 'AnaBeats', 'Urubu#100', 'ana.souza@example.com', 'Apaixonada por trap e hip-hop.', 'Instrumental', 'Ableton Live', DEFAULT),
