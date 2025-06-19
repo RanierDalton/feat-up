@@ -28,6 +28,15 @@ CREATE TABLE feat (
     CONSTRAINT fkProdutorAceitaFeat FOREIGN KEY (fkProdutorAceita) REFERENCES produtor(idProdutor)
 );
 
+CREATE TABLE conversa (
+    idConversa INT PRIMARY KEY AUTO_INCREMENT,
+    dtMensagem DATETIME NOT NULL DEFAULT now(),
+    produtor VARCHAR(45) NOT NULL,
+    mensagem TEXT NOT NULL,
+    fkFeat INT NOT NULL,
+    CONSTRAINT fkFeatConversa FOREIGN KEY (fkFeat) REFERENCES feat(idFeat)
+);
+
 CREATE TABLE rede_social (
 	idRede INT PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(45),
@@ -83,11 +92,19 @@ CREATE TABLE genero_musica (
 );
 
 CREATE TABLE playlist (
+    idPlaylist INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45) NOT NULL,
+    imgPlaylist VARCHAR(45) DEFAULT '../static/assets/covers/default.png',
     fkProdutor INT NOT NULL,
-    fkAlbum INT NOT NULL,
+    CONSTRAINT fkProdutorPlaylist FOREIGN KEY (fkProdutor) REFERENCES produtor(idProdutor)
+);
 
-    CONSTRAINT fkProdutorPlaylist FOREIGN KEY (fkProdutor) REFERENCES produtor(idProdutor),
-    CONSTRAINT fkAlbumPlaylist FOREIGN KEY (fkAlbum) REFERENCES album(idAlbum)
+CREATE TABLE musicas_playlist (
+    fkPlaylist INT NOT NULL,
+    fkMusica INT NOT NULL,
+    PRIMARY KEY(fkPlaylist, fkMusica),
+    CONSTRAINT fkPlaylistMusica FOREIGN KEY (fkPlaylist) REFERENCES playlist(idPlaylist),
+    CONSTRAINT fkMusicaPlaylist FOREIGN KEY (fkMusica) REFERENCES musica(idMusica)
 );
 
 CREATE TABLE comentario (
