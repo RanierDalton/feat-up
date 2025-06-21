@@ -3,29 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convites | Feat Up</title>
+    <title>Feats Ups | Feat Up</title>
 
     <link rel="stylesheet" href="../static/styles/achar_feats.css">
     <link rel="icon" href="../static/assets/fone-de-ouvido.png">
-    <script src="../static/js/convites.js"></script>
-
+    <script src="../static/js/feats.js"></script>
     <script src="../static/js/public/session.js"></script>
+
     <script src="../static/components/navbarUser.js"></script>
     <script src="../static/components/cabecalhoInfo.js"></script>
+
 </head>
-<body onload="validarSessao(),carregarProdutoresConvite()">
-    
+<body onload="validarSessao(), carregarProdutoresFeats()">
     <section class="cabecalho">
-        <script>construirNavbar(2)</script>
+        <script>construirNavbar(0)</script>
     </section>
-    
+
     <section class="conteudo-achar">
         <div class="body">
             <div class="cabecalho-achar">
-                <script>construirCabecalhoInfo('Convites', 'Convites de outros produtores param realizarem um Feat', false)</script>
+                <script>construirCabecalhoInfo('Feed', 'Interaja com o portifólio dos outros produtores', false)</script>
             </div>
-            <div id="produtores" class="produtores">
 
+            <div id="produtores" class="produtores">
+            
             </div>
         </div>
     </section>
@@ -36,7 +37,7 @@
     
     
     <script src="../static/js/public/loading.js"></script>
-
+    
     <script src="../static/js/public/perfil.js"></script>
     <!-- LIB FONT AWESOME-->
     <script src="https://kit.fontawesome.com/d5ea0dfb99.js" crossorigin="anonymous"></script>

@@ -1,8 +1,7 @@
-let divLoad = document.getElementById("loadingModal");
 function loading() {
-    divLoad.showModal();
+    document.getElementById("loadingModal").showModal();
 }
 
 function finalizarLoading() {
-    divLoad.close();
+    document.getElementById("loadingModal").close();
 }

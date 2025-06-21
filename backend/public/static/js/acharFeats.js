@@ -1,6 +1,6 @@
 function carregarProdutoresAchar(){
     loading();
-    document.getElementById("fotoPerfil").src = sessionStorage.PATH_FOTO;
+    
     fetch(`/produtores/achar/${sessionStorage.ID_USUARIO}`, {
         method: "GET",
         headers: {

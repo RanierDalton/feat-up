@@ -10,32 +10,13 @@
     <title id="title">Perfil</title>
 
     <script src="../static/js/profile.js"></script>
+    <script src="../static/components/navbarUser.js"></script>
 </head>
-<body onload="validarSessao(),carregarSelfPerfil()"> 
+<body onload="validarSessao(), carregarSelfPerfil()"> 
     <section class="cabecalho">
-        <header>
-            <div class="conteudo">
-                <div class="titulo">
-                    <span>FEAT UP</span>
-                </div>
-                <nav>
-                    <ul class="navbar">
-                        <li><a href="./achar_feats.html">Achar Feats</a></li>
-                        <li><a href="./convites.html">Convites</a></li>
-                        <li><a href="./feat_ups.html">Feats Ups</a></li>
-                    </ul>
-                </nav>
-                <div class="profile">
-                    <button onclick="abrirPerfil()">
-                        <img id="fotoPerfil" src="../static/assets/default.png" alt="Imagem de perfil do seu usuário">
-                    </button>
-                    <div id="dropdownPerfil" class="dropdown-content">
-                        <a href="#" onclick="limparSessao()" class="sair">Sair</a>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <script>construirNavbar(-1)</script>
     </section>
+    
     <section class="corpo-perfil">
         <div class="divisoes-perfil">
             <div class="column-esquerda-perfil">
