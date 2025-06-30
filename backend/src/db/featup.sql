@@ -489,6 +489,75 @@ INSERT INTO feat (dtFeat, statusFeat, fkProdutorSolicita, fkProdutorAceita) VALU
 ('2024-04-30 22:00:00', 2, 30, 31),
 ('2024-05-01 10:00:00', 2, 32, 33);
 
+DELIMITER $$
+CREATE PROCEDURE prFeatsAtivos(IN id INT)
+BEGIN
+    SELECT idProdutor, alias, aplicativo, pontoForte, pathFotoPerfil as foto, g.nome as genero 
+    FROM produtor 
+    JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor 
+    JOIN genero as g ON gp.fkGenero = g.idGenero
+    JOIN feat ON idProdutor = fkProdutorAceita OR idProdutor = fkProdutorSolicita
+    WHERE idProdutor <> id AND statusFeat = 1  AND (fkProdutorAceita = id or fkProdutorSolicita= id);
+END $$ 
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE prConvites(IN id INT)
+BEGIN
+    SELECT idProdutor, alias, aplicativo, pontoForte, pathFotoPerfil as foto, g.nome as genero FROM produtor 
+    JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor 
+    JOIN genero as g ON gp.fkGenero = g.idGenero 
+    JOIN feat ON idProdutor = feat.fkProdutorSolicita
+    WHERE feat.statusFeat = 0 AND fkProdutorAceita = id;
+END $$ 
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE prFeatsTotais()
+BEGIN
+    SELECT COUNT(idFeat) as resultado FROM feat;
+END $$ 
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE prFeatsTotais()
+BEGIN
+    SELECT COUNT(idFeat) as resultado FROM feat;
+END $$ 
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE prStatusFeats()
+BEGIN
+    SELECT COUNT(statusFeat) as total, 
+        CASE 
+            WHEN statusFeat = 0 THEN 'Pendente' 
+            WHEN statusFeat = 1 THEN 'Aceito' 
+            ELSE 'Recusado' 
+        END AS nome 
+    FROM feat 
+    GROUP BY statusFeat;
+END $$ 
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE prPostFeat(IN idSolicitante INT, IN idAceitante INT)
+BEGIN
+    INSERT INTO feat (dtFeat, fkProdutorSolicita, fkProdutorAceita) VALUES (now(), idSolicitante, idAceitante);
+    SELECT LAST_INSERT_ID() AS idFeat;
+END $$ 
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE prPutStatusFeat(IN idSolicitante INT, IN idAceitante INT, IN statusFeat INT)
+BEGIN
+    UPDATE feat SET statusFeat = statusFeat 
+    WHERE fkProdutorAceita = idAceitante AND fkProdutorSolicita = idSolicitante;
+    SELECT idFeat FROM feat WHERE fkProdutorAceita = idAceitante AND fkProdutorSolicita = idSolicitante;
+END $$ 
+DELIMITER ;
+
+
 -- ----------------------------
 -- SRCIPTS DO PRÓPRIO SISTEMA
 -- ----------------------------
