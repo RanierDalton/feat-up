@@ -1,13 +1,13 @@
 const db = require('../db/connection');
 
 const getGeneros = () =>{
-    const instrucao = 'SELECT idGenero as id, nome FROM genero ORDER BY nome';
+    const instrucao = 'CALL prGetGeneros()';
 
     return db.executar(instrucao);
 }
 
 const getGenerosProdutor = (id) =>{
-    const instrucao = `SELECT genero.nome as nome FROM genero_produtor JOIN genero ON genero.idGenero = fkGenero JOIN produtor ON fkProdutor = idProdutor WHERE fkProdutor = ${id}`;
+    const instrucao = `prGetGenerosProdutor(${id})`;
 
     return db.executar(instrucao);
 }
@@ -18,7 +18,7 @@ const postGeneroProdutor = (values) => {
 }
 
 const getGenerosRecorrentes = () => {
-    const instrucao = `SELECT COUNT(fkGenero) as total, nome FROM genero_produtor JOIN genero ON genero.idGenero = fkGenero GROUP BY fkGenero ORDER BY total DESC`;
+    const instrucao = `CALL prGetGenerosRecorrentes()`;
     return db.executar(instrucao);
 }
 

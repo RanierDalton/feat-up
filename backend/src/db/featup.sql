@@ -557,75 +557,171 @@ BEGIN
 END $$ 
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE prGetGeneros()
+BEGIN
+    SELECT idGenero as id, nome FROM genero ORDER BY nome;
+END $$ 
+DELIMITER ;
 
--- ----------------------------
--- SRCIPTS DO PRÓPRIO SISTEMA
--- ----------------------------
+DELIMITER $$
+CREATE PROCEDURE prGetGenerosProdutor(IN id INT)
+BEGIN
+    SELECT genero.nome as nome 
+    FROM genero_produtor 
+    JOIN genero 
+    ON genero.idGenero = fkGenero 
+    JOIN produtor ON fkProdutor = idProdutor
+    WHERE fkProdutor = id;
+END $$
+DELIMITER ;
 
--- SCRIPT DE SELECIONAR TODAS AS REDES, Gêneros 
--- SELECT idRede as id, nome FROM rede_social ORDER BY nome;
--- SELECT idGenero as id, nome FROM genero ORDER BY nome;
+DELIMITER $$
+CREATE PROCEDURE prGetGenerosRecorrentes()
+BEGIN
+    SELECT COUNT(fkGenero) as total, nome 
+    FROM genero_produtor 
+    JOIN genero ON genero.idGenero = fkGenero 
+    GROUP BY fkGenero 
+    ORDER BY total DESC;
+END $$
+DELIMITER ;
 
--- SCRIPT DE LOGIN
--- SELECT COUNT(idProdutor) FROM produtor WHERE alias = apelidoInformado AND senha = senhaInformada;
--- ------------------------------------------------------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE prPostProdutor(
+    IN nome VARCHAR(100), 
+    IN alias VARCHAR(50), 
+    IN senha VARCHAR(50), 
+    IN email VARCHAR(100), 
+    IN descricao TEXT, 
+    IN pontoForte VARCHAR(50), 
+    IN aplicativo VARCHAR(50))
+BEGIN
+    INSERT INTO produtor (nome, alias, senha, email, descricao, pontoForte, aplicativo) 
+    VALUES (nome, alias, senha, email, descricao, pontoForte, aplicativo);
+END $$
+DELIMITER ;
 
--- SCRIPT DE CADASTRO
--- INSERT INTO produtor (nome, alias, senha, email, descricao, pontoForte, aplicativo) VALUES (nome, apelido, senha, email, descricao, pontoForte, aplicativo);
--- SELECT idProdutor FROM produtor WHERE alias = alias que acabou de cadastrar;
--- INSERT INTO rede_produtor (fkProdutor, fkRede, usuario) VALUES (idProdutor, idRede, user); FAZER LOOP EM CASO DE MAIS DE UMA REDE
--- INSERT INTO genero_produtor (fkProdutor, fkGenero) VALUES (idProdutor, idGenero),  FAZER LOOP EM CASO DE MAIS DE UM GENERO
--- SCRIPT MOSTRAR PRODUTORES PARA FEAT
--- SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero WHERE adicionar genero de acordo com os generos que o user que acessou;
--- ------------------------------------------------------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE prGerProdutorByAlias(IN alias VARCHAR(50))
+BEGIN
+    SELECT idProdutor FROM produtor WHERE alias = alias;
+END $$
+DELIMITER ;
 
--- SCRIPT MOSTRAR CONVITES PARA FEAT
--- SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero JOIN feat ON idProdutor = feat.fkProdutorSolicita WHERE fkProdutorAceita = 1;
--- --------------------------------------------------------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE prAuth(IN alias VARCHAR(50), IN senha VARCHAR(50))
+BEGIN
+    SELECT COUNT(idProdutor) as auth, idProdutor, alias, email, pathFotoPerfil as foto FROM produtor 
+    WHERE alias = alias AND senha = senha;
+END $$
+DELIMITER ;
 
--- -- SCRIPT PARA MOSTRAR OS FEATS FEITOS 
--- SELECT a.alias as 'apelido', b.alias as 'apelido b' FROM produtor as a 
--- JOIN produtor as b
--- JOIN feat ON a.idProdutor = fkProdutorSolicita;
--- -------------------------------------------------------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE prGetProdutoresTotais()
+BEGIN
+    SELECT COUNT(idProdutor) as resultado FROM produtor;
+END $$
+DELIMITER ;
 
--- SCRIPT PARA ACESSAR INFORMAÇÕES DO PERFIL DE USUÁRIO
--- SELECT idProdutor, alias, aplicativo, pontoForte, g.nome as genero FROM produtor JOIN genero_produtor as gp ON gp.fkProdutor = idProdutor JOIN genero as g ON gp.fkGenero = g.idGenero WHERE idProdutor = idPerfilQueUserClicou;
--- --------------------------------------------------------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE prGetProdutoresAtivos()
+BEGIN
+    SELECT COUNT(idProdutor) as resultado 
+    FROM produtor 
+    WHERE TIMESTAMPDIFF(DAY,now(),lastLogin) <= 10;
+END $$
+DELIMITER ;
 
--- SCRIPT PARA EDITAR O PERFIL DO USUÁRIO
--- UPDATE produtor SET cada campo igual ao input dos perfil WHERE idProdutor = idProdutor perfil;
--- UPDATE rede_produtor SET usuario = usuarioInformado WHERE fkProdutor = idprodutoratualizar AND fkRede = redeInformada; ATUALIZAR EM LOOP TODAS AS REDES DO PRODUTOR QUE JA EXISTIREM
--- POREM INSERIR UMA REDE CASO O PRODUTOR NÃO TENHA CADASTRADO
--- UPDATE genero_produtor SET usuario = usuarioInformado WHERE fkProdutor = idprodutoratualizar AND fkRede = redeInformada; ATUALIZAR EM LOOP TODAS OS GENEROS DO PRODUTOR QUE JA EXISTIREM
--- POREM INSERIR UM GENERO CASO O PRODUTOR NÃO TENHA CADASTRADO
--- --------------------------------------------------------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE prGetAplicativosUsados()
+BEGIN
+    SELECT COUNT(aplicativo) as total, aplicativo as nome 
+    FROM produtor 
+    GROUP BY aplicativo;
+END $$
+DELIMITER ;
 
--- SCRIPT PARA ATUALIZAR STATUS DE UM FEAT 
--- UPDATE feat SET statusFeat WHERE idProdutorAceita = idProdutorClicouAceitar AND idProdutorSolicita = idProdutorSolicitou;
--- --------------------------------------------------------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE prGetAcharFeatsGenericos(IN idProdutor INT)
+BEGIN
+    SELECT p.idProdutor, 
+           p.alias, 
+           p.aplicativo, 
+           p.pontoForte, 
+           p.pathFotoPerfil as foto, 
+           g.nome as genero
+        FROM produtor AS p
+        JOIN genero_produtor as gp 
+            ON gp.fkProdutor = p.idProdutor 
+        JOIN genero as g 
+            ON gp.fkGenero = g.idGenero 
+        JOIN feat 
+            ON fkProdutorSolicita = idProdutor 
+        WHERE p.idProdutor <> idProdutor and
+        	isNull((
+        		SELECT COUNT(feat.fkProdutorAceita) 
+                FROM produtor as prod
+                JOIN feat ON prod.idProdutor = fkProdutorAceita 
+                    AND fkProdutorSolicita = idProdutor
+                WHERE fkProdutorAceita = p.idProdutor
+                GROUP BY feat.fkProdutorAceita
 
--- SCRIPT INSERIR UM NOVO FEAT 
--- INSERT INTO feat (dtFeat, fkProdutorSolicita, fkProdutorAceita) VALUES (now(), idSolicita, idAceita);
+        	)) and 
+        	isNull((
+        		SELECT COUNT(feat.fkProdutorSolicita) 
+                FROM produtor as prod
+                JOIN feat ON prod.idProdutor = fkProdutorSolicita 
+                     AND fkProdutorAceita = ${idProdutor}
+                WHERE fkProdutorSolicita = p.idProdutor
+                GROUP BY feat.fkProdutorSolicita
+        	))
+        ORDER BY p.alias
+        LIMIT 60;
+END $$
+DELIMITER ;
 
--- ----------------------------
--- SRCIPTS DA DASHBOARD
--- ----------------------------
+DELIMITER $$
+CREATE PROCEDURE prGetPerfil(IN id INT)
+BEGIN
+    SELECT descricao, pathFotoPerfil as pathFoto, alias, aplicativo, pontoForte, g.nome as genero,r.url as url, r.fontAwesomeTag as class, rp.usuario as 'user' 
+        FROM produtor 
+        JOIN genero_produtor as gp 
+            ON gp.fkProdutor = idProdutor 
+        JOIN genero as g 
+            ON gp.fkGenero = g.idGenero 
+        JOIN rede_produtor as rp 
+            ON rp.fkProdutor = idProdutor 
+        JOIN rede_social as r 
+            ON fkRede = idRede
+        WHERE idProdutor = id;
+END $$
+DELIMITER ;
 
--- SCRIPT USUARIOS TOTAL
--- SELECT COUNT(idProdutor) FROM produtor;
+DELIMITER $$
+CREATE PROCEDURE prPatchHorarioPerfil(IN alias VARCHAR(50))(
+BEGIN 
+    UPDATE produtor 
+    SET lastLogin = now() 
+    WHERE alias = alias;
+END $$
+DELIMITER ;
 
--- SCRIPT USUARIOS ATIVO
--- SELECT COUNT(idProdutor) FROM produtor WHERE TIMESTAMPDIFF(DAY,now(),lastLogin) <= 10;
+DELIMITER $$
+CREATE PROCEDURE prPatchFotoPerfil(IN id INT, IN pathFoto VARCHAR(255))
+BEGIN
+    UPDATE produtor 
+    SET pathFotoPerfil = pathFoto 
+    WHERE idProdutor = id; 
+END $$
+DELIMITER ;
 
--- SCRIPT FEATS FEITOS
--- SELECT COUNT(idFeat) FROM feat;
+DELIMITER $$
+CREATE PROCEDURE prGetRedes()
+BEGIN
+    SELECT idRede as id, nome 
+    FROM rede_social 
+    ORDER BY nome;
+END $$
+DELIMITER ;
 
--- SCRIPT GENEROS MAIS USADOS
--- SELECT COUNT(fkGenero), nome as genero FROM genero_produtor JOIN genero ON genero.idGenero = fkGenero GROUP BY fkGenero;
-
--- SCRIPT STATUS DOS FEATS
--- SELECT COUNT(statusFeat), CASE WHEN statusFeat = 0 THEN 'Pendente' WHEN statusFeat = 1 THEN 'Aceito' ELSE 'Recusado' END AS stausFeat FROM feat GROUP BY statusFeat;
-
--- SCRIPT APPS MAIS USADOS
--- SELECT COUNT(aplicativo), aplicativo FROM produtor GROUP BY aplicativo;
