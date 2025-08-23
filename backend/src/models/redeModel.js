@@ -1,7 +1,7 @@
 const db = require('../db/connection');
 
 const getRedes = () =>{
-    const instrucao = 'SELECT idRede as id, nome FROM rede_social ORDER BY nome';
+    const instrucao = 'CALL prGetRedes()';
 
     return db.executar(instrucao);
 }
